@@ -1,26 +1,32 @@
 /*
-    Arduino and MPU6050 IMU - 3D Visualization Example 
-     by Dejan, https://howtomechatronics.com
+    Desc: Arduino and MPU6050 IMU - 3D Visualization Example 
+    Date: October 25, 2019  
 */
+
 import processing.serial.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 Serial myPort;
 String portName = Serial.list()[2];
-
 String data="";
 float roll, pitch,yaw;
+
 void setup() {
-  print("Reading from: " + portName);
+  
   size(1200, 800, P3D);
+  
+  print("Reading from: " + portName);
   myPort = new Serial(this, portName, 9600); // starts the serial communication //<>//
   myPort.bufferUntil('\n');
 }
+
 void draw() {
+  
   translate(width/2, height/2, 0);
   background(233);
   textSize(22);
   text("Roll: " + int(roll) + "     Pitch: " + int(pitch) + "     Yaw: " + int(yaw), -100, 265);
+ 
   // Rotate the object
   rotateX(radians(-pitch));
   rotateZ(radians(-roll));
@@ -36,16 +42,20 @@ void draw() {
   //delay(10);
   //println("ypr:\t" + angleX + "\t" + angleY); // Print the values to check whether we are getting proper values
 }
+
 // Read data from the Serial Port
 void serialEvent (Serial myPort) { 
   // reads the data from the Serial Port up to the character '.' and puts it into the String variable "data".
   data = myPort.readStringUntil('\n');
+  
   // if you got any bytes other than the linefeed:
   if (data != null) {
     data = trim(data);
     // split the string at "/"
     String items[] = split(data, '/');
+    
     if (items.length > 1) {
+      
       //--- Roll,Pitch in degrees
       roll = float(items[0]);
       pitch = float(items[1]);
