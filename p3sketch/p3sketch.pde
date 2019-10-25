@@ -6,9 +6,12 @@ import processing.serial.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 Serial myPort;
+String portName = Serial.list()[2];
+
 String data="";
 float roll, pitch,yaw;
 void setup() {
+  print("Reading from: " + portName);
   size(1200, 800, P3D);
   myPort = new Serial(this, "COM6", 9600); // starts the serial communication //<>//
   myPort.bufferUntil('\n');
