@@ -1,19 +1,9 @@
 /*
-  String to Integer conversion
-
-  Reads a serial input string until it sees a newline, then converts the string
-  to a number if the characters are digits.
-
-  The circuit:
-  - No external components needed.
-
-  created 29 Nov 2010
-  by Tom Igoe
-
-  This example code is in the public domain.
-
-  http://www.arduino.cc/en/Tutorial/StringToInt
+ * Desc: The arduino code to continously read from the gyroscope and output it to the serial port for use.
+ * Date: October 24, 2019
 */
+
+
 #include <Wire.h>
 
 String inString = "";    // string to hold input
@@ -25,7 +15,10 @@ float roll, pitch, yaw;
 float AccErrorX, AccErrorY, GyroErrorX, GyroErrorY, GyroErrorZ;
 float elapsedTime, currentTime, previousTime;
 int c = 0;
+
 void setup() {
+  // Code in here only runs once per reset
+  
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
   while (!Serial) {
@@ -40,29 +33,14 @@ void setup() {
   Wire.write(0x00);                  // Make reset - place a 0 into the 6B register
   Wire.endTransmission(true);        //end the transmission
   delay(20);
-    calculate_IMU_error();
+  calculate_IMU_error();
   delay(20);
 
 }
 
 void loop() {
-  // Read serial input:
-//  while (Serial.available() > 0) {
-//    int inChar = Serial.read();
-//    if (isDigit(inChar)) {
-//      // convert the incoming byte to a char and add it to the string:
-//      inString += (char)inChar;
-//    }
-//    // if you get a newline, print the string, then the string's value:
-//    if (inChar == '\n') {
-//      Serial.print("Value:");
-//      Serial.println(inString.toInt());
-//      Serial.print("String: ");
-//      Serial.println(inString);
-//      // clear the string for new input:
-//      inString = "";
-//    }
-//  }
+  // Code here will continue to loop for the duration of the runtime
+ 
   // === Read acceleromter data === //
   Wire.beginTransmission(MPU);
   Wire.write(0x3B); // Start with register 0x3B (ACCEL_XOUT_H)
@@ -87,8 +65,8 @@ void loop() {
   GyroX = (Wire.read() << 8 | Wire.read()) / 131.0; // For a 250deg/s range we have to divide first the raw value by 131.0, according to the datasheet
   GyroY = (Wire.read() << 8 | Wire.read()) / 131.0;
   GyroZ = (Wire.read() << 8 | Wire.read()) / 131.0;
+  
   // Correct the outputs with the calculated error values
-  // TODO: Get the correct error values and tweak the coordinates as required
   GyroX = GyroX - GyroErrorX; // GyroErrorX ~(-0.56)
   GyroY = GyroY - GyroErrorY; // GyroErrorY ~(2)
   GyroZ = GyroZ - GyroErrorZ; // GyroErrorZ ~ (-0.8)
@@ -97,8 +75,8 @@ void loop() {
   gyroAngleX = gyroAngleX + GyroX * elapsedTime; // deg/s * s = deg
   gyroAngleY = gyroAngleY + GyroY * elapsedTime;
   yaw =  yaw + GyroZ * elapsedTime;
-//  roll =  roll + GyroX * elapsedTime;
-//  pitch =  pitch + GyroY * elapsedTime;
+  //  roll =  roll + GyroX * elapsedTime;
+  //  pitch =  pitch + GyroY * elapsedTime;
 
   // Complementary filter - combine acceleromter and gyro angle values
   roll = 0.96 * gyroAngleX + 0.04 * accAngleX;
@@ -113,6 +91,7 @@ void loop() {
 }
 
 void calculate_IMU_error() {
+  
   // We can call this funtion in the setup section to calculate the accelerometer and gyro data error. From here we will get the error values used in the above equations printed on the Serial Monitor.
   // Note that we should place the IMU flat in order to get the proper values, so that we then can the correct values
   // Read accelerometer values 200 times
@@ -129,6 +108,7 @@ void calculate_IMU_error() {
     AccErrorY = AccErrorY + ((atan(-1 * (AccX) / sqrt(pow((AccY), 2) + pow((AccZ), 2))) * 180 / PI));
     c++;
   }
+  
   //Divide the sum by 200 to get the error value
   AccErrorX = AccErrorX / 200;
   AccErrorY = AccErrorY / 200;
@@ -148,6 +128,7 @@ void calculate_IMU_error() {
     GyroErrorZ = GyroErrorZ + (GyroZ / 131.0);
     c++;
   }
+  
   //Divide the sum by 200 to get the error value
   GyroErrorX = GyroErrorX / 200;
   GyroErrorY = GyroErrorY / 200;
@@ -165,6 +146,11 @@ void calculate_IMU_error() {
   Serial.println(GyroErrorZ);
 }
 
+
+
+========================================================================
+
+// Original Code
 //#include <Wire.h>
 //
 //const int MPU = 0x68; // MPU6050 I2C address
