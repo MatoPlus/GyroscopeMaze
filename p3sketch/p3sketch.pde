@@ -10,7 +10,7 @@ String data="";
 float roll, pitch,yaw;
 void setup() {
   size(1200, 800, P3D);
-  myPort = new Serial(this, "/dev/cu.wchusbserial14430", 9600); // starts the serial communication //<>//
+  myPort = new Serial(this, "COM6", 9600); // starts the serial communication //<>//
   myPort.bufferUntil('\n');
 }
 void draw() {
@@ -19,7 +19,7 @@ void draw() {
   textSize(22);
   text("Roll: " + int(roll) + "     Pitch: " + int(pitch) + "     Yaw: " + int(yaw), -100, 265);
   // Rotate the object
-  rotateX(radians(pitch));
+  rotateX(-radians(pitch));
   rotateZ(radians(roll));
   rotateY(radians(yaw));
   
