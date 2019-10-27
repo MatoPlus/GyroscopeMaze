@@ -25,5 +25,16 @@ public class Tilt : MonoBehaviour
 
 
         }
+        if (Input.GetAxis("Vertical") > .2)
+        {
+            transform.Rotate(1, 0, 0);
+
+        }
+        if (Input.GetAxis("Vertical") < -.2)
+        {
+            transform.Rotate(-1, 0, 0);
+
+
+        }
     }
 }

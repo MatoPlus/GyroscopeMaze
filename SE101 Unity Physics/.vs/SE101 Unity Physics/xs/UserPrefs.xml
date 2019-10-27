@@ -1,8 +1,8 @@
 ﻿<Properties StartupConfiguration="{630D97C5-ACCA-C1CD-62EF-A27984C48149}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Tilt.cs">
     <Files>
-      <File FileName="Tilt.cs" Line="18" Column="10" />
-      <File FileName="Assets/Tilt.cs" Line="1" Column="1" />
+      <File FileName="Assets/Tilt.cs" Line="32" Column="10" />
+      <File FileName="Assets/Ball.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

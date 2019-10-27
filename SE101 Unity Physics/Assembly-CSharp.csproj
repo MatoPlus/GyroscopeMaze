@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Ball.cs" />
     <Compile Include="Assets\Tilt.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/Users/kevin1/Desktop/GyroscopeMaze/SE101 Unity Physics/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
