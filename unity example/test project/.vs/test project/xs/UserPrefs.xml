@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{475A2F6C-DE8C-D9C7-55E4-0EF4FE321A3A}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/plswork.cs">
+    <Files>
+      <File FileName="Assets/plswork.cs" Line="65" Column="76" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="test project" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="plswork.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="1c346e6e-d305-4e38-bd7e-ceec5a963e2a" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
