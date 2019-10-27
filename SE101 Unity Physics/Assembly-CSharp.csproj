@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{214159AE-58EF-BAB9-4288-DC38BBA4C658}</ProjectGuid>
+    <ProjectGuid>{630D97C5-ACCA-C1CD-62EF-A27984C48149}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,16 +63,16 @@
   <ItemGroup>
     <Compile Include="Assets\Tilt.cs" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>/Users/kevin1/Desktop/SE101 FINAL PROJECT/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>/Users/kevin1/Desktop/GyroscopeMaze/SE101 Unity Physics/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>/Users/kevin1/Desktop/SE101 FINAL PROJECT/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>/Users/kevin1/Desktop/GyroscopeMaze/SE101 Unity Physics/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>/Users/kevin1/Desktop/SE101 FINAL PROJECT/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>/Users/kevin1/Desktop/GyroscopeMaze/SE101 Unity Physics/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>/Users/kevin1/Desktop/SE101 FINAL PROJECT/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>/Users/kevin1/Desktop/GyroscopeMaze/SE101 Unity Physics/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Users/kevin1/Desktop/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
