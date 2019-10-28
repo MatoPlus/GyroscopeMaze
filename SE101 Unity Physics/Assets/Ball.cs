@@ -14,12 +14,4 @@ public class Ball : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.name == "Goal")
-        {
-            Destroy(gameObject);
-            Debug.Log("You win !!");
-        }
-    }
 }
