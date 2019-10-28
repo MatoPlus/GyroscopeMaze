@@ -207,7 +207,7 @@ void setup() {
 //    mpu.setYGyroOffset(-59);
 //    mpu.setZGyroOffset(-36);
 //    mpu.setZAccelOffset(750); // 1688 factory default for my test chip
-  mpu.setXGyroOffset(220);
+    mpu.setXGyroOffset(220);
     mpu.setYGyroOffset(76);
     mpu.setZGyroOffset(-85);
     mpu.setZAccelOffset(1788); // 1688 factory default for my test chip

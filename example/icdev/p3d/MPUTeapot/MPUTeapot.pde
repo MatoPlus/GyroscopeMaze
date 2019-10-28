@@ -72,8 +72,8 @@ void setup() {
     //String portName = Serial.list()[3];
 
     // get a specific serial port (use EITHER this OR the first-available code above)
-    //String portName = "COM4";
-    String portName = "/dev/cu.wchusbserial14110";
+    String portName = "COM6";
+    //String portName = "/dev/cu.wchusbserial14110";
     // open the serial port
     port = new Serial(this, portName, 9600);
     
