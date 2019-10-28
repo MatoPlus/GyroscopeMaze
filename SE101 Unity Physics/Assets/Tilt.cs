@@ -7,8 +7,9 @@ using System.Threading;
 
 public class Tilt : MonoBehaviour
 {
+    ///dev/ch.wchusbserial14410
   // Start is called before the first frame update
-    SerialPort sp = new SerialPort("COM6", 9600);
+    SerialPort sp = new SerialPort("/dev/cu.wchusbserial14410", 9600);
     char[] teapotPacket = new char[14];  // InvenSense Teapot packet
     int serialCount = 0;                 // current packet byte position
     int synced = 0;
