@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4718936685012290}
   - component: {fileID: 33332594060595440}
   - component: {fileID: 23347001036356596}
-  - component: {fileID: 135084246783305502}
   - component: {fileID: 54707840419284382}
+  - component: {fileID: 135466338330443578}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -100,7 +100,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &135084246783305502
+--- !u!135 &135466338330443578
 SphereCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

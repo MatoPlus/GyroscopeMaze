@@ -500,3 +500,7 @@
 /Users/kevin1/Desktop/GyroscopeMaze/SE101 Unity Physics/obj/Debug/Assembly-CSharp.csproj.CopyComplete
 /Users/kevin1/Desktop/GyroscopeMaze/SE101 Unity Physics/obj/Debug/Assembly-CSharp.dll
 /Users/kevin1/Desktop/GyroscopeMaze/SE101 Unity Physics/obj/Debug/Assembly-CSharp.pdb
+C:\Users\ibrah\Documents\Projects\SE101\GyroscopeMaze\SE101 Unity Physics\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\ibrah\Documents\Projects\SE101\GyroscopeMaze\SE101 Unity Physics\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+C:\Users\ibrah\Documents\Projects\SE101\GyroscopeMaze\SE101 Unity Physics\obj\Debug\Assembly-CSharp.dll
+C:\Users\ibrah\Documents\Projects\SE101\GyroscopeMaze\SE101 Unity Physics\obj\Debug\Assembly-CSharp.pdb

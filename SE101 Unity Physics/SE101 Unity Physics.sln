@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio for Mac
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE101 Unity Physics", "Assembly-CSharp.csproj", "{630D97C5-ACCA-C1CD-62EF-A27984C48149}"
 EndProject
 Global
