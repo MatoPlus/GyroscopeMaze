@@ -1,7 +1,7 @@
 # GyroscopeMaze
 A maze game made in unity with a custom made gyroscope controller.
 
-# Components
+# Components / Sofware
 - Elegoo Ardiuno nano clone
 - MPU6050 Gyroscope
 - Arduino nano complier
