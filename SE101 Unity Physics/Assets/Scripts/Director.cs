@@ -20,21 +20,20 @@ public class Director : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        boxPreset = new int[3, 10, 10];
+        boxPreset = new int[3, 11, 11];
         for (int i = 0; i < 10; i++)
         {
             boxPreset[0, 0, i] = 1;
-            boxPreset[0, 9, i] = 1;
-            boxPreset[0, 1, i/2] = 1;
+            boxPreset[0, 10, i] = 1;
             boxPreset[1, i, 0] = 1;
-            boxPreset[1, i, 9] = 1;
+            boxPreset[1, i, 10] = 1;
             for (int j = 0; j < 10; j++)
             {
                 boxPreset[2, i, j] = 1;
             }
             boxPreset[2, 7, 7] = 0;
         }
-        MakeLevel(10,10,boxPreset);
+        MakeLevel(11,11,boxPreset);
         Ball = Instantiate(BallPrefab, new Vector3(0, (float)1.5, 0), Quaternion.identity);
     }
 
@@ -46,7 +45,7 @@ public class Director : MonoBehaviour {
     void MakeLevel(int width, int height, int [,,] toGenerate){
         //first index in toGenerate is horizontal or vertical (0 is horiz., 1 is vert.)
         //2nd index is height, 3rd is width
-        origin = new Vector3((float)(-width/2),0,(float)(-height/2+1));
+        origin = new Vector3((float)(-width/2),0,(float)(-height/2));
         Platform = Instantiate(PlatformPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         /*Tile = Instantiate(TilePrefab, new Vector3(0, 0, 0), Quaternion.identity);
         Tile.transform.SetParent(Platform.transform);
@@ -55,13 +54,13 @@ public class Director : MonoBehaviour {
         for (int i = 0; i < height; i++){
             for(int j = 0; j < width; j++){
                 if(toGenerate[0,i,j] == 1){
-                    GameObject wall = Instantiate(WallPrefab, new Vector3(origin.x+(float)j, (float)0.5, origin.z+(float)i), Quaternion.identity);
+                    GameObject wall = Instantiate(WallPrefab, new Vector3(origin.x + (float)j, (float)0.5, origin.z + (float)i), Quaternion.identity);//Euler(0, 180, 0));
                     wall.transform.SetParent(Platform.transform);
                     wallsArray[0,i,j] = wall;
                 }
                 if (toGenerate[1, i, j] == 1)
                 {
-                    GameObject wall = Instantiate(WallPrefab, new Vector3(origin.x + (float)j, (float)0.5, origin.z + (float)i), Quaternion.Euler(0, 90, 0));
+                    GameObject wall = Instantiate(WallPrefab, new Vector3(origin.x + (float)j, (float)0.5, origin.z + (float)i), Quaternion.Euler(0, 270, 0));
                     wall.transform.SetParent(Platform.transform);
                     wallsArray[1,i, j] = wall;
                 }

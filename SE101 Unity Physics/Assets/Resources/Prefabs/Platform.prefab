@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33464427914369878}
   - component: {fileID: 23472638454749208}
   - component: {fileID: 65130255232338424}
-  - component: {fileID: 114066530384779352}
   - component: {fileID: 114970507324003892}
   - component: {fileID: 54537167469359364}
   m_Layer: 0
@@ -60,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b91369cf62e6919489cc4dbcadf13ee8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,7 +100,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &65130255232338424
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -114,22 +113,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114066530384779352
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1812423483642362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b083056f45d90545bbe770ce8570658, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sendTriggerMessage: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  skinWidth: 0.1
 --- !u!114 &114970507324003892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,3 +124,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215f455c3c3674a579303ac39dfb3d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useGyro: 0
