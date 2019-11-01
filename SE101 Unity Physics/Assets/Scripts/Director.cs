@@ -24,6 +24,7 @@ public class Director : MonoBehaviour {
         for (int i = 0; i < 10; i++)
         {
             boxPreset[0, 0, i] = 1;
+            boxPreset[1, i, 2] = 1;
             boxPreset[0, 10, i] = 1;
             boxPreset[1, i, 0] = 1;
             boxPreset[1, i, 10] = 1;
@@ -31,21 +32,28 @@ public class Director : MonoBehaviour {
             {
                 boxPreset[2, i, j] = 1;
             }
-            boxPreset[2, 7, 7] = 0;
         }
-        MakeLevel(11,11,boxPreset);
+        MakeLevel(boxPreset);
         Ball = Instantiate(BallPrefab, new Vector3(0, (float)1.5, 0), Quaternion.identity);
     }
 
     public GameObject[,,] wallsArray;
-    public GameObject[,] platsArray;
     public int[,,] boxPreset;
-    private Vector3 origin;
-    private int numWalls;
-    void MakeLevel(int width, int height, int [,,] toGenerate){
-        //first index in toGenerate is horizontal or vertical (0 is horiz., 1 is vert.)
-        //2nd index is height, 3rd is width
-        origin = new Vector3((float)(-width/2),0,(float)(-height/2));
+
+    /*
+    MakeLevel takes in a 3D array: [Type, Y, X]. Dimensions: [3, Width of Maze, Height of Maze]
+    The origin is at the bottom left of the maze; x goes right, y goes up. Currently, the platform size doesn't scale properly, but I will fix this. 
+    (Don't worry about setting the origin; the maze as a whole will always have its center at 0,0,0 in the game world.)
+    Index 0 (Type): 0 is horizontal walls, 1 is vertical walls. 2 is currently unused, but required (place a dummy value at 2)
+    Index 1 (Y): Should be an array of [[height]] 0's and 1's. If a value is 1, a wall will be placed there, else no wall.
+    Index 1 (X): Should be an array of [[width]] 0's and 1's. If a value is 1, a wall will be placed there, else no wall.
+    e.g. array[0,0,0] = 1 means a horizontal wall will be placed at position 0,0 on the grid.
+    e.g. array[1,2,3] = 1 means a vertical wall will be placed at position 3,2 on the grid (3 right, 2 up)  
+     */
+    void MakeLevel(int [,,] toGenerate){
+        int height = toGenerate.GetLength(1);
+        int width = toGenerate.GetLength(2);
+        Vector3 origin = new Vector3((float)(-width/2),0,(float)(-height/2));
         Platform = Instantiate(PlatformPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         /*Tile = Instantiate(TilePrefab, new Vector3(0, 0, 0), Quaternion.identity);
         Tile.transform.SetParent(Platform.transform);
