@@ -36,3 +36,4 @@ sysinfo.txt
 *.unitypackage
 
 .vscode
+.DS_Store
