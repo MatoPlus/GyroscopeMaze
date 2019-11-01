@@ -26,18 +26,18 @@ public class Tilt : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // if useGyro is false use the 
         if (!useGyro)
         {
             if (Input.GetAxis("Horizontal") > .2)
             {
-                transform.Rotate(0, 0, 1);
+                transform.Rotate(0, 0, (float)0.5);
             }
             if (Input.GetAxis("Horizontal") < -.2)
             {
-                transform.Rotate(0, 0, -1);
+                transform.Rotate(0, 0, (float)-0.5);
             }
             if (Input.GetAxis("Vertical") > .2)
             {
