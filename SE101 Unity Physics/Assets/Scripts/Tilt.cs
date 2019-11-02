@@ -96,8 +96,8 @@ public class Tilt : MonoBehaviour
 
     void SetUpGyro()
     {
-        // sp = new SerialPort("/dev/cu.wchusbserial14430", 9600);
-        sp = new SerialPort("COM6", 9600);
+        sp = new SerialPort("/dev/cu.wchusbserial14110", 9600);
+        // sp = new SerialPort("COM6", 9600);
         sp.Open();
     }
 }
