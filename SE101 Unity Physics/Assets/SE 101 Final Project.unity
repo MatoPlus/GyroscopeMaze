@@ -211,8 +211,16 @@ MonoBehaviour:
   WallPrefab: {fileID: 0}
   PlatformPrefab: {fileID: 0}
   Platform: {fileID: 0}
+  Ceiling: {fileID: 0}
   TilePrefab: {fileID: 0}
   Tile: {fileID: 0}
+  BlockerPrefab: {fileID: 0}
+  TopBlocker: {fileID: 0}
+  BottomBlocker: {fileID: 0}
+  LeftBlocker: {fileID: 0}
+  RightBlocker: {fileID: 0}
+  FrontBlocker: {fileID: 0}
+  BackBlocker: {fileID: 0}
 --- !u!4 &218385086
 Transform:
   m_ObjectHideFlags: 0
