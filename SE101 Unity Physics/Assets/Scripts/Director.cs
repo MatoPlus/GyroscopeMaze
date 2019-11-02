@@ -36,16 +36,10 @@ public class Director : MonoBehaviour {
         boxPreset = new int[3, 11, 11];
         for (int i = 0; i < 10; i++)
         {
-<<<<<<< HEAD
             //boxPreset[0, 0, i] = 1;
             //boxPreset[0, 10, i] = 1;
             //boxPreset[1, i, 0] = 1;
             //boxPreset[1, i, 10] = 1;
-
-
-
-            // Dummy Value...
-=======
             boxPreset[1, 0, i] = 1;
             boxPreset[0, (i / 2), 2] = 1;
             boxPreset[0, 9-(i / 2), 4] = 1;
@@ -53,7 +47,6 @@ public class Director : MonoBehaviour {
             boxPreset[0, i, 0] = 1;
             boxPreset[0, i, 10] = 1;
             boxPreset[0, i, 10] = 1;
->>>>>>> 4a4a0abb8ad2aec0c815fa5fd44a77c7ca0aff40
             for (int j = 0; j < 10; j++)
             {
                 boxPreset[2, i, j] = 1;
