@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MazeGeneration;
 
 public class Director : MonoBehaviour {
     public GameObject BallPrefab;
@@ -20,19 +21,33 @@ public class Director : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
+ 
+        var maze = new Maze(20, 20);
+        maze.Display();
         boxPreset = new int[3, 11, 11];
         for (int i = 0; i < 10; i++)
         {
-            boxPreset[0, 0, i] = 1;
-            boxPreset[1, i, 2] = 1;
-            boxPreset[0, 10, i] = 1;
-            boxPreset[1, i, 0] = 1;
-            boxPreset[1, i, 10] = 1;
+            //boxPreset[0, 0, i] = 1;
+            //boxPreset[0, 10, i] = 1;
+            //boxPreset[1, i, 0] = 1;
+            //boxPreset[1, i, 10] = 1;
+
+
+
+            // Dummy Value...
             for (int j = 0; j < 10; j++)
             {
                 boxPreset[2, i, j] = 1;
             }
         }
+
+        boxPreset[0, 0, 0] = 1;
+        boxPreset[1, 0, 0] = 1;
+        boxPreset[0, 1, 0] = 1;
+        boxPreset[1, 1, 0] = 1;
+        boxPreset[0, 0, 1] = 1;
+        boxPreset[1, 0, 1] = 1;
+
         MakeLevel(boxPreset);
         Ball = Instantiate(BallPrefab, new Vector3(0, (float)1.5, 0), Quaternion.identity);
     }
