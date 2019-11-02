@@ -130,6 +130,44 @@ namespace MazeGeneration
             }
             print(firstLine);
         }
+
+        public int[,,] Generation()
+        {
+			int[,,] arr = new int[3,_width+1,_height+1];
+            var firstLine = string.Empty;
+            var all = new StringBuilder();
+            for (var y = 0; y < _height; y++)
+            {
+                var sbTop = new StringBuilder();
+                var sbMid = new StringBuilder();
+                for (var x = 0; x < _width; x++)
+                {
+                    if (this[x,y].HasFlag(CellState.Top))
+					{
+						arr[0, x, y] = 1;
+					}
+                    if (this[x,y].HasFlag(CellState.Left))
+					{
+						arr[1, x, y] = 1;
+					}
+                    sbTop.Append(this[x, y].HasFlag(CellState.Top) ? "+--" : "+  ");
+                    sbMid.Append(this[x, y].HasFlag(CellState.Left) ? "|  " : "   ");
+                }
+                if (firstLine == string.Empty)
+                    firstLine = sbTop.ToString();
+				arr[1, _width, y] = 1;
+                all.Append(sbTop + "+\n");
+                all.Append(sbMid + "|\n");
+                // all.Append(sbMid + "|\n");
+            }
+            for (var x = 0; x < _width; x++)
+			{
+				arr[0, x, _height] = 1;
+			}
+            all.Append(firstLine + "\n");
+            print(all);
+			return arr;
+        }
     }
  
 }

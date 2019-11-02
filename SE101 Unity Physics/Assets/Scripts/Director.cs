@@ -32,8 +32,8 @@ public class Director : MonoBehaviour {
     // Use this for initialization
     void Start () {
  
-        var maze = new Maze(20, 20);
-        maze.Display();
+        var maze = new Maze(10,10);
+        maze.Generation();
         boxPreset = new int[3, 11, 11];
         for (int i = 0; i < 10; i++)
         {
@@ -61,7 +61,8 @@ public class Director : MonoBehaviour {
         boxPreset[0, 0, 1] = 1;
         boxPreset[1, 0, 1] = 1;
 
-        MakeLevel(boxPreset);
+        // MakeLevel(boxPreset);
+        MakeLevel(maze.Generation());
         Ball = Instantiate(BallPrefab, new Vector3(0, (float)0.5, 0), Quaternion.identity);
     }
 
