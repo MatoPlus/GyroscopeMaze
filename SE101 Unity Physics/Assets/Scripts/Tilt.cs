@@ -33,11 +33,11 @@ public class Tilt : MonoBehaviour
         {
             if (Input.GetAxis("Horizontal") > .2)
             {
-                transform.Rotate(0, 0, (float)0.5);
+                transform.Rotate(0, 0, 0.5f);
             }
             if (Input.GetAxis("Horizontal") < -.2)
             {
-                transform.Rotate(0, 0, (float)-0.5);
+                transform.Rotate(0, 0, -0.5f);
             }
             if (Input.GetAxis("Vertical") > .2)
             {

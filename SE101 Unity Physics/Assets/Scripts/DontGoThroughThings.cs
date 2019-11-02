@@ -14,8 +14,10 @@ public class DontGoThroughThings : MonoBehaviour
     private float partialExtent;
     private float sqrMinimumExtent;
     private Vector3 previousPosition;
+    private Vector3 previousOffset;
     private Rigidbody myRigidbody;
     private Collider myCollider;
+    private Director dir;
 
     //initialize values 
     void Start()
@@ -26,6 +28,8 @@ public class DontGoThroughThings : MonoBehaviour
         minimumExtent = Mathf.Min(Mathf.Min(myCollider.bounds.extents.x, myCollider.bounds.extents.y), myCollider.bounds.extents.z);
         partialExtent = minimumExtent * (1.0f - skinWidth);
         sqrMinimumExtent = minimumExtent * minimumExtent;
+        GameObject direct = GameObject.Find("Director");
+        dir = direct.GetComponent<Director>();
     }
 
     void FixedUpdate()
@@ -48,12 +52,17 @@ public class DontGoThroughThings : MonoBehaviour
                 if (hitInfo.collider.isTrigger)
                     hitInfo.collider.SendMessage("OnTriggerEnter", myCollider);
 
-                if (!hitInfo.collider.isTrigger)
-                    myRigidbody.position = hitInfo.point - (movementThisStep / movementMagnitude) * partialExtent;
-
+                if (!hitInfo.collider.isTrigger) {
+                    //myRigidbody.position = hitInfo.point - (movementThisStep / movementMagnitude) * partialExtent;
+                    this.transform.SetParent(dir.Platform.transform);
+                    this.transform.localPosition = previousOffset;
+                    this.transform.parent = null;
+                    print("working");
+                }
             }
         }
 
         previousPosition = myRigidbody.position;
+        previousOffset = myRigidbody.position - dir.Platform.GetComponent<Rigidbody>().position;
     }
 }

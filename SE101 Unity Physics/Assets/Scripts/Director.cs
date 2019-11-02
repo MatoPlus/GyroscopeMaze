@@ -19,6 +19,7 @@ public class Director : MonoBehaviour {
     public GameObject RightBlocker;
     public GameObject FrontBlocker;
     public GameObject BackBlocker;
+    public int test = 65;
 
     void Awake()
     {
@@ -86,6 +87,9 @@ public class Director : MonoBehaviour {
         int height = toGenerate.GetLength(2);
         Vector3 origin = new Vector3((float)(-width/2),0,(float)(-height/2));
         Platform = Instantiate(PlatformPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        Color temp = Platform.GetComponent<MeshRenderer>().material.color;
+        temp.a = 0.5f;
+        Platform.GetComponent<MeshRenderer>().material.color = temp;
         Platform.transform.localScale = new Vector3(width-1, (float)0.1, height-1);
         Ceiling = Instantiate(PlatformPrefab, new Vector3(0, 1, 0), Quaternion.identity);
         TopBlocker = Instantiate(BlockerPrefab, new Vector3(0, (float)(1+5), 0), Quaternion.identity);
