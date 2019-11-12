@@ -240,7 +240,7 @@ void loop() {
     pushButton = digitalRead(7);
     if (pushButton == HIGH)
     {
-      Serial.write("#pushed\n");
+      Serial.write("#PUSH\n");
     }
     // blink LED to indicate activity
     blinkState = !blinkState;
