@@ -22,7 +22,7 @@ public class Tilt : MonoBehaviour
         // /dev/cu.wchusbserial14xx0   OR    COMx
         if (useGyro)
         {
-            SetUpGyro();
+            SetupController();
         }
     }
 
@@ -53,7 +53,7 @@ public class Tilt : MonoBehaviour
 
             if (sp == null)
             {
-                SetUpGyro();
+                SetupController();
             }
 
             while (sp.BytesToRead > 0)
@@ -94,10 +94,41 @@ public class Tilt : MonoBehaviour
     }
 
 
-    void SetUpGyro()
+    void SetupController()
     {
         //sp = new SerialPort("/dev/cu.wchusbserial14110", 9600);
-        sp = new SerialPort("COM6", 9600);
-        sp.Open();
+        //sp = new SerialPort("COM8", 9600);
+        //sp.Open();
+
+        // Auto detect implementation.
+        string[] ports = SerialPort.GetPortNames();
+        foreach (string p in ports)
+        {   
+            try
+            {
+                print("Attempted to connect to: " + p);
+                sp = new SerialPort(p, 9600);
+                sp.Open();
+                // Sucessfully reads input from sp, meaning the port is valid.
+                if(sp.BytesToRead != 0)
+                {
+                    break;
+                } 
+                //Scan inputs for "connectAlready"
+            }
+            catch (InvalidOperationException e)
+            {
+                // Port in use  
+                print(e);
+                continue;
+            }
+            catch (System.IO.IOException e)
+            {
+                // Port can't be opened
+                print(e);
+                continue;
+            }
+
+        }
     }
 }
