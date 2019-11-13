@@ -9,6 +9,9 @@ public class Tilt : MonoBehaviour
 {
     // Public Variables (for changing in insepctor)
     public bool useGyro = false;
+    public Vector3 grav;
+    public float magnitude;
+    Camera mCamera;
 
     // Private Variables
     SerialPort sp;
@@ -19,11 +22,15 @@ public class Tilt : MonoBehaviour
 
     void Start()
     {
+        useGyro = false;
         // /dev/cu.wchusbserial14xx0   OR    COMx
         if (useGyro)
         {
             SetupController();
         }
+        grav = Vector3.up;
+        magnitude = 9.81f;
+        mCamera = Camera.main;
     }
 
     void FixedUpdate()
@@ -33,19 +40,19 @@ public class Tilt : MonoBehaviour
         {
             if (Input.GetAxis("Horizontal") > .2)
             {
-                transform.Rotate(0, 0, 0.5f);
+                grav = Quaternion.Euler(0, 0, 0.5f) * grav;
             }
             if (Input.GetAxis("Horizontal") < -.2)
             {
-                transform.Rotate(0, 0, -0.5f);
+                grav = Quaternion.Euler(0, 0, -0.5f) * grav;
             }
             if (Input.GetAxis("Vertical") > .2)
             {
-                transform.Rotate((float)0.5, 0, 0);
+                grav = Quaternion.Euler(0.5f, 0, 0) * grav;
             }
             if (Input.GetAxis("Vertical") < -.2)
             {
-                transform.Rotate((float)-0.5, 0, 0);
+                grav = Quaternion.Euler(-0.5f, 0, 0) * grav;
             }
         }
         else
@@ -86,11 +93,18 @@ public class Tilt : MonoBehaviour
                         for (int i = 0; i < 4; i++) if (q[i] >= 2) q[i] = -4 + q[i];
 
                         // set our toxilibs quaternion to new data
-                        transform.rotation = new Quaternion(q[2], q[0], -q[1], q[3]);
+                        //transform.rotation = new Quaternion(q[2], q[0], -q[1], q[3]);
+                        grav = new Quaternion(q[2], q[0], -q[1], q[3]) * Vector3.up;
+                        grav.y *= -1;
+                        
+
                     }
                 }
             }
         }
+        this.GetComponent<Rigidbody>().AddForce(grav * magnitude, ForceMode.Acceleration);
+        //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
+        //mCamera.transform.LookAt(new Vector3(0, 0, 0));
     }
 
 
