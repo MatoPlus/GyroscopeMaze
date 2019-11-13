@@ -238,7 +238,7 @@ void loop() {
 
     // button input, writes to serial for processing
     pushButton = digitalRead(7);
-    if (pushButton == HIGH)
+    if (pushButton == LOW)
     {
       Serial.write("#PUSH\n");
     }
