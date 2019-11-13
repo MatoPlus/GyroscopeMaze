@@ -1,7 +1,7 @@
 /*
- * Date: October 29, 2019
- * Desc: an Arduino script that allows the Nano to output gyroscope data to the serial port in Quaternions.
- */
+   Date: Nov 12, 2019
+   Desc: an Arduino script that allows the Nano to output gyroscope data to the serial port in Quaternions.
+*/
 
 // I2Cdev and MPU6050 must be installed as libraries, or else the .cpp/.h files
 // for both classes must be in the include path of your project
@@ -28,7 +28,7 @@ MPU6050 mpu;
    depends on the MPU-6050's INT pin being connected to the Arduino's
    external interrupt #0 pin. On the Arduino Uno and Mega 2560, this is
    digital I/O pin 2.
-   * ========================================================================= */
+     ========================================================================= */
 
 /* =========================================================================
    NOTE: Arduino v1.0.1 with the Leonardo board generates a compile error
@@ -39,10 +39,11 @@ MPU6050 mpu;
 
    http://arduino.cc/forum/index.php/topic,109987.0.html
    http://code.google.com/p/arduino/issues/detail?id=958
-   * ========================================================================= */
+     ========================================================================= */
 
 #define INTERRUPT_PIN 2  // use pin 2 on Arduino Uno & most boards
 #define LED_PIN 13 // (Arduino is 13, Teensy is 11, Teensy++ is 6)
+#define BUTTON_PIN 7 // button pin used for input
 bool blinkState = false;
 
 // MPU control/status vars
@@ -63,7 +64,10 @@ float euler[3];         // [psi, theta, phi]    Euler angle container
 float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
 
 // packet structure for gyroscope usage
-uint8_t teapotPacket[14] = { '$', 0x02, 0,0, 0,0, 0,0, 0,0, 0x00, 0x00, '\r', '\n' };
+uint8_t teapotPacket[14] = { '$', 0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0x00, 0x00, '\r', '\n' };
+
+// button
+int pushButton;
 
 
 // ================================================================
@@ -160,6 +164,9 @@ void setup() {
 
   // configure LED for output
   pinMode(LED_PIN, OUTPUT);
+
+  // configure D7 for input
+  pinMode(7, INPUT_PULLUP);
 }
 
 
@@ -196,7 +203,7 @@ void loop() {
 
   // get current FIFO count
   fifoCount = mpu.getFIFOCount();
-  if(fifoCount < packetSize){
+  if (fifoCount < packetSize) {
     //Lets go back and wait for another interrupt. We shouldn't be here, we got an interrupt from another event
     // This is blocking so don't do it   while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
   }
@@ -211,7 +218,7 @@ void loop() {
   } else if (mpuIntStatus & _BV(MPU6050_INTERRUPT_DMP_INT_BIT)) {
 
     // read a packet from FIFO
-    while(fifoCount >= packetSize){ // Lets catch up to NOW, someone is using the dreaded delay()!
+    while (fifoCount >= packetSize) { // Lets catch up to NOW, someone is using the dreaded delay()!
       mpu.getFIFOBytes(fifoBuffer, packetSize);
       // track FIFO count here in case there is > 1 packet available
       // (this lets us immediately read more without waiting for an interrupt)
@@ -229,6 +236,12 @@ void loop() {
     Serial.write(teapotPacket, 14);
     teapotPacket[11]++; // packetCount, loops at 0xFF on purpose
 
+    // button input, writes to serial for processing
+    pushButton = digitalRead(7);
+    if (pushButton == LOW)
+    {
+      Serial.write("#PUSH\n");
+    }
     // blink LED to indicate activity
     blinkState = !blinkState;
     digitalWrite(LED_PIN, blinkState);
