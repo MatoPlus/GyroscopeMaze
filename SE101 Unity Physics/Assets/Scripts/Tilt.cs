@@ -9,9 +9,9 @@ public class Tilt : MonoBehaviour
 {
     // Public Variables (for changing in insepctor)
     public bool useGyro = false;
-    public Vector3 grav;
     public float magnitude;
-    Camera mCamera;
+    public GameObject ball;
+    //public GameObject gravPointer;
 
     // Private Variables
     SerialPort sp;
@@ -28,9 +28,9 @@ public class Tilt : MonoBehaviour
         {
             SetupController();
         }
-        grav = Vector3.up;
-        magnitude = 9.81f;
-        mCamera = Camera.main;
+        magnitude = -9.81f;
+        ball = GameObject.Find("Ball(Clone)");
+        //gravPointer = GameObject.Find("GravPointer");
     }
 
     void FixedUpdate()
@@ -40,19 +40,19 @@ public class Tilt : MonoBehaviour
         {
             if (Input.GetAxis("Horizontal") > .2)
             {
-                grav = Quaternion.Euler(0, 0, 0.5f) * grav;
+                this.transform.rotation *= Quaternion.Euler(0, 0, 0.5f);
             }
             if (Input.GetAxis("Horizontal") < -.2)
             {
-                grav = Quaternion.Euler(0, 0, -0.5f) * grav;
+                this.transform.rotation *= Quaternion.Euler(0, 0, -0.5f);
             }
             if (Input.GetAxis("Vertical") > .2)
             {
-                grav = Quaternion.Euler(0.5f, 0, 0) * grav;
+                this.transform.rotation *= Quaternion.Euler(0.5f, 0, 0);
             }
             if (Input.GetAxis("Vertical") < -.2)
             {
-                grav = Quaternion.Euler(-0.5f, 0, 0) * grav;
+                this.transform.rotation *= Quaternion.Euler(-0.5f, 0, 0);
             }
         }
         else
@@ -94,15 +94,15 @@ public class Tilt : MonoBehaviour
 
                         // set our toxilibs quaternion to new data
                         //transform.rotation = new Quaternion(q[2], q[0], -q[1], q[3]);
-                        grav = new Quaternion(q[2], q[0], -q[1], q[3]) * Vector3.up;
-                        grav.y *= -1;
+                        this.transform.rotation = new Quaternion(q[2], q[0], -q[1], q[3]);
                         
 
                     }
                 }
             }
         }
-        this.GetComponent<Rigidbody>().AddForce(grav * magnitude, ForceMode.Acceleration);
+        GameObject.Find("Ball(Clone)").GetComponent<Rigidbody>().AddForce(transform.up * magnitude, ForceMode.Acceleration);
+        //gravPointer.transform.position = transform.up*magnitude;
         //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
         //mCamera.transform.LookAt(new Vector3(0, 0, 0));
     }
@@ -111,38 +111,37 @@ public class Tilt : MonoBehaviour
     void SetupController()
     {
         //sp = new SerialPort("/dev/cu.wchusbserial14110", 9600);
-        //sp = new SerialPort("COM8", 9600);
-        //sp.Open();
+        sp = new SerialPort("COM6", 9600);
+        sp.Open();
 
         // Auto detect implementation.
-        string[] ports = SerialPort.GetPortNames();
-        foreach (string p in ports)
-        {   
-            try
-            {
-                print("Attempted to connect to: " + p);
-                sp = new SerialPort(p, 9600);
-                sp.Open();
-                // Sucessfully reads input from sp, meaning the port is valid.
-                if(sp.BytesToRead != 0)
-                {
-                    break;
-                } 
-                //Scan inputs for "connectAlready"
-            }
-            catch (InvalidOperationException e)
-            {
-                // Port in use  
-                print(e);
-                continue;
-            }
-            catch (System.IO.IOException e)
-            {
-                // Port can't be opened
-                print(e);
-                continue;
-            }
-
-        }
+        //string[] ports = SerialPort.GetPortNames();
+        //foreach (string p in ports)
+        //{   
+        //    try
+        //    {
+        //        print("Attempted to connect to: " + p);
+        //        sp = new SerialPort(p, 9600);
+        //        sp.Open();
+        //        // Sucessfully reads input from sp, meaning the port is valid.
+        //        if(sp.BytesToRead != 0)
+        //        {
+        //            break;
+        //        } 
+        //        //Scan inputs for "connectAlready"
+        //    }
+        //    catch (InvalidOperationException e)
+        //    {
+        //        // Port in use  
+        //        print(e);
+        //        continue;
+        //    }
+        //    catch (System.IO.IOException e)
+        //    {
+        //        // Port can't be opened
+        //        print(e);
+        //        continue;
+        //    }
+        //}
     }
 }
