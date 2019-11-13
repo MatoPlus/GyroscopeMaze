@@ -86,25 +86,17 @@ public class Director : MonoBehaviour {
     void MakeLevel(int [,,] toGenerate){
         int width = toGenerate.GetLength(1);
         int height = toGenerate.GetLength(2);
-        Vector3 origin = new Vector3((float)(-width/2),0,(float)(-height/2));
-        Platform = Instantiate(PlatformPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        Vector3 origin = new Vector3(-(float)width/2.0f,0,-(float)height/2.0f);
+        Platform = Instantiate(PlatformPrefab, new Vector3(-0.5f, 0, -0.5f), Quaternion.identity);
         Platform.transform.localScale = new Vector3(width-1, (float)0.1, height-1);
-        Ceiling = Instantiate(PlatformPrefab, new Vector3(0, 1, 0), Quaternion.identity);
-        TopBlocker = Instantiate(BlockerPrefab, new Vector3(0, (float)(1+5), 0), Quaternion.identity);
-        BottomBlocker = Instantiate(BlockerPrefab, new Vector3(0, (float)(-5), 0), Quaternion.identity);
-        LeftBlocker = Instantiate(BlockerPrefab, new Vector3((float)(-5 - (width / 2)), 0, 0), Quaternion.Euler(90, 0, 0));
-        RightBlocker = Instantiate(BlockerPrefab, new Vector3((float)(5 + (width / 2)), 0, 0), Quaternion.Euler(90, 0, 0));
-        FrontBlocker = Instantiate(BlockerPrefab, new Vector3(0, 0, (float)(5 + (height / 2))), Quaternion.Euler(0, 90, 0));
-        BackBlocker = Instantiate(BlockerPrefab, new Vector3(0,0,(float)(-5 - (height / 2))), Quaternion.Euler(0, 90, 0));
-        //Destroy(Ceiling.GetComponent<MeshRenderer>());
+        Ceiling = Instantiate(PlatformPrefab, new Vector3(-0.5f, 1, -0.5f), Quaternion.identity);
+        //TopBlocker = Instantiate(BlockerPrefab, new Vector3(0, (float)(1+5), 0), Quaternion.identity);
+        //BottomBlocker = Instantiate(BlockerPrefab, new Vector3(0, (float)(-5), 0), Quaternion.identity);
+        Destroy(Ceiling.GetComponent<MeshRenderer>());
         Destroy(Ceiling.GetComponent<Tilt>());
         Ceiling.transform.SetParent(Platform.transform);
-        TopBlocker.transform.SetParent(Platform.transform);
-        BottomBlocker.transform.SetParent(Platform.transform);
-        LeftBlocker.transform.SetParent(Platform.transform);
-        RightBlocker.transform.SetParent(Platform.transform);
-        FrontBlocker.transform.SetParent(Platform.transform);
-        BackBlocker.transform.SetParent(Platform.transform);
+        //TopBlocker.transform.SetParent(Platform.transform);
+        //BottomBlocker.transform.SetParent(Platform.transform);
         /*Tile = Instantiate(TilePrefab, new Vector3(0, 0, 0), Quaternion.identity);
         Tile.transform.SetParent(Platform.transform);
         Tile.transform.localScale = new Vector3(1,1,1);*/
