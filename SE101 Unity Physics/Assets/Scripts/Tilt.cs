@@ -22,8 +22,7 @@ public class Tilt : MonoBehaviour
 
     void Start()
     {
-        useGyro = false;
-        // /dev/cu.wchusbserial14xx0   OR    COMx
+        useGyro = true;
         if (useGyro)
         {
             SetupController();
@@ -66,6 +65,12 @@ public class Tilt : MonoBehaviour
             while (sp.BytesToRead > 0)
             {
                 int ch = sp.ReadByte();
+
+                // For debugging purposes, print to console when button is pressed
+                if (serialCount == 0 && ch == '#')
+                {
+                    print("Button Pressed!");
+                }
 
                 if (synced == 0 && ch != '$') return;   // initial synchronization - also used to resync/realign if needed
                 synced = 1;
