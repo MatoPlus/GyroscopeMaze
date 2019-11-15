@@ -15,7 +15,7 @@ public class Tilt : MonoBehaviour
 
     // Private Variables
     SerialPort sp;
-    char[] packet = new char[14];  // InvenSense Teapot packet
+    char[] packet = new char[14];  // InvenSense packets
     int serialCount = 0;                 // current packet byte position
     int synced = 0;
     float[] q = new float[4];
