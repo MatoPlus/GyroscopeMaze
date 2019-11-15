@@ -1,82 +1,19 @@
-﻿namespace MazeObjects
+using System;
+using UnityEngine;
+
+namespace MazeObjects
 {
-    public abstract class Feature
-    {
-        private int xCoord;
-        private int yCoord;
-        private int type;
-        private bool isDead;
+	public abstract class Feature 
+	{
+		protected bool uniqueObjects[,];
 
-        public Feature(int xCoord, int yCoord, int type)
-        {
-            X = xCoord;
-            Y = yCoord;
-            Dead = false;
-            Type = type;
+        Feature(bool uniqueObjects[,])
+		{
+			this.uniqueObjects = uniqueObjects;
         }
 
-        public int X
-        {
-            get
-            {
-                return xCoord;
-            }
+        void abstract public Build()
 
-            set
-            {
-                xCoord = value;
-            }
-        }
-
-        public int Type
-        {
-            get
-            {
-                return type;
-            }
-
-            set
-            {
-                type = value;
-            }
-        }
-
-        public int Y
-        {
-            get
-            {
-                return yCoord;
-            }
-
-            set
-            {
-                yCoord = value;
-            }
-        }
-
-        public bool Dead
-        {
-            get
-            {
-                return isDead;
-            }
-
-            set
-            {
-                isDead = value;
-            }
-        }
-
-        // Play corresponding interaction sound affect 
-        public abstract void PlaySound();
-        
-        // Kill object from game
-        public abstract void KillObject();
-
-        // Builds object in unity
-        public abstract void Build();
-
-        // Update is called once per frame
-        public abstract void Update();
-    }
+        void abstract public Update()
+	}
 }
