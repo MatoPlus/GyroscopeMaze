@@ -3,17 +3,21 @@ using UnityEngine;
 
 namespace MazeObjects
 {
-	public abstract class Feature 
+	public abstract class Feature
 	{
-		protected bool uniqueObjects[,];
+		protected bool [,] uniqueObjects;
 
-        Feature(bool uniqueObjects[,])
+        protected Feature()
+        {
+        }
+
+        Feature(bool [,] uniqueObjects)
 		{
 			this.uniqueObjects = uniqueObjects;
         }
 
-        void abstract public Build()
+        public abstract void Build();
 
-        void abstract public Update()
+        public abstract void Update();
 	}
 }
