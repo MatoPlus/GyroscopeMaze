@@ -12,6 +12,7 @@ public class Tilt : MonoBehaviour
     public float magnitude;
     public GameObject ball;
     //public GameObject gravPointer;
+    public Camera mCam;
 
     // Private Variables
     SerialPort sp;
@@ -31,6 +32,7 @@ public class Tilt : MonoBehaviour
         magnitude = -9.81f;
         ball = GameObject.Find("Ball(Clone)");
         //gravPointer = GameObject.Find("GravPointer");
+        mCam = Camera.main;
     }
 
     void FixedUpdate()
@@ -102,9 +104,10 @@ public class Tilt : MonoBehaviour
             }
         }
         GameObject.Find("Ball(Clone)").GetComponent<Rigidbody>().AddForce(transform.up * magnitude, ForceMode.Acceleration);
+        Vector3 ea = mCam.transform.localEulerAngles;
+        mCam.transform.localEulerAngles = new Vector3(90, -90*(-this.transform.TransformPoint(this.transform.up).y-1), 0);
         //gravPointer.transform.position = transform.up*magnitude;
         //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
-        //mCamera.transform.LookAt(new Vector3(0, 0, 0));
     }
 
 
