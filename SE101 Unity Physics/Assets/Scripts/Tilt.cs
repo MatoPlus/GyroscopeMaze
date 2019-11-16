@@ -8,7 +8,7 @@ using System.Threading;
 public class Tilt : MonoBehaviour
 {
     // Public Variables (for changing in insepctor)
-    public bool useGyro = false;
+    public bool useGyro = true;
     public float magnitude;
     public GameObject ball;
     //public GameObject gravPointer;
