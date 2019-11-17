@@ -7,11 +7,12 @@ namespace MazeObjects
 	{
 		protected bool [,] uniqueObjects;
 
-        protected Feature()
+        public Feature()
         {
+            return;
         }
 
-        Feature(bool [,] uniqueObjects)
+        public Feature(bool [,] uniqueObjects)
 		{
 			this.uniqueObjects = uniqueObjects;
         }
