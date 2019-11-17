@@ -22,7 +22,7 @@ public class Tilt : MonoBehaviour
 
     void Start()
     {
-        useGyro = false;
+        useGyro = true;
         // /dev/cu.wchusbserial14xx0   OR    COMx
         if (useGyro)
         {
@@ -123,12 +123,11 @@ public class Tilt : MonoBehaviour
                print("Attempted to connect to: " + p);
                sp = new SerialPort(p, 9600);
                sp.Open();
-               // Sucessfully reads input from sp, meaning the port is valid.
-               if(sp.BytesToRead != 0)
-               {
-                   break;
-               } 
-               //Scan inputs for "connectAlready"
+                // Sucessfully reads input from sp, meaning the port is valid.
+                if (sp.BytesToRead != 0)
+                {
+                    break;
+                }
            }
            catch (InvalidOperationException e)
            {

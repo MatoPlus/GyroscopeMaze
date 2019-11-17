@@ -8,14 +8,13 @@ public class Director : MonoBehaviour {
 
     void Awake()
     {
-        MazePrefab = (GameObject)Resources.Load("Prefabs/Maze");
-        MazeObject = Instantiate(MazePrefab);
-        Maze maze = MazeObject.GetComponent<Maze>();
-        maze.Initialize(10, 10);
+        MazePrefab = (GameObject)Resources.Load("Prefabs/MazePrefab");
     }
     // Use this for initialization
     void Start () {
-
+        MazeObject = Instantiate(MazePrefab);
+        Maze maze = MazeObject.GetComponent<Maze>();
+        maze.Initialize(10, 10);
     }
     
     /*

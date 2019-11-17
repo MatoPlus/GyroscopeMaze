@@ -17,10 +17,12 @@ namespace MazeObjects
         public Walls(Maze maze, int [,,] map): base()
         {
             Origin = maze.Origin;
-            Height = maze.Height;
-            Width = maze.Width;
+            Height = maze.Height + 1;
+            Width = maze.Width + 1;
             Map = map;
             MazeObject = maze.gameObject;
+            WallPrefab = (GameObject)Resources.Load("Prefabs/Wall");
+
         }
 
         // Use this for initialization
@@ -31,6 +33,7 @@ namespace MazeObjects
         public override void Build()
         {
             WallsArray = new GameObject[3, Width, Height];
+
             for (int i = 0; i < Width; i++)
             {
                 for (int j = 0; j < Height; j++)
@@ -38,7 +41,7 @@ namespace MazeObjects
                     if (Map[0, i, j] == 1)
                     {
                         
-                        GameObject wall = Object.Instantiate(WallPrefab, new Vector3(Origin.x + i, (float)0.5, Origin.z + (float)j), Quaternion.identity);//Euler(0, 180, 0));
+                        GameObject wall = Object.Instantiate(WallPrefab, new Vector3(Origin.x + (float)i, (float)0.5, Origin.z + (float)j), Quaternion.identity);//Euler(0, 180, 0));
                         wall.transform.SetParent(MazeObject.transform);
                         WallsArray[0, i, j] = wall;
                     }
@@ -54,7 +57,7 @@ namespace MazeObjects
 
         public override void Update()
         {
-            throw new System.NotImplementedException();
+            return;
         }
     }
 }
