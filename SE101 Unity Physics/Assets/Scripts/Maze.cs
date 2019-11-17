@@ -13,6 +13,7 @@ public class Maze : MonoBehaviour {
     public GameObject Ball { get; private set; }
     private GameObject BallPrefab { get; set; }
     private int [,,] Map { get; set; }
+    private bool [,] UniqueObjects { get; set; }
 
     private GameObject Platform;
     private GameObject Ceiling;
@@ -22,6 +23,7 @@ public class Maze : MonoBehaviour {
 	// Use this for initialization
     public void Initialize(int width, int height)
     {
+        UniqueObjects = new bool[width, height];
         features = new List<Feature>();
         Width = width;
         Height = height;
