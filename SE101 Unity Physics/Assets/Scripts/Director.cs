@@ -8,7 +8,7 @@ public class Director : MonoBehaviour {
 
     void Awake()
     {
-        MazePrefab = (GameObject)Resources.Load("Prefabs/MazePrefab");
+        MazePrefab = (GameObject)Resources.Load("Prefabs/Maze");
     }
     // Use this for initialization
     void Start () {
