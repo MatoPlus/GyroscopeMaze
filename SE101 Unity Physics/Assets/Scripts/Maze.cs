@@ -5,7 +5,7 @@ using MazeObjects;
 
 public class Maze : MonoBehaviour {
 
-	List<Feature> features;
+	private List<Feature> features;
 
     public int Width { get; private set; }
     public int Height { get; private set; }
