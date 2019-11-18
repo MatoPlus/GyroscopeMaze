@@ -7,20 +7,18 @@ namespace MazeObjects
     {
 
         GameObject start;
-        GameObject startPrefab;
         Maze maze;
         public int XCoord { get; private set; }
         public int YCoord { get; private set; }
         public GameObject StartPrefab { get; private set; }
         public bool [,] UniqueObjects { get; private set; }
 
-
-        public Start(int xCoord, int yCoord, bool [,]  uniqueObjects) : base(xCoord, yCoord)
+        public Start(int xCoord, int yCoord) : base(xCoord, yCoord)
         {
             XCoord = xCoord;
             YCoord = yCoord;
-            UniqueObjects[xCoord, yCoord] = true;
             StartPrefab = (GameObject)Resources.Load("Prefabs/Start");
+            Build();
         }
 
         // Kill object from game
@@ -32,8 +30,7 @@ namespace MazeObjects
         // Builds object in unity
         public override void Build()
         {
-            return;
-
+            start = Object.Instantiate(StartPrefab, new Vector3(XCoord + 0.5f, 0.1f, YCoord + 0.5f), Quaternion.identity);
         }
 
         // Update is called once per frame

@@ -14,6 +14,10 @@ public class Maze : MonoBehaviour {
     private GameObject BallPrefab { get; set; }
     private int [,,] Map { get; set; }
     private bool [,] UniqueObjects { get; set; }
+    private int StartX { get; set; }
+    private int StartY { get; set; }
+    private int EndX { get; set; }
+    private int EndY { get; set; }
 
     private GameObject Platform;
     private GameObject Ceiling;
@@ -62,6 +66,7 @@ public class Maze : MonoBehaviour {
 			feature.Update();
 		}
 	}
+
     void BuildFeatures()
     {
         foreach (Feature feature in features)
@@ -71,8 +76,18 @@ public class Maze : MonoBehaviour {
     }
     void InitializeFeatures()
 	{
+
+        // Loop and generate coordinates with appropriate distance away.
+        do {
+            StartX = Random.Range(0, Width);
+            StartY = Random.Range(0, Height);
+            EndX = Random.Range(0, Width);
+            EndY = Random.Range(0, Height);
+        } while (Mathf.Sqrt(Mathf.Pow((StartX-EndX),2) + Mathf.Pow((StartY-EndY),2)) < ((Width > Height) ? Width : Height ));
+
         features.Add(new Walls(this, Map));
         features.Add(new SpikeBalls(this, UniqueObjects));
+        features.Add(new KeyPoints(this, StartX, StartY, EndX, EndY, UniqueObjects));
         //features.Add(new Obsticles);
     }
 }

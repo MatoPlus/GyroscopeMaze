@@ -35,14 +35,6 @@ namespace MazeObjects
             spikeBallTimer = 2 + Director.Difficulty/100;
         }
 
-        public override void Build()
-        {
-            /*foreach (FeatureObject spikeBall in spikeBalls)
-            {
-                spikeBall.Build();
-            }*/
-        }
-
         public override void Update()
         {
             counter += Time.deltaTime;
@@ -51,7 +43,17 @@ namespace MazeObjects
                 //Chance of spawning
                 if (Random.value < 0.25)
                 {
-                    SpikeBall spikeBall = new SpikeBall(Random.Range((int)Origin.x, (int)(Origin.x + this.maze.Width)), Random.Range((int)Origin.z, (int)(Origin.z + this.maze.Height)), SpikeBallPrefab, spikeBallTimer, this.spikeBalls);
+                    SpikeBall spikeBall = new SpikeBall(
+                        Random.Range(
+                            (int)Origin.x, 
+                            (int)(Origin.x + this.maze.Width)), 
+                        Random.Range(
+                            (int)Origin.z, 
+                            (int)(Origin.z + this.maze.Height)), 
+                        SpikeBallPrefab, 
+                        spikeBallTimer, 
+                        this.spikeBalls);
+
                     spikeBalls.Add(spikeBall);
                 }
                 counter = 0;
@@ -68,6 +70,14 @@ namespace MazeObjects
             /*foreach (FeatureObject spikeBall in spikeBalls)
             {
                 spikeBall.Update();
+            }*/
+        }
+
+        public override void Build()
+        {
+            /*foreach (FeatureObject spikeBall in spikeBalls)
+            {
+                spikeBall.Build();
             }*/
         }
     }
