@@ -4,24 +4,24 @@ using System.Collections.Generic;
 
 namespace MazeObjects
 {
-    class SpikeBalls : Feature
+    class BuzzSaws : Feature
     {
         public Vector3 Origin { get; private set; }
         public GameObject MazeObject { get; private set; }
-        public GameObject SpikeBallPrefab { get; private set; }
-        private List<SpikeBall> spikeBalls;
+        public GameObject BuzzSawPrefab { get; private set; }
+        private List<BuzzSaw> buzzSaws;
         public Maze maze;
         private float counterMax;
         private float counter;
-        private float spikeBallTimer;
+        private float buzzSawTimer;
 
-        public SpikeBalls(Maze maze, bool [,] uniqueObjects) : base(uniqueObjects)
+        public BuzzSaws(Maze maze, bool[,] uniqueObjects) : base(uniqueObjects)
         {
-            spikeBalls = new List<SpikeBall>();
+            buzzSaws = new List<BuzzSaw>();
             this.maze = maze;
             Origin = maze.Origin;
             MazeObject = maze.gameObject;
-            SpikeBallPrefab = (GameObject)Resources.Load("Prefabs/SpikeBall");
+            BuzzSawPrefab = (GameObject)Resources.Load("Prefabs/BuzzSaw");
             this.Initialize();
         }
 
@@ -29,17 +29,17 @@ namespace MazeObjects
         public void Initialize()
         {
             //Time between spawns
-            counterMax = 1 - (Director.Difficulty)/100;
+            counterMax = 1 - (Director.Difficulty) / 100;
             counter = 0;
             //Time for a ball to despawn
-            spikeBallTimer = 2 + Director.Difficulty/100;
+            buzzSawTimer = 2 + Director.Difficulty / 100;
         }
 
         public override void Build()
         {
-            /*foreach (FeatureObject spikeBall in spikeBalls)
+            /*foreach (FeatureObject buzzSaw in buzzSaws)
             {
-                spikeBall.Build();
+                buzzSaw.Build();
             }*/
         }
 
@@ -51,23 +51,23 @@ namespace MazeObjects
                 //Chance of spawning
                 if (Random.value < 0.25)
                 {
-                    SpikeBall spikeBall = new SpikeBall(Random.Range(0, (int)(this.maze.Width)), Random.Range(0, (int)this.maze.Height), SpikeBallPrefab, spikeBallTimer, Origin);
-                    spikeBalls.Add(spikeBall);
+                    BuzzSaw buzzSaw = new BuzzSaw(Random.Range(0, (int)(this.maze.Width)), Random.Range(0, (int)this.maze.Height), BuzzSawPrefab, buzzSawTimer, Origin);
+                    buzzSaws.Add(buzzSaw);
                 }
                 counter = 0;
             }
-            for (int i = spikeBalls.Count-1; i >= 0; --i)
+            for (int i = buzzSaws.Count - 1; i >= 0; --i)
             {
-                if (spikeBalls[i].Dead)
+                if (buzzSaws[i].Dead)
                 {
-                    spikeBalls.RemoveAt(i);
+                    buzzSaws.RemoveAt(i);
                     continue;
                 }
-                spikeBalls[i].Update();
+                buzzSaws[i].Update();
             }
-            /*foreach (FeatureObject spikeBall in spikeBalls)
+            /*foreach (FeatureObject buzzSaw in buzzSaws)
             {
-                spikeBall.Update();
+                buzzSaw.Update();
             }*/
         }
     }

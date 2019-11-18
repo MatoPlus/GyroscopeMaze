@@ -5,36 +5,36 @@ using System.Collections.Generic;
 namespace MazeObjects
 {
 
-    class SpikeBall : FeatureObject
+    class BuzzSaw : FeatureObject
     {
 
-        GameObject spikeBall;
-        GameObject spikeBallPrefab;
+        GameObject buzzSaw;
+        GameObject buzzSawPrefab;
         Vector3 Origin;
         private float timerMax;
         private float timer;
         Maze maze;
 
-        public SpikeBall(int xCoord, int yCoord, GameObject spikeBallPrefab, float timerMax, Vector3 Origin) : base(xCoord, yCoord)
+        public BuzzSaw(int xCoord, int yCoord, GameObject buzzSawPrefab, float timerMax, Vector3 Origin) : base(xCoord, yCoord)
         {
             this.Origin = Origin;
             this.timerMax = timerMax;
-            this.spikeBallPrefab = spikeBallPrefab;
+            this.buzzSawPrefab = buzzSawPrefab;
             Build();
         }
 
         // Kill object from game
         public override void KillObject()
         {
-            Object.Destroy(spikeBall);
+            Object.Destroy(buzzSaw);
             Dead = true;
-            //AllSpikeBalls.Remove(this);
+            //AllBuzzSaws.Remove(this);
         }
 
         // Builds object in unity
         public override void Build()
         {
-            this.spikeBall = Object.Instantiate(spikeBallPrefab, new Vector3(Origin.x + X + 0.5f, 0.5f, Origin.z + Y + 0.5f), Quaternion.identity);
+            this.buzzSaw = Object.Instantiate(buzzSawPrefab, new Vector3(Origin.x + X + 0.5f, 0.5f, Origin.z + Y + 0.5f), Quaternion.identity);
             this.timer = timerMax;
         }
 

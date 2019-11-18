@@ -31,6 +31,9 @@ public class Maze : MonoBehaviour {
         Map = generator.Generation();
         // Origin = transform.parent.position;
         Origin = new Vector3(-width / 2.0f, 0, -height / 2.0f);
+        Debug.Log(Origin.x);
+        Debug.Log(Origin.y);
+        Debug.Log(Origin.z);
 
         BallPrefab = (GameObject) Resources.Load("Prefabs/Ball");
         BlockerPrefab = (GameObject)Resources.Load("Prefabs/Blocker");
@@ -38,8 +41,9 @@ public class Maze : MonoBehaviour {
         PlatformPrefab = (GameObject)Resources.Load("Prefabs/Platform");
 
         Platform = Instantiate(PlatformPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        transform.localScale = new Vector3(width - 1, (float)0.1, height - 1);
-        Ceiling = Instantiate(PlatformPrefab, new Vector3(-0.5f, 1, -0.5f), Quaternion.identity);
+        Platform.transform.localScale = new Vector3(width, (float)0.1, height);
+        Ceiling = Instantiate(PlatformPrefab, new Vector3(0, 1, 0), Quaternion.identity);
+        Ceiling.transform.localScale = new Vector3(width, (float)0.1, height);
         //TopBlocker = Instantiate(BlockerPrefab, new Vector3(0, (float)(1+5), 0), Quaternion.identity);
         //BottomBlocker = Instantiate(BlockerPrefab, new Vector3(0, (float)(-5), 0), Quaternion.identity);
         Destroy(Ceiling.GetComponent<MeshRenderer>());

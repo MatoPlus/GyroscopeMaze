@@ -42,6 +42,7 @@ namespace MazeObjects
                     {
                         
                         GameObject wall = Object.Instantiate(WallPrefab, new Vector3(Origin.x + (float)i, (float)0.5, Origin.z + (float)j), Quaternion.identity);//Euler(0, 180, 0));
+                        Debug.Log(wall.transform.TransformPoint(wall.transform.position).x);
                         wall.transform.SetParent(MazeObject.transform);
                         WallsArray[0, i, j] = wall;
                     }
