@@ -8,15 +8,13 @@ namespace MazeObjects
 
         public int X { get; set; }
         public int Y { get; set; }
-        public int Type { get; set; }
         public bool Dead { get; set; }
 
-        public FeatureObject(int xCoord, int yCoord, int type)
+        public FeatureObject(int xCoord, int yCoord)
         {
             X = xCoord;
             Y = yCoord;
             Dead = false;
-            Type = type;
         }
 
         // Play corresponding interaction sound affect 

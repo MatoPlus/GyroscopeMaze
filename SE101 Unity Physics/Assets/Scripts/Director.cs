@@ -5,6 +5,7 @@ using UnityEngine;
 public class Director : MonoBehaviour {
     public GameObject MazePrefab;
     public GameObject MazeObject;
+    public static int Difficulty { get; private set; }
 
     void Awake()
     {
@@ -12,6 +13,7 @@ public class Director : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
+        Difficulty = 0;
         MazeObject = Instantiate(MazePrefab);
         Maze maze = MazeObject.GetComponent<Maze>();
         maze.Initialize(10, 10);

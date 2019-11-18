@@ -15,7 +15,7 @@ namespace MazeObjects
         WallDirection direction;
         Maze maze;
 
-        public Wall(int xCoord, int yCoord, int type, WallDirection direction, GameObject wallPrefab) : base(xCoord, yCoord, type)
+        public Wall(int xCoord, int yCoord, int type, WallDirection direction, GameObject wallPrefab) : base(xCoord, yCoord)
         {
             this.direction = direction;
             this.wallPrefab = wallPrefab;
