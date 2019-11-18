@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114892460316533292}
   - component: {fileID: 114451086890126170}
   m_Layer: 0
-  m_Name: MazePrefab
+  m_Name: Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
