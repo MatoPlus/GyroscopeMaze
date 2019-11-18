@@ -22,7 +22,6 @@ public class Tilt : MonoBehaviour
 
     void Start()
     {
-        useGyro = true;
         // /dev/cu.wchusbserial14xx0   OR    COMx
         if (useGyro)
         {

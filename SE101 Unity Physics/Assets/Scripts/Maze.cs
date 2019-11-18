@@ -71,8 +71,8 @@ public class Maze : MonoBehaviour {
     }
     void InitializeFeatures()
 	{
-        Walls walls = new Walls(this, Map);
-        features.Add(walls);
-		//features.Add(new Obsticles);
-	}
+        features.Add(new Walls(this, Map));
+        features.Add(new SpikeBalls(this, UniqueObjects));
+        //features.Add(new Obsticles);
+    }
 }

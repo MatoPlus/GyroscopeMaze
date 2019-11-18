@@ -66,7 +66,7 @@ namespace MazeObjects
         }
     }
 
-    public class MazeGeneration : MonoBehaviour
+    public class MazeGeneration
     {
         private readonly CellState[,] _cells;
         private readonly int _width;
@@ -108,27 +108,6 @@ namespace MazeObjects
                 this[p.Neighbour.X, p.Neighbour.Y] -= p.Wall.OppositeWall();
                 VisitCell(p.Neighbour.X, p.Neighbour.Y);
             }
-        }
-
-        public void Display()
-        {
-            var firstLine = string.Empty;
-            for (var y = 0; y < _height; y++)
-            {
-                var sbTop = new StringBuilder();
-                var sbMid = new StringBuilder();
-                for (var x = 0; x < _width; x++)
-                {
-                    sbTop.Append(this[x, y].HasFlag(CellState.Top) ? "+--" : "+  ");
-                    sbMid.Append(this[x, y].HasFlag(CellState.Left) ? "|  " : "   ");
-                }
-                if (firstLine == string.Empty)
-                    firstLine = sbTop.ToString();
-                print(sbTop + "+");
-                print(sbMid + "|");
-                print(sbMid + "|");
-            }
-            print(firstLine);
         }
 
         public int[,,] Generation()
