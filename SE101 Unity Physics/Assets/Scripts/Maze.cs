@@ -48,13 +48,9 @@ public class Maze : MonoBehaviour {
         Platform.transform.localScale = new Vector3(width, (float)0.1, height);
         Ceiling = Instantiate(PlatformPrefab, new Vector3(0, 1, 0), Quaternion.identity);
         Ceiling.transform.localScale = new Vector3(width, (float)0.1, height);
-        //TopBlocker = Instantiate(BlockerPrefab, new Vector3(0, (float)(1+5), 0), Quaternion.identity);
-        //BottomBlocker = Instantiate(BlockerPrefab, new Vector3(0, (float)(-5), 0), Quaternion.identity);
         Destroy(Ceiling.GetComponent<MeshRenderer>());
         Platform.transform.SetParent(transform);
         Ceiling.transform.SetParent(transform);
-        //TopBlocker.transform.SetParent(Platform.transform);
-        //BottomBlocker.transform.SetParent(Platform.transform);
 
 
         InitializeFeatures();

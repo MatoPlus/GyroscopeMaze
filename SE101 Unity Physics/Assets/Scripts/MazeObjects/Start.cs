@@ -11,7 +11,6 @@ namespace MazeObjects
         public int XCoord { get; private set; }
         public int YCoord { get; private set; }
         public GameObject StartPrefab { get; private set; }
-        public bool [,] UniqueObjects { get; private set; }
 
         public Start(int xCoord, int yCoord) : base(xCoord, yCoord)
         {

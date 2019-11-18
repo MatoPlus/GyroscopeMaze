@@ -14,6 +14,7 @@ namespace MazeObjects
         private Start start;
         private End end;
         public Maze maze;
+        public int startX, startY, endX, endY;
 
         public KeyPoints(Maze maze, int startX, int startY, int endX, int endY, bool[,] uniqueObjects) : base(uniqueObjects)
         {
@@ -26,16 +27,17 @@ namespace MazeObjects
             MazeObject = maze.gameObject;
             StartBallPrefab = (GameObject)Resources.Load("Prefabs/Start");
             EndBallPrefab = (GameObject)Resources.Load("Prefabs/End");
-            start = new Start(startX+(int)Origin.x, startY+(int)Origin.z);
-            end = new End(endX + (int)Origin.x, endY+(int)Origin.z);
+            this.startX = startX;
+            this.startY = startY;
+            this.endX = endX;
+            this.endY = endY;
+            Build();
         }
 
         public override void Build()
         {
-            /*foreach (FeatureObject spikeBall in spikeBalls)
-            {
-                spikeBall.Build();
-            }*/
+            start = new Start(startX + (int)Origin.x, startY + (int)Origin.z);
+            end = new End(endX + (int)Origin.x, endY + (int)Origin.z);
         }
 
         public override void Update()

@@ -22,7 +22,7 @@ namespace MazeObjects
             Origin = maze.Origin;
             MazeObject = maze.gameObject;
             SpikeBallPrefab = (GameObject)Resources.Load("Prefabs/SpikeBall");
-            this.Initialize();
+            Initialize();
         }
 
         // Use this for initialization
@@ -43,7 +43,24 @@ namespace MazeObjects
                 //Chance of spawning
                 if (Random.value < 0.25)
                 {
-                    SpikeBall spikeBall = new SpikeBall(Random.Range(0, (int)(this.maze.Width)), Random.Range(0, (int)this.maze.Height), SpikeBallPrefab, spikeBallTimer, Origin);
+                    int posX;
+                    int posY;
+                    bool ballNearby;
+                    do {
+                        ballNearby = false;
+                        posX = Random.Range(0, (int)(this.maze.Width));
+                        posY = Random.Range(0, (int)this.maze.Height);
+                        Collider[] nearbyBalls = Physics.OverlapSphere(new Vector3(Origin.x + posX, 0.5f, Origin.z + posY), 1.5f);
+                        foreach (Collider i in nearbyBalls)
+                        {
+                            if (i.name == "SpikeBall(Clone)")
+                            {
+                                ballNearby = true;
+                                break;
+                            }
+                        }
+                    } while (ballNearby);
+                    SpikeBall spikeBall = new SpikeBall(posX, posY, SpikeBallPrefab, spikeBallTimer, Origin);
                     spikeBalls.Add(spikeBall);
                 }
                 counter = 0;
