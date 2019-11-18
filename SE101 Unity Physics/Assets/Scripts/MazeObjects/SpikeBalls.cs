@@ -43,21 +43,7 @@ namespace MazeObjects
                 //Chance of spawning
                 if (Random.value < 0.25)
                 {
-<<<<<<< HEAD
                     SpikeBall spikeBall = new SpikeBall(Random.Range(0, (int)(this.maze.Width)), Random.Range(0, (int)this.maze.Height), SpikeBallPrefab, spikeBallTimer, Origin);
-=======
-                    SpikeBall spikeBall = new SpikeBall(
-                        Random.Range(
-                            (int)Origin.x, 
-                            (int)(Origin.x + this.maze.Width)), 
-                        Random.Range(
-                            (int)Origin.z, 
-                            (int)(Origin.z + this.maze.Height)), 
-                        SpikeBallPrefab, 
-                        spikeBallTimer, 
-                        this.spikeBalls);
-
->>>>>>> a7e000b168209bf61bd0e6aa359e8614d8be3efa
                     spikeBalls.Add(spikeBall);
                 }
                 counter = 0;
