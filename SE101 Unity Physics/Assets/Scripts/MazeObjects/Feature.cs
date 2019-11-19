@@ -22,7 +22,7 @@ namespace MazeObjects
             this.Origin = Origin;
         }
 
-        public Vector2 getValidLocation()
+        public Vector2 getValidLocation(float radius)
         {
             int posX;
             int posY;
@@ -32,7 +32,7 @@ namespace MazeObjects
                 objNearby = false;
                 posX = UnityEngine.Random.Range(0, (int)(maze.Width));
                 posY = UnityEngine.Random.Range(0, (int)(maze.Height));
-                Collider[] nearbyObjects = Physics.OverlapSphere(new Vector3(Origin.x + posX, 0.5f, Origin.z + posY), 1);
+                Collider[] nearbyObjects = Physics.OverlapSphere(new Vector3(Origin.x + posX, 0.5f, Origin.z + posY), radius);
                 foreach (Collider i in nearbyObjects)
                 {
                     if (i.tag == "UniqueObject" || i.tag == "Player")

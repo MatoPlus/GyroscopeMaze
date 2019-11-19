@@ -39,7 +39,7 @@ namespace MazeObjects
                 //Chance of spawning
                 if (Random.value <= 0.5)
                 {
-                    Vector2 coords = getValidLocation();
+                    Vector2 coords = getValidLocation(1);
                     SpikeBall spikeBall = new SpikeBall((int)coords.x, (int)coords.y, SpikeBallPrefab, spikeBallTimer, Origin);
                     spikeBalls.Add(spikeBall);
                 }
