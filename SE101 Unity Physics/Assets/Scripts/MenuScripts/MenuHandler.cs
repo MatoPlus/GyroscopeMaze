@@ -14,16 +14,26 @@ public class MenuHandler
         buttons = new List<Button>();
         PlayButtonPrefab = (GameObject)Resources.Load("Prefabs/PlayButton");
         Canvas = GameObject.Find("Canvas");
+        BuildMainMenu();
     }
 
-    private void BuildMainMenu()
+    public void BuildMainMenu()
     {
-        SceneButton PlayButton = new SceneButton(UnityEngine.Object.Instantiate(PlayButtonPrefab, new Vector3(Screen.width / 2f, Screen.height / 2f + 20f, 0), Quaternion.identity));
+        SceneButton PlayButton = new SceneButton(Screen.width / 2f, Screen.height / 2f + 20, PlayButtonPrefab, "Game", Canvas);
         buttons.Add(PlayButton);
-        PlayButton.attached.transform.SetParent(Canvas.transform);
-        //PlayButton.attached.GetComponent<PressScript>();
 
         //SettingsButton = UnityEngine.Object.Instantiate(ButtonPrefab, new Vector3(Screen.width / 2f, Screen.height / 2f, 0), Quaternion.identity);
+    }
+
+    public void PressAll()
+    {
+        foreach (Button i in buttons)
+        {
+            if (i.active)
+            {
+                i.Press();
+            }
+        }
     }
 
 }

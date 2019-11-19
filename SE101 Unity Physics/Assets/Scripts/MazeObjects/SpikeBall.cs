@@ -46,7 +46,6 @@ namespace MazeObjects
         public override void Update()
         {
             warningTimer -= Time.deltaTime;
-            Debug.Log(warningTimer);
             if (!active && warningTimer <= 0)
             {
                 Object.Destroy(warningPad);

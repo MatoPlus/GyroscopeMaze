@@ -7,6 +7,8 @@ public class Director : MonoBehaviour {
     private GameObject MazeObject;
     private GameObject TimerPrefab;
     private GameObject TimerObject;
+    private MenuHandler menuHandler;
+    private bool playing = false;
     private Timer Timer { get; set; }
 
     public static int Difficulty { get; private set; }
@@ -14,7 +16,16 @@ public class Director : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        menuHandler = new MenuHandler();
         Difficulty = 0;
+        if (playing)
+        {
+            StartGame();
+        }
+    }
+
+    void StartGame()
+    {
         CreateMaze();
         CreateTimer();
     }
@@ -26,7 +37,10 @@ public class Director : MonoBehaviour {
 
     void Update()
     {
-        // print(Timer.TimeLeft);
+        if (Input.GetKeyDown("space"))
+        {
+            menuHandler.PressAll();
+        }
     }
 
     void TimerDone()
