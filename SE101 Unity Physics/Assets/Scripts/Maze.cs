@@ -35,9 +35,6 @@ public class Maze : MonoBehaviour {
         Map = generator.Generation();
         // Origin = transform.parent.position;
         Origin = new Vector3(-width / 2.0f, 0, -height / 2.0f);
-        Debug.Log(Origin.x);
-        Debug.Log(Origin.y);
-        Debug.Log(Origin.z);
 
         BallPrefab = (GameObject) Resources.Load("Prefabs/Ball");
         BlockerPrefab = (GameObject)Resources.Load("Prefabs/Blocker");
