@@ -25,10 +25,10 @@ namespace MazeObjects
         public void Initialize()
         {
             //Time between spawns
-            counterMax = 1 - (Director.Difficulty)/100;
+            counterMax = 3 - (Director.Difficulty)/100;
             counter = 0;
             //Time for a ball to despawn
-            spikeBallTimer = 2 + Director.Difficulty/100;
+            spikeBallTimer = 5 + Director.Difficulty/100;
         }
 
         public override void Update()
@@ -37,7 +37,7 @@ namespace MazeObjects
             if (counter >= counterMax)
             {
                 //Chance of spawning
-                if (Random.value < 0.25)
+                if (Random.value <= 0.5)
                 {
                     Vector2 coords = getValidLocation();
                     SpikeBall spikeBall = new SpikeBall((int)coords.x, (int)coords.y, SpikeBallPrefab, spikeBallTimer, Origin);
