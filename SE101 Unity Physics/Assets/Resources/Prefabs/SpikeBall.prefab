@@ -37,6 +37,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4760225711053010}
   - component: {fileID: 135587980638065290}
+  - component: {fileID: 114641166713687850}
+  - component: {fileID: 54057403311809482}
   m_Layer: 0
   m_Name: SpikeBall
   m_TagString: Untagged
@@ -52,7 +54,7 @@ Transform:
   m_GameObject: {fileID: 1881343967499548}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 4909898602223504}
   m_Father: {fileID: 0}
@@ -113,6 +115,32 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1162102348030030}
   m_Mesh: {fileID: 4300002, guid: c455996f6e6b49d418895f41b5216202, type: 3}
+--- !u!54 &54057403311809482
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1881343967499548}
+  serializedVersion: 2
+  m_Mass: 5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &114641166713687850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1881343967499548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e351f5e0e4d144e1bd99a2d864bcd77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135587980638065290
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -120,7 +148,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1881343967499548}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1

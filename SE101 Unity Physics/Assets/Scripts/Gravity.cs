@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Gravity : MonoBehaviour {
-	void Update () {
+	void FixedUpdate () {
         GetComponent<Rigidbody>().AddForce(Tilt.Gravity, ForceMode.Acceleration);
     }
 }

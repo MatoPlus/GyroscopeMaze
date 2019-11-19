@@ -116,8 +116,8 @@ public class Tilt : MonoBehaviour
                     }
                 }
             }
-        }
-         GameObject.Find("Ball(Clone)").GetComponent<Rigidbody>().AddForce(transform.up * magnitude, ForceMode.Acceleration);
+        }        
+        //GameObject.Find("Ball(Clone)").GetComponent<Rigidbody>().AddForce(transform.up * magnitude, ForceMode.Acceleration);
         //gravPointer.transform.position = transform.up*magnitude;
         //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
         //mCamera.transform.LookAt(new Vector3(0, 0, 0));
