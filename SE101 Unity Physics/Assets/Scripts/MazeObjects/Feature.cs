@@ -35,7 +35,7 @@ namespace MazeObjects
                 Collider[] nearbyObjects = Physics.OverlapSphere(new Vector3(Origin.x + posX, 0.5f, Origin.z + posY), 1);
                 foreach (Collider i in nearbyObjects)
                 {
-                    if (i.tag == "UniqueObject")
+                    if (i.tag == "UniqueObject" || i.tag == "Player")
                     {
                         objNearby = true;
                         break;
