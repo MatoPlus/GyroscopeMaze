@@ -5,13 +5,12 @@ using UnityEngine;
 public class ButtonTracking : MonoBehaviour {
     public Button attachedTo;
 	// Use this for initialization
-	void OnCollisionEnter2D()
+	void OnTriggerEnter2D()
     {
         attachedTo.active = true;
-        Debug.Log("Entered!");
 	}
 
-    void OnCollisionExit2D()
+    void OnTriggerExit2D()
     {
         attachedTo.active = false;
     }

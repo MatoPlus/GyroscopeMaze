@@ -24,7 +24,7 @@ public class Mouse : MonoBehaviour
 
     void Start()
     {
-        useGyro = true;
+        useGyro = false;
         if (useGyro)
         {
             SetupController();
@@ -39,11 +39,11 @@ public class Mouse : MonoBehaviour
         {
             if (Input.GetAxis("Horizontal") > .2)
             {
-                this.transform.rotation *= Quaternion.Euler(0, 0, 0.3f);
+                this.transform.rotation *= Quaternion.Euler(0, 0, -0.3f);
             }
             if (Input.GetAxis("Horizontal") < -.2)
             {
-                this.transform.rotation *= Quaternion.Euler(0, 0, -0.3f);
+                this.transform.rotation *= Quaternion.Euler(0, 0, 0.3f);
             }
             if (Input.GetAxis("Vertical") > .2)
             {
@@ -107,7 +107,7 @@ public class Mouse : MonoBehaviour
             }
         }
         
-        mouse.transform.position = new Vector3(transform.up.x*600+Screen.width/2, transform.up.z * 600 + Screen.height/2, 0);
+        mouse.transform.position = new Vector3(transform.up.x*600+Screen.width/2, transform.up.z * 600 + Screen.height/2, -1);
         //print(mouse.transform.position.x + " : " + mouse.transform.position.y);
         XCoord = (int)mouse.transform.position.x;
         YCoord = (int)mouse.transform.position.y;

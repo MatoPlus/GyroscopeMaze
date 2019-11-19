@@ -39,8 +39,8 @@ GameObject:
   - component: {fileID: 222957564192671130}
   - component: {fileID: 114045360970964608}
   - component: {fileID: 114014969201972142}
-  - component: {fileID: 61705363194321366}
   - component: {fileID: 114754184713886948}
+  - component: {fileID: 61975050378433646}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -48,7 +48,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &61705363194321366
+--- !u!61 &61975050378433646
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

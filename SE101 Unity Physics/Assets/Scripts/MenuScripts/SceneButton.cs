@@ -14,7 +14,7 @@ public class SceneButton : Button
 
     public override void Press()
     {
-        Debug.Log("Pressed");
+        Debug.Log("TODO: Make this do something");
         //SceneManager.LoadScene(targetScene);
     }
 }
