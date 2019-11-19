@@ -6,11 +6,9 @@ namespace MazeObjects
 {
     class SpikeBalls : Feature
     {
-        public Vector3 Origin { get; private set; }
         public GameObject MazeObject { get; private set; }
         public GameObject SpikeBallPrefab { get; private set; }
         private List<SpikeBall> spikeBalls;
-        public Maze maze;
         private float counterMax;
         private float counter;
         private float spikeBallTimer;

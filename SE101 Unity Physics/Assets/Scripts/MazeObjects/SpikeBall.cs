@@ -10,7 +10,7 @@ namespace MazeObjects
 
         GameObject spikeBall;
         GameObject spikeBallPrefab;
-        Vector3 Origin;
+        private Vector3 Origin;
         private float timerMax;
         private float timer;
         Maze maze;

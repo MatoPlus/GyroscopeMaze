@@ -10,7 +10,7 @@ namespace MazeObjects
 
         GameObject buzzSaw;
         GameObject buzzSawPrefab;
-        Vector3 Origin;
+        private Vector3 Origin;
         private float timerMax;
         private float timer;
         Maze maze;
