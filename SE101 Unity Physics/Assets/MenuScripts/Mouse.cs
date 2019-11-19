@@ -10,6 +10,10 @@ public class Mouse : MonoBehaviour
     // Public Variables (for changing in insepctor)
     public bool useGyro = true;
     public float magnitude;
+    public GameObject mouse;
+    public int XCoord { get; private set; }
+    public int YCoord { get; private set; }
+
 
     // Private Variables
     SerialPort sp;
@@ -25,6 +29,7 @@ public class Mouse : MonoBehaviour
         {
             SetupController();
         }
+        mouse = GameObject.Find("Mouse");
     }
 
     void FixedUpdate()
@@ -102,7 +107,11 @@ public class Mouse : MonoBehaviour
             }
         }
         
-        GameObject.Find("Mouse").transform.position = new Vector3(transform.up.x*600+Screen.width/2, transform.up.z * 600 + Screen.height/2, 0);
+        mouse.transform.position = new Vector3(transform.up.x*600+Screen.width/2, transform.up.z * 600 + Screen.height/2, 0);
+        print(mouse.transform.position.x + " : " + mouse.transform.position.y);
+        XCoord = (int)mouse.transform.position.x;
+        YCoord = (int)mouse.transform.position.y;
+
         //gravPointer.transform.position = transform.up*magnitude;
         //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
     }
