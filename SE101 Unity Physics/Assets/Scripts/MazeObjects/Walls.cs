@@ -4,8 +4,6 @@ namespace MazeObjects
 {
     class Walls : Feature
     {
-
-        public Vector3 Origin { get; private set; }
         public int Height { get; private set; }
         public int Width { get; private set; }
         public int[,,] Map { get; private set; }
@@ -21,6 +19,7 @@ namespace MazeObjects
             Map = map;
             MazeObject = maze.gameObject;
             WallPrefab = (GameObject)Resources.Load("Prefabs/Wall");
+            Debug.Log(Origin.x);
         }
 
         /*
@@ -49,9 +48,11 @@ namespace MazeObjects
                     {
                         
                         GameObject wall = Object.Instantiate(WallPrefab, new Vector3(Origin.x + (float)i, (float)0.5, Origin.z + (float)j), Quaternion.identity);//Euler(0, 180, 0));
-                        Debug.Log(wall.transform.TransformPoint(wall.transform.position).x);
                         wall.transform.SetParent(MazeObject.transform);
                         WallsArray[0, i, j] = wall;
+                        Debug.Log(Origin.x);
+                        //Debug.Log(Origin.x + (float)i);
+                        //Debug.Log(wall.transform.position.x);
                     }
                     if (Map[1, i, j] == 1)
                     {

@@ -5,8 +5,8 @@ namespace MazeObjects
 {
 	public abstract class Feature
 	{
-        Maze maze;
-        Vector3 Origin;
+        protected Maze maze;
+        protected Vector3 Origin;
 		protected bool [,] uniqueObjects;
 
         public Feature(Maze maze, Vector3 Origin)

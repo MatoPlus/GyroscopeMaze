@@ -10,7 +10,6 @@ namespace MazeObjects
         public GameObject MazeObject { get; private set; }
         public GameObject StartBallPrefab { get; private set; }
         public GameObject EndBallPrefab { get; private set; }
-        public bool[,] UniqueObjects { get; private set; }
         private Start start;
         private End end;
         public Maze maze;
@@ -19,8 +18,8 @@ namespace MazeObjects
         public KeyPoints(Maze maze, Vector3 Origin, int startX, int startY, int endX, int endY, bool[,] uniqueObjects) : base(maze, Origin, uniqueObjects)
         {
             // TODO: Implment sanity check for based placements.
-            UniqueObjects[startX, startY] = true;
-            UniqueObjects[endY, endY] = true;
+            uniqueObjects[startX, startY] = true;
+            uniqueObjects[endY, endY] = true;
             MazeObject = maze.gameObject;
             StartBallPrefab = (GameObject)Resources.Load("Prefabs/Start");
             EndBallPrefab = (GameObject)Resources.Load("Prefabs/End");
