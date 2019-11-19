@@ -16,7 +16,7 @@ namespace MazeObjects
         {
             XCoord = xCoord;
             YCoord = yCoord;
-            StartPrefab = (GameObject)Resources.Load("Prefabs/Start");
+            StartPrefab = (GameObject)Resources.Load("Prefabs/Maze/Start");
             Build();
         }
 

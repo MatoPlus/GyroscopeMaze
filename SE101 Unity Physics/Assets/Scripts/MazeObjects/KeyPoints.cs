@@ -19,8 +19,8 @@ namespace MazeObjects
             uniqueObjects[startX, startY] = true;
             uniqueObjects[endY, endY] = true;
             MazeObject = maze.gameObject;
-            StartBallPrefab = (GameObject)Resources.Load("Prefabs/Start");
-            EndBallPrefab = (GameObject)Resources.Load("Prefabs/End");
+            StartBallPrefab = (GameObject)Resources.Load("Prefabs/Maze/Start");
+            EndBallPrefab = (GameObject)Resources.Load("Prefabs/Maze/End");
             this.startX = startX;
             this.startY = startY;
             this.endX = endX;

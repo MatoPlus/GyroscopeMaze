@@ -18,8 +18,8 @@ namespace MazeObjects
         {
             spikeBalls = new List<SpikeBall>();
             MazeObject = maze.gameObject;
-            SpikeBallPrefab = (GameObject)Resources.Load("Prefabs/SpikeBall");
-            WarningPadPrefab = (GameObject)Resources.Load("Prefabs/WarningPad");
+            SpikeBallPrefab = (GameObject)Resources.Load("Prefabs/Maze/SpikeBall");
+            WarningPadPrefab = (GameObject)Resources.Load("Prefabs/Maze/WarningPad");
             Initialize();
         }
 

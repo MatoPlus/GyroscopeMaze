@@ -8,7 +8,6 @@ public class MenuHandler
 
     private GameObject StageButtonPrefab;
     GameObject Canvas;
-    StageButton SettingsButton;
     public MenuHandler()
     {
         buttons = new List<Button>();
@@ -19,6 +18,7 @@ public class MenuHandler
 
     public void BuildMainMenu()
     {
+
         StageButton PlayButton = new StageButton(Screen.width / 2f, Screen.height / 2f + 20, StageButtonPrefab, "Play", "Game", Canvas);
         buttons.Add(PlayButton);
         StageButton SettingsButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 30, StageButtonPrefab, "Settings", "Settings", Canvas);

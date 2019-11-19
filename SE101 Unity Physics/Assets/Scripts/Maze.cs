@@ -22,7 +22,6 @@ public class Maze : MonoBehaviour {
     private GameObject Platform;
     private GameObject Ceiling;
     private GameObject PlatformPrefab;
-    private GameObject BlockerPrefab;
 
 	// Use this for initialization
     public void Initialize(int width, int height)
@@ -36,10 +35,9 @@ public class Maze : MonoBehaviour {
         // Origin = transform.parent.position;
         Origin = new Vector3(-width / 2.0f, 0, -height / 2.0f);
 
-        BallPrefab = (GameObject) Resources.Load("Prefabs/Ball");
-        BlockerPrefab = (GameObject)Resources.Load("Prefabs/Blocker");
-        //TilePrefab = (GameObject)Resources.Load("Prefabs/PlatformTile");
-        PlatformPrefab = (GameObject)Resources.Load("Prefabs/Platform");
+        BallPrefab = (GameObject) Resources.Load("Prefabs/Maze/Ball");
+        //TilePrefab = (GameObject)Resources.Load("Prefabs/Maze/PlatformTile");
+        PlatformPrefab = (GameObject)Resources.Load("Prefabs/Maze/Platform");
 
         Platform = Instantiate(PlatformPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         Platform.transform.localScale = new Vector3(width, (float)0.1, height);

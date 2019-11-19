@@ -8,7 +8,7 @@ public class Director : MonoBehaviour {
     private GameObject TimerPrefab;
     private GameObject TimerObject;
     private MenuHandler menuHandler;
-    private bool playing = false;
+    private bool playing = true;
     private Timer Timer { get; set; }
 
     public static int Difficulty { get; private set; }
@@ -16,7 +16,7 @@ public class Director : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        menuHandler = new MenuHandler();
+        //menuHandler = new MenuHandler();
         Difficulty = 0;
         if (playing)
         {
@@ -73,7 +73,7 @@ public class Director : MonoBehaviour {
 
     void LoadPrefabs()
     {
-        MazePrefab = (GameObject)Resources.Load("Prefabs/Maze");
+        MazePrefab = (GameObject)Resources.Load("Prefabs/Maze/Maze");
         TimerPrefab = (GameObject)Resources.Load("Prefabs/Timer");
     }
 }

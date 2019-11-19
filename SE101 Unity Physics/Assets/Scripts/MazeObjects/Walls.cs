@@ -18,8 +18,7 @@ namespace MazeObjects
             Width = maze.Width + 1;
             Map = map;
             MazeObject = maze.gameObject;
-            WallPrefab = (GameObject)Resources.Load("Prefabs/Wall");
-            Debug.Log(Origin.x);
+            WallPrefab = (GameObject)Resources.Load("Prefabs/Maze/Wall");
         }
 
         /*
@@ -50,7 +49,6 @@ namespace MazeObjects
                         GameObject wall = Object.Instantiate(WallPrefab, new Vector3(Origin.x + (float)i, (float)0.5, Origin.z + (float)j), Quaternion.identity);//Euler(0, 180, 0));
                         wall.transform.SetParent(MazeObject.transform);
                         WallsArray[0, i, j] = wall;
-                        Debug.Log(Origin.x);
                         //Debug.Log(Origin.x + (float)i);
                         //Debug.Log(wall.transform.position.x);
                     }

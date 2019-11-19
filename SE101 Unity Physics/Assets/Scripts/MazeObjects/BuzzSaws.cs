@@ -18,7 +18,7 @@ namespace MazeObjects
             buzzSaws = new List<BuzzSaw>();
             this.maze = maze;
             MazeObject = maze.gameObject;
-            BuzzSawPrefab = (GameObject)Resources.Load("Prefabs/BuzzSaw");
+            BuzzSawPrefab = (GameObject)Resources.Load("Prefabs/Maze/BuzzSaw");
             this.Initialize();
         }
 
