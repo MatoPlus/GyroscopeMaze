@@ -10,6 +10,10 @@ public class Mouse : MonoBehaviour
     // Public Variables (for changing in insepctor)
     public bool useGyro = true;
     public float magnitude;
+    public GameObject mouse;
+    public int XCoord { get; private set; }
+    public int YCoord { get; private set; }
+
 
     // Private Variables
     SerialPort sp;
@@ -20,11 +24,12 @@ public class Mouse : MonoBehaviour
 
     void Start()
     {
-        useGyro = false;
+        useGyro = true;
         if (useGyro)
         {
             SetupController();
         }
+        mouse = GameObject.Find("Mouse");
     }
 
     void FixedUpdate()
@@ -61,6 +66,12 @@ public class Mouse : MonoBehaviour
             {
                 int ch = sp.ReadByte();
 
+                // For debugging purposes, print to console when button is pressed
+                if (serialCount == 0 && ch == '#')
+                {
+                    print("Button Pressed!");
+                }
+
                 if (synced == 0 && ch != '$') return;   // initial synchronization - also used to resync/realign if needed
                 synced = 1;
                 if ((serialCount == 1 && ch != 2)
@@ -95,7 +106,12 @@ public class Mouse : MonoBehaviour
                 }
             }
         }
-        GameObject.Find("Mouse").transform.position = new Vector3(transform.up.x*600+Screen.width/2, transform.up.z * 600 + Screen.height/2, 0);
+        
+        mouse.transform.position = new Vector3(transform.up.x*600+Screen.width/2, transform.up.z * 600 + Screen.height/2, 0);
+        print(mouse.transform.position.x + " : " + mouse.transform.position.y);
+        XCoord = (int)mouse.transform.position.x;
+        YCoord = (int)mouse.transform.position.y;
+
         //gravPointer.transform.position = transform.up*magnitude;
         //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
     }

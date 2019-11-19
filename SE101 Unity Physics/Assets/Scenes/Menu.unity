@@ -113,29 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &69911028 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1422884903013922, guid: d90e6510c6f3c3d4bad12bf78d60645a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1445434131}
 --- !u!224 &69911029 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224643395363453994, guid: d90e6510c6f3c3d4bad12bf78d60645a,
     type: 2}
   m_PrefabInternal: {fileID: 1445434131}
---- !u!114 &69911032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 69911028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25f874fc64a4bbb4aadc6a3775ce0cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useGyro: 1
-  magnitude: 0
 --- !u!1 &111264470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,7 +1241,7 @@ Prefab:
     - target: {fileID: 224643395363453994, guid: d90e6510c6f3c3d4bad12bf78d60645a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 224643395363453994, guid: d90e6510c6f3c3d4bad12bf78d60645a,
         type: 2}
@@ -1711,3 +1693,45 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2129762615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2129762617}
+  - component: {fileID: 2129762616}
+  m_Layer: 0
+  m_Name: Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2129762616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2129762615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f874fc64a4bbb4aadc6a3775ce0cb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useGyro: 1
+  magnitude: 0
+--- !u!4 &2129762617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2129762615}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

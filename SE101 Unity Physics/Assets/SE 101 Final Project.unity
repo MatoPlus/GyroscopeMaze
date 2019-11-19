@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -206,22 +206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdbe86e863044aa4b76b82e38cff69d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BallPrefab: {fileID: 0}
-  Ball: {fileID: 0}
-  WallPrefab: {fileID: 0}
-  PlatformPrefab: {fileID: 0}
-  Platform: {fileID: 0}
-  Ceiling: {fileID: 0}
-  TilePrefab: {fileID: 0}
-  Tile: {fileID: 0}
-  BlockerPrefab: {fileID: 0}
-  TopBlocker: {fileID: 0}
-  BottomBlocker: {fileID: 0}
-  LeftBlocker: {fileID: 0}
-  RightBlocker: {fileID: 0}
-  FrontBlocker: {fileID: 0}
-  BackBlocker: {fileID: 0}
-  test: 65
+  MazePrefab: {fileID: 0}
+  MazeObject: {fileID: 0}
 --- !u!4 &218385086
 Transform:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace MazeGeneration
+namespace MazeObjects
 {
     public static class Extensions
     {
@@ -66,14 +66,14 @@ namespace MazeGeneration
         }
     }
 
-    public class Maze : MonoBehaviour
+    public class MazeGeneration
     {
         private readonly CellState[,] _cells;
         private readonly int _width;
         private readonly int _height;
         private readonly System.Random _rng;
 
-        public Maze(int width, int height)
+        public MazeGeneration(int width, int height)
         {
             _width = width;
             _height = height;
@@ -110,36 +110,11 @@ namespace MazeGeneration
             }
         }
 
-        public void Display()
-        {
-            var firstLine = string.Empty;
-            for (var y = 0; y < _height; y++)
-            {
-                var sbTop = new StringBuilder();
-                var sbMid = new StringBuilder();
-                for (var x = 0; x < _width; x++)
-                {
-                    sbTop.Append(this[x, y].HasFlag(CellState.Top) ? "+--" : "+  ");
-                    sbMid.Append(this[x, y].HasFlag(CellState.Left) ? "|  " : "   ");
-                }
-                if (firstLine == string.Empty)
-                    firstLine = sbTop.ToString();
-                print(sbTop + "+");
-                print(sbMid + "|");
-                print(sbMid + "|");
-            }
-            print(firstLine);
-        }
-
         public int[,,] Generation()
         {
 			int[,,] arr = new int[3,_width+1,_height+1];
-            var firstLine = string.Empty;
-            var all = new StringBuilder();
             for (var y = 0; y < _height; y++)
             {
-                var sbTop = new StringBuilder();
-                var sbMid = new StringBuilder();
                 for (var x = 0; x < _width; x++)
                 {
                     if (this[x,y].HasFlag(CellState.Top))
@@ -150,23 +125,14 @@ namespace MazeGeneration
 					{
 						arr[1, x, y] = 1;
 					}
-                    sbTop.Append(this[x, y].HasFlag(CellState.Top) ? "+--" : "+  ");
-                    sbMid.Append(this[x, y].HasFlag(CellState.Left) ? "|  " : "   ");
                 }
-                if (firstLine == string.Empty)
-                    firstLine = sbTop.ToString();
-				arr[1, _width, y] = 1;
-                all.Append(sbTop + "+\n");
-                all.Append(sbMid + "|\n");
-                // all.Append(sbMid + "|\n");
+                arr[1, _width, y] = 1;
             }
             for (var x = 0; x < _width; x++)
 			{
 				arr[0, x, _height] = 1;
 			}
-            all.Append(firstLine + "\n");
-            print(all);
-			return arr;
+            return arr;
         }
     }
  
