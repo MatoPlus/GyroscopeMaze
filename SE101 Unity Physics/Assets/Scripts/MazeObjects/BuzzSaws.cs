@@ -6,11 +6,9 @@ namespace MazeObjects
 {
     class BuzzSaws : Feature
     {
-        public Vector3 Origin { get; private set; }
         public GameObject MazeObject { get; private set; }
-        public GameObject BuzzSawPrefab { get; private set; }
+        private GameObject BuzzSawPrefab { get; set; }
         private List<BuzzSaw> buzzSaws;
-        public Maze maze;
         private float counterMax;
         private float counter;
         private float buzzSawTimer;

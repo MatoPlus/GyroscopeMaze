@@ -6,13 +6,11 @@ namespace MazeObjects
 {
     class KeyPoints : Feature
     {
-        public Vector3 Origin { get; private set; }
         public GameObject MazeObject { get; private set; }
         public GameObject StartBallPrefab { get; private set; }
         public GameObject EndBallPrefab { get; private set; }
         private Start start;
         private End end;
-        public Maze maze;
         public int startX, startY, endX, endY;
 
         public KeyPoints(Maze maze, Vector3 Origin, int startX, int startY, int endX, int endY, bool[,] uniqueObjects) : base(maze, Origin, uniqueObjects)
