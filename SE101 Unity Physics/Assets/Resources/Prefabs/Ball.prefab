@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4718936685012290}
   - component: {fileID: 33332594060595440}
   - component: {fileID: 23347001036356596}
-  - component: {fileID: 54707840419284382}
+  - component: {fileID: 54472018989523712}
   - component: {fileID: 135466338330443578}
   - component: {fileID: 114753818811765080}
   m_Layer: 0
@@ -86,7 +86,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1067349648702148}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54707840419284382
+--- !u!54 &54472018989523712
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,7 +100,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!114 &114753818811765080
 MonoBehaviour:
   m_ObjectHideFlags: 1

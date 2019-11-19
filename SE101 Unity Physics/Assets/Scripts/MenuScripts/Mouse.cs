@@ -107,7 +107,7 @@ public class Mouse : MonoBehaviour
             }
         }
         
-        mouse.transform.position = new Vector3(transform.up.x*600+Screen.width/2, transform.up.z * 600 + Screen.height/2, -1);
+        mouse.transform.position = new Vector3(transform.up.x*600+Screen.width/2, transform.up.z * 600 + Screen.height/2, 0);
         //print(mouse.transform.position.x + " : " + mouse.transform.position.y);
         XCoord = (int)mouse.transform.position.x;
         YCoord = (int)mouse.transform.position.y;
