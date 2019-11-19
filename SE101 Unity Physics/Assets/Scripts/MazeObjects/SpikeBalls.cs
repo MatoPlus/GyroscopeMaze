@@ -15,11 +15,9 @@ namespace MazeObjects
         private float counter;
         private float spikeBallTimer;
 
-        public SpikeBalls(Maze maze, bool [,] uniqueObjects) : base(uniqueObjects)
+        public SpikeBalls(Maze maze, Vector3 Origin, bool [,] uniqueObjects) : base(maze, Origin, uniqueObjects)
         {
             spikeBalls = new List<SpikeBall>();
-            this.maze = maze;
-            Origin = maze.Origin;
             MazeObject = maze.gameObject;
             SpikeBallPrefab = (GameObject)Resources.Load("Prefabs/SpikeBall");
             Initialize();
@@ -43,24 +41,8 @@ namespace MazeObjects
                 //Chance of spawning
                 if (Random.value < 0.25)
                 {
-                    int posX;
-                    int posY;
-                    bool ballNearby;
-                    do {
-                        ballNearby = false;
-                        posX = Random.Range(0, (int)(this.maze.Width));
-                        posY = Random.Range(0, (int)this.maze.Height);
-                        Collider[] nearbyBalls = Physics.OverlapSphere(new Vector3(Origin.x + posX, 0.5f, Origin.z + posY), 1.5f);
-                        foreach (Collider i in nearbyBalls)
-                        {
-                            if (i.name == "SpikeBall(Clone)")
-                            {
-                                ballNearby = true;
-                                break;
-                            }
-                        }
-                    } while (ballNearby);
-                    SpikeBall spikeBall = new SpikeBall(posX, posY, SpikeBallPrefab, spikeBallTimer, Origin);
+                    Vector2 coords = getValidLocation();
+                    SpikeBall spikeBall = new SpikeBall((int)coords.x, (int)coords.y, SpikeBallPrefab, spikeBallTimer, Origin);
                     spikeBalls.Add(spikeBall);
                 }
                 counter = 0;

@@ -15,7 +15,7 @@ namespace MazeObjects
         private float counter;
         private float buzzSawTimer;
 
-        public BuzzSaws(Maze maze, bool[,] uniqueObjects) : base(uniqueObjects)
+        public BuzzSaws(Maze maze, Vector3 Origin, bool[,] uniqueObjects) : base(maze, Origin, uniqueObjects)
         {
             buzzSaws = new List<BuzzSaw>();
             this.maze = maze;

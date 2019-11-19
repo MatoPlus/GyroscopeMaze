@@ -85,9 +85,9 @@ public class Maze : MonoBehaviour {
             EndY = Random.Range(0, Height);
         } while (Mathf.Sqrt(Mathf.Pow((StartX-EndX),2) + Mathf.Pow((StartY-EndY),2)) < ((Width > Height) ? Width : Height ));
 
-        features.Add(new Walls(this, Map));
-        features.Add(new SpikeBalls(this, UniqueObjects));
-        features.Add(new KeyPoints(this, StartX, StartY, EndX, EndY, UniqueObjects));
+        features.Add(new Walls(Map, this, Origin));
+        features.Add(new SpikeBalls(this, Origin, UniqueObjects));
+        features.Add(new KeyPoints(this, Origin, StartX, StartY, EndX, EndY, UniqueObjects));
         //features.Add(new Obsticles);
     }
 }

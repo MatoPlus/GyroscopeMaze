@@ -14,9 +14,8 @@ namespace MazeObjects
         public GameObject WallPrefab { get; private set; }
 
 
-        public Walls(Maze maze, int [,,] map): base()
+        public Walls(int [,,] map, Maze maze, Vector3 Origin): base(maze, Origin)
         {
-            Origin = maze.Origin;
             Height = maze.Height + 1;
             Width = maze.Width + 1;
             Map = map;

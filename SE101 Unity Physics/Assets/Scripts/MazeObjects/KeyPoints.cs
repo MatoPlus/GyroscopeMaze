@@ -16,11 +16,8 @@ namespace MazeObjects
         public Maze maze;
         public int startX, startY, endX, endY;
 
-        public KeyPoints(Maze maze, int startX, int startY, int endX, int endY, bool[,] uniqueObjects) : base(uniqueObjects)
+        public KeyPoints(Maze maze, Vector3 Origin, int startX, int startY, int endX, int endY, bool[,] uniqueObjects) : base(maze, Origin, uniqueObjects)
         {
-            this.maze = maze;
-            Origin = maze.Origin;
-            UniqueObjects = uniqueObjects;
             // TODO: Implment sanity check for based placements.
             UniqueObjects[startX, startY] = true;
             UniqueObjects[endY, endY] = true;
