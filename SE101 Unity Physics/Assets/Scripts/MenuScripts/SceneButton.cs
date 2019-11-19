@@ -9,6 +9,6 @@ public class SceneButton : Button
 
     public override void Press()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

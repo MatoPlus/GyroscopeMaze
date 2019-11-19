@@ -7,20 +7,24 @@ namespace MazeObjects
 
     class SpikeBall : FeatureObject
     {
-
+        private bool active;
         GameObject spikeBall;
-        GameObject spikeBallPrefab;
+        GameObject warningPad;
+        GameObject spikeBallPrefab; 
         private Vector3 Origin;
         private float timerMax;
         private float timer;
+        private float warningTimer;
         Maze maze;
 
-        public SpikeBall(int xCoord, int yCoord, GameObject spikeBallPrefab, float timerMax, Vector3 Origin) : base(xCoord, yCoord)
+        public SpikeBall(int xCoord, int yCoord, GameObject spikeBallPrefab, GameObject warningPadPrefab, float timerMax, Vector3 Origin) : base(xCoord, yCoord)
         {
+            active = false;
             this.Origin = Origin;
             this.timerMax = timerMax;
             this.spikeBallPrefab = spikeBallPrefab;
-            Build();
+            warningPad = Object.Instantiate(warningPadPrefab, new Vector3(Origin.x + X + 0.5f, 0.1f, Origin.z + Y + 0.5f), Quaternion.Euler(90, 0, 0));
+            warningTimer = 2;
         }
 
         // Kill object from game
@@ -34,17 +38,28 @@ namespace MazeObjects
         // Builds object in unity
         public override void Build()
         {
-            this.spikeBall = Object.Instantiate(spikeBallPrefab, new Vector3(Origin.x + X + 0.5f, 0.5f, Origin.z + Y + 0.5f), Quaternion.identity);
-            this.timer = timerMax;
+            spikeBall = Object.Instantiate(spikeBallPrefab, new Vector3(Origin.x + X + 0.5f, 0.5f, Origin.z + Y + 0.5f), Quaternion.identity);
+            timer = timerMax;
         }
 
         // Update is called once per frame
         public override void Update()
         {
-            this.timer -= Time.deltaTime;
-            if (this.timer <= 0)
+            warningTimer -= Time.deltaTime;
+            Debug.Log(warningTimer);
+            if (!active && warningTimer <= 0)
             {
-                this.KillObject();
+                Object.Destroy(warningPad);
+                active = true;
+                Build();
+            }
+            if (active)
+            {
+                timer -= Time.deltaTime;
+                if (timer <= 0)
+                {
+                    KillObject();
+                }
             }
         }
     }

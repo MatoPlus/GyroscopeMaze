@@ -8,6 +8,7 @@ namespace MazeObjects
     {
         public GameObject MazeObject { get; private set; }
         public GameObject SpikeBallPrefab { get; private set; }
+        public GameObject WarningPadPrefab { get; private set; }
         private List<SpikeBall> spikeBalls;
         private float counterMax;
         private float counter;
@@ -18,6 +19,7 @@ namespace MazeObjects
             spikeBalls = new List<SpikeBall>();
             MazeObject = maze.gameObject;
             SpikeBallPrefab = (GameObject)Resources.Load("Prefabs/SpikeBall");
+            WarningPadPrefab = (GameObject)Resources.Load("Prefabs/WarningPad");
             Initialize();
         }
 
@@ -25,7 +27,7 @@ namespace MazeObjects
         public void Initialize()
         {
             //Time between spawns
-            counterMax = 3 - (Director.Difficulty)/100;
+            counterMax = 2.5f - (Director.Difficulty)/100;
             counter = 0;
             //Time for a ball to despawn
             spikeBallTimer = 5 + Director.Difficulty/100;
@@ -40,7 +42,7 @@ namespace MazeObjects
                 if (Random.value <= 0.5)
                 {
                     Vector2 coords = getValidLocation(1);
-                    SpikeBall spikeBall = new SpikeBall((int)coords.x, (int)coords.y, SpikeBallPrefab, spikeBallTimer, Origin);
+                    SpikeBall spikeBall = new SpikeBall((int)coords.x, (int)coords.y, SpikeBallPrefab, WarningPadPrefab, spikeBallTimer, Origin);
                     spikeBalls.Add(spikeBall);
                 }
                 counter = 0;

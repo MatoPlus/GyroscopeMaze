@@ -32,6 +32,7 @@ namespace MazeObjects
                 objNearby = false;
                 posX = UnityEngine.Random.Range(0, (int)(maze.Width));
                 posY = UnityEngine.Random.Range(0, (int)(maze.Height));
+                if (uniqueObjects[posX, posY]) continue;
                 Collider[] nearbyObjects = Physics.OverlapSphere(new Vector3(Origin.x + posX, 0.5f, Origin.z + posY), radius);
                 foreach (Collider i in nearbyObjects)
                 {

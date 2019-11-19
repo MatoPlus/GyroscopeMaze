@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -206,8 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdbe86e863044aa4b76b82e38cff69d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MazePrefab: {fileID: 0}
-  MazeObject: {fileID: 0}
 --- !u!4 &218385086
 Transform:
   m_ObjectHideFlags: 0
@@ -427,5 +425,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useGyro: 0
-  magnitude: 0
   ball: {fileID: 0}

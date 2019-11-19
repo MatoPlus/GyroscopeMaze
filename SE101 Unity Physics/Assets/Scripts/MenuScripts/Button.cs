@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
 
-public class Button
+public abstract class Button
 {
     bool active;
-    GameObject attached;
+    public GameObject attached;
     public Button(GameObject attached)
     {
         active = false;
         this.attached = attached;
     }
 
-    private void Press()
-    {
-
-    }
+    public abstract void Press();
 }
