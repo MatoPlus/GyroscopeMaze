@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 using System.IO.Ports;
 using System.Threading;
@@ -9,8 +10,21 @@ public class Tilt : MonoBehaviour
 {
     // Public Variables (for changing in insepctor)
     public bool useGyro = false;
-    public float magnitude;
+    private static float magnitude = -9.81f;
     public GameObject ball;
+    private static GameObject gravityObject;
+    public static Vector3 Gravity
+    {
+        get
+        {
+            if (gravityObject == null)
+            {
+                return Vector3.up;
+            }
+            return gravityObject.transform.up * magnitude;
+        }
+    }
+
     //public GameObject gravPointer;
 
     // Private Variables
@@ -27,8 +41,11 @@ public class Tilt : MonoBehaviour
         {
             SetupController();
         }
-        magnitude = -9.81f;
-        ball = GameObject.Find("Ball(Clone)");
+        if (gravityObject != null)
+        {
+            throw new Exception();
+        }
+        gravityObject = gameObject;
         //gravPointer = GameObject.Find("GravPointer");
     }
 
@@ -100,6 +117,8 @@ public class Tilt : MonoBehaviour
                 }
             }
         }
+
+
         GameObject.Find("Ball(Clone)").GetComponent<Rigidbody>().AddForce(transform.up * magnitude, ForceMode.Acceleration);
         //gravPointer.transform.position = transform.up*magnitude;
         //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
@@ -111,7 +130,7 @@ public class Tilt : MonoBehaviour
     {
         // sp = new SerialPort("/dev/cu.wchusbserial14110", 9600);
         // sp = new SerialPort("COM6", 9600);
-        //sp.Open();
+        // sp.Open();
 
         //Auto detect implementation.
         string[] ports = SerialPort.GetPortNames();
