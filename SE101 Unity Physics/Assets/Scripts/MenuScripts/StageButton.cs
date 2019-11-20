@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -8,9 +9,12 @@ public class StageButton : Button
 {
     public UnityEvent actions = new UnityEvent();
 
-    public StageButton(float x, float y, GameObject prefab, string displayText, Action associatedAction, GameObject canvas)
+    public StageButton(float x, float y, GameObject prefab, string displayText, List<Action> associatedActions, GameObject canvas)
     {
-        actions.AddListener(delegate { associatedAction(); });
+        foreach (Action i in associatedActions)
+        {
+            actions.AddListener(delegate { i(); });
+        }
         attached = UnityEngine.Object.Instantiate(prefab, new Vector3(x, y, 0), Quaternion.identity);
         attached.transform.SetParent(canvas.transform);
         attached.GetComponent<ButtonTracking>().attachedTo = this;
@@ -20,6 +24,5 @@ public class StageButton : Button
     public override void Press()
     {
         actions.Invoke();
-        //SceneManager.LoadScene(targetScene);
     }
 }

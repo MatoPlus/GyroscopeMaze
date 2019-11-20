@@ -20,12 +20,17 @@ public class MenuHandler
 
     public void BuildMainMenu()
     {
-
-        StageButton PlayButton = new StageButton(Screen.width / 2f, Screen.height / 2f + 20, StageButtonPrefab, "Play", director.StartGame, Canvas);
+        List<Action> buttonActions = new List<Action>();
+        buttonActions.Add(director.StartGame);
+        StageButton PlayButton = new StageButton(Screen.width / 2f, Screen.height / 2f + 20, StageButtonPrefab, "Play", buttonActions, Canvas);
         buttons.Add(PlayButton);
-        StageButton SettingsButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 30, StageButtonPrefab, "Settings", director.Empty, Canvas);
+
+        buttonActions.Clear();
+        buttonActions.Add(director.Empty);
+        StageButton SettingsButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 30, StageButtonPrefab, "Settings", buttonActions, Canvas);
         buttons.Add(SettingsButton);
-        StageButton QuitButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Quit", director.Empty, Canvas);
+
+        StageButton QuitButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Quit", buttonActions, Canvas);
         buttons.Add(QuitButton);
 
         //SettingsButton = UnityEngine.Object.Instantiate(ButtonPrefab, new Vector3(Screen.width / 2f, Screen.height / 2f, 0), Quaternion.identity);
