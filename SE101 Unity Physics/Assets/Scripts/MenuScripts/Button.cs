@@ -10,4 +10,9 @@ public abstract class Button
     }
 
     public abstract void Press();
+
+    public void Remove()
+    {
+        Object.Destroy(attached);
+    }
 }
