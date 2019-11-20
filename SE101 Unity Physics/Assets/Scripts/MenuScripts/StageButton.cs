@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StageButton : Button
 {
-    private string targetStage;
-    public StageButton(float x, float y, GameObject prefab, string displayText, string targetStage, GameObject canvas)
+    public UnityEvent actions = new UnityEvent();
+
+    public StageButton(float x, float y, GameObject prefab, string displayText, Action associatedAction, GameObject canvas)
     {
-        this.targetStage = targetStage;
-        attached = Object.Instantiate(prefab, new Vector3(x, y, 0), Quaternion.identity);
+        actions.AddListener(delegate { associatedAction(); });
+        attached = UnityEngine.Object.Instantiate(prefab, new Vector3(x, y, 0), Quaternion.identity);
         attached.transform.SetParent(canvas.transform);
         attached.GetComponent<ButtonTracking>().attachedTo = this;
         attached.GetComponentInChildren<Text>().text = displayText;
@@ -16,7 +19,7 @@ public class StageButton : Button
 
     public override void Press()
     {
-        Debug.Log("TODO: Make this do something");
+        actions.Invoke();
         //SceneManager.LoadScene(targetScene);
     }
 }

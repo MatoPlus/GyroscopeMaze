@@ -11,7 +11,6 @@ public class SerialDropdown : MonoBehaviour {
         PopulateList();	
 	}
 	
-	// Update is called once per frame
 	void PopulateList() {
         List<string> ports = new List<string>(SerialPort.GetPortNames());
         dropdown.AddOptions(ports);
