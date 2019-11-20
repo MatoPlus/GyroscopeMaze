@@ -37,8 +37,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4760225711053010}
   - component: {fileID: 135587980638065290}
+  - component: {fileID: 135465841686099020}
   - component: {fileID: 114641166713687850}
   - component: {fileID: 54057403311809482}
+  - component: {fileID: 114789818404655922}
   m_Layer: 0
   m_Name: SpikeBall
   m_TagString: Untagged
@@ -53,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1881343967499548}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -40.673393, y: 49.9, z: -26.85962}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 4909898602223504}
@@ -141,6 +143,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e351f5e0e4d144e1bd99a2d864bcd77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114789818404655922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1881343967499548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba77f8d5a6c6f459083e0155cd4bbaf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionWithBall:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!135 &135465841686099020
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1881343967499548}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135587980638065290
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -17,8 +17,9 @@ namespace MazeObjects
         private float warningTimer;
         Maze maze;
 
-        public SpikeBall(int xCoord, int yCoord, GameObject spikeBallPrefab, GameObject warningPadPrefab, float timerMax, Vector3 Origin) : base(xCoord, yCoord)
+        public SpikeBall(int xCoord, int yCoord, GameObject spikeBallPrefab, GameObject warningPadPrefab, float timerMax, Vector3 Origin, Maze maze) : base(xCoord, yCoord)
         {
+            this.maze = maze;
             active = false;
             this.Origin = Origin;
             this.timerMax = timerMax;
@@ -39,6 +40,7 @@ namespace MazeObjects
         public override void Build()
         {
             spikeBall = Object.Instantiate(spikeBallPrefab, new Vector3(Origin.x + X + 0.5f, 0.5f, Origin.z + Y + 0.5f), Quaternion.identity);
+            spikeBall.GetComponent<LethalObject>().OnCollisionWithBall.AddListener(maze.KillBall);
             timer = timerMax;
         }
 

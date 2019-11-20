@@ -17,6 +17,7 @@ namespace MazeObjects
         public SpikeBalls(Maze maze, Vector3 Origin, bool [,] uniqueObjects) : base(maze, Origin, uniqueObjects)
         {
             spikeBalls = new List<SpikeBall>();
+            this.maze = maze;
             MazeObject = maze.gameObject;
             SpikeBallPrefab = (GameObject)Resources.Load("Prefabs/Maze/SpikeBall");
             WarningPadPrefab = (GameObject)Resources.Load("Prefabs/Maze/WarningPad");
@@ -39,10 +40,10 @@ namespace MazeObjects
             if (counter >= counterMax)
             {
                 //Chance of spawning
-                if (Random.value <= 0.5)
+                if (Random.value <= 1)
                 {
                     Vector2 coords = getValidLocation(1);
-                    SpikeBall spikeBall = new SpikeBall((int)coords.x, (int)coords.y, SpikeBallPrefab, WarningPadPrefab, spikeBallTimer, Origin);
+                    SpikeBall spikeBall = new SpikeBall((int)coords.x, (int)coords.y, SpikeBallPrefab, WarningPadPrefab, spikeBallTimer, Origin, maze);
                     spikeBalls.Add(spikeBall);
                 }
                 counter = 0;

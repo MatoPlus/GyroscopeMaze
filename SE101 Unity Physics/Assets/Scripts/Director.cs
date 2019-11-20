@@ -51,7 +51,7 @@ public class Director : MonoBehaviour {
 
     void TimerUpdate()
     {
-        print(Timer.TimeLeft);
+        // print(Timer.TimeLeft);
     }
 
     void CreateMaze()

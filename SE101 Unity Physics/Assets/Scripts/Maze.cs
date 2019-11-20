@@ -5,15 +5,20 @@ using MazeObjects;
 
 public class Maze : MonoBehaviour {
 
-	private List<Feature> features;
+    enum FeatureName
+    {
+        Walls, Spikeballs, KeyPoints
+    }
+
+    private Dictionary<FeatureName, Feature> features;
 
     public int Width { get; private set; }
     public int Height { get; private set; }
     public Vector3 Origin { get; private set; }
     public GameObject Ball { get; private set; }
     private GameObject BallPrefab { get; set; }
-    private int [,,] Map { get; set; }
-    private bool [,] UniqueObjects { get; set; }
+    private int[,,] Map { get; set; }
+    private bool[,] UniqueObjects { get; set; }
     private int StartX { get; set; }
     private int StartY { get; set; }
     private int EndX { get; set; }
@@ -23,11 +28,11 @@ public class Maze : MonoBehaviour {
     private GameObject Ceiling;
     private GameObject PlatformPrefab;
 
-	// Use this for initialization
+    // Use this for initialization
     public void Initialize(int width, int height)
     {
         UniqueObjects = new bool[width, height];
-        features = new List<Feature>();
+        features = new Dictionary<FeatureName, Feature>();
         Width = width;
         Height = height;
         MazeGeneration generator = new MazeGeneration(width, height);
@@ -47,42 +52,56 @@ public class Maze : MonoBehaviour {
         Platform.transform.SetParent(transform);
         Ceiling.transform.SetParent(transform);
 
-
         InitializeFeatures();
         BuildFeatures();
 
-        Ball = Instantiate(BallPrefab, new Vector3(0, (float)0.5, 0), Quaternion.identity);
+        Ball = Instantiate(BallPrefab, CoordsToPosition(StartX, StartY, 0.5f, 0.5f, 0.5f), Quaternion.identity);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		foreach (Feature feature in features)
-		{
-			feature.Update();
-		}
-	}
+
+    // Update is called once per frame
+    void Update() {
+        foreach (var feature in features)
+        {
+            feature.Value.Update();
+        }
+    }
 
     void BuildFeatures()
     {
-        foreach (Feature feature in features)
+        foreach (var feature in features)
         {
-            feature.Build();
+            feature.Value.Build();
         }
     }
     void InitializeFeatures()
-	{
-
+    {
         // Loop and generate coordinates with appropriate distance away.
         do {
             StartX = Random.Range(0, Width);
             StartY = Random.Range(0, Height);
             EndX = Random.Range(0, Width);
             EndY = Random.Range(0, Height);
-        } while (Mathf.Sqrt(Mathf.Pow((StartX-EndX),2) + Mathf.Pow((StartY-EndY),2)) < ((Width > Height) ? Width : Height ));
+        } while (Mathf.Sqrt(Mathf.Pow((StartX - EndX), 2) + Mathf.Pow((StartY - EndY), 2)) < ((Width > Height) ? Width : Height));
 
-        features.Add(new Walls(Map, this, Origin));
-        features.Add(new SpikeBalls(this, Origin, UniqueObjects));
-        features.Add(new KeyPoints(this, Origin, StartX, StartY, EndX, EndY, UniqueObjects));
+        features[FeatureName.Walls] = new Walls(Map, this, Origin);
+        features[FeatureName.Spikeballs] = new SpikeBalls(this, Origin, UniqueObjects);
+        features[FeatureName.KeyPoints] = new KeyPoints(this, Origin, StartX, StartY, EndX, EndY, UniqueObjects);
         //features.Add(new Obsticles);
+    }
+
+    public Vector3 CoordsToPosition(float x, float y, float offsetX, float offsetY, float offsetZ)
+    {
+        return new Vector3(Origin.x + x + offsetX, offsetZ, Origin.z + y + offsetY);
+    }
+
+    public void KillBall()
+    {
+        print("kill ball");
+        Ball.transform.position = CoordsToPosition(StartX, StartY, 0.5f, 0.5f, 0.5f);
+    }
+
+    public void MazeComplete()
+    {
+        print("end reached");
     }
 }
