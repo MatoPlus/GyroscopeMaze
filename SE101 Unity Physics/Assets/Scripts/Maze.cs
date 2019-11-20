@@ -10,15 +10,15 @@ public class Maze : MonoBehaviour {
         Walls, Spikeballs, KeyPoints
     }
 
-	private Dictionary<FeatureName,Feature> features;
+    private Dictionary<FeatureName, Feature> features;
 
     public int Width { get; private set; }
     public int Height { get; private set; }
     public Vector3 Origin { get; private set; }
     public GameObject Ball { get; private set; }
     private GameObject BallPrefab { get; set; }
-    private int [,,] Map { get; set; }
-    private bool [,] UniqueObjects { get; set; }
+    private int[,,] Map { get; set; }
+    private bool[,] UniqueObjects { get; set; }
     private int StartX { get; set; }
     private int StartY { get; set; }
     private int EndX { get; set; }
@@ -29,7 +29,7 @@ public class Maze : MonoBehaviour {
     private GameObject PlatformPrefab;
     private GameObject BlockerPrefab;
 
-	// Use this for initialization
+    // Use this for initialization
     public void Initialize(int width, int height)
     {
         UniqueObjects = new bool[width, height];
@@ -41,7 +41,7 @@ public class Maze : MonoBehaviour {
         // Origin = transform.parent.position;
         Origin = new Vector3(-width / 2.0f, 0, -height / 2.0f);
 
-        BallPrefab = (GameObject) Resources.Load("Prefabs/Ball");
+        BallPrefab = (GameObject)Resources.Load("Prefabs/Ball");
         BlockerPrefab = (GameObject)Resources.Load("Prefabs/Blocker");
         //TilePrefab = (GameObject)Resources.Load("Prefabs/PlatformTile");
         PlatformPrefab = (GameObject)Resources.Load("Prefabs/Platform");
@@ -59,14 +59,14 @@ public class Maze : MonoBehaviour {
 
         Ball = Instantiate(BallPrefab, CoordsToPosition(StartX, StartY, 0.5f, 0.5f, 0.5f), Quaternion.identity);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		foreach (var feature in features)
-		{
+
+    // Update is called once per frame
+    void Update() {
+        foreach (var feature in features)
+        {
             feature.Value.Update();
-		}
-	}
+        }
+    }
 
     void BuildFeatures()
     {
@@ -76,14 +76,14 @@ public class Maze : MonoBehaviour {
         }
     }
     void InitializeFeatures()
-	{
+    {
         // Loop and generate coordinates with appropriate distance away.
         do {
             StartX = Random.Range(0, Width);
             StartY = Random.Range(0, Height);
             EndX = Random.Range(0, Width);
             EndY = Random.Range(0, Height);
-        } while (Mathf.Sqrt(Mathf.Pow((StartX-EndX),2) + Mathf.Pow((StartY-EndY),2)) < ((Width > Height) ? Width : Height ));
+        } while (Mathf.Sqrt(Mathf.Pow((StartX - EndX), 2) + Mathf.Pow((StartY - EndY), 2)) < ((Width > Height) ? Width : Height));
 
         features[FeatureName.Walls] = new Walls(Map, this, Origin);
         features[FeatureName.Spikeballs] = new SpikeBalls(this, Origin, UniqueObjects);
@@ -94,5 +94,16 @@ public class Maze : MonoBehaviour {
     public Vector3 CoordsToPosition(float x, float y, float offsetX, float offsetY, float offsetZ)
     {
         return new Vector3(Origin.x + x + offsetX, offsetZ, Origin.z + y + offsetY);
+    }
+
+    public void KillBall()
+    {
+        print("kill ball");
+        Ball.transform.position = CoordsToPosition(StartX, StartY, 0.5f, 0.5f, 0.5f);
+    }
+
+    public void MazeComplete()
+    {
+        print("end reached");
     }
 }
