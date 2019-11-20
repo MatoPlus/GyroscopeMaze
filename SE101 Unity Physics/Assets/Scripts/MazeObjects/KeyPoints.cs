@@ -30,8 +30,8 @@ namespace MazeObjects
 
         public override void Build()
         {
-            start = new Start(startX + (int)Origin.x, startY + (int)Origin.z);
-            end = new End(endX + (int)Origin.x, endY + (int)Origin.z);
+            start = new Start(startX + (int)Origin.x, startY + (int)Origin.z, maze);
+            end = new End(endX + (int)Origin.x, endY + (int)Origin.z, maze);
         }
 
         public override void Update()

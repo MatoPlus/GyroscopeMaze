@@ -8,14 +8,11 @@ namespace MazeObjects
 
         GameObject start;
         Maze maze;
-        public int XCoord { get; private set; }
-        public int YCoord { get; private set; }
         public GameObject StartPrefab { get; private set; }
 
-        public Start(int xCoord, int yCoord) : base(xCoord, yCoord)
+        public Start(int xCoord, int yCoord, Maze maze) : base(xCoord, yCoord)
         {
-            XCoord = xCoord;
-            YCoord = yCoord;
+            this.maze = maze;
             StartPrefab = (GameObject)Resources.Load("Prefabs/Maze/Start");
             Build();
         }
@@ -29,7 +26,7 @@ namespace MazeObjects
         // Builds object in unity
         public override void Build()
         {
-            start = Object.Instantiate(StartPrefab, new Vector3(XCoord + 0.5f, 0.1f, YCoord + 0.5f), Quaternion.identity);
+            start = Object.Instantiate(StartPrefab, new Vector3(X + 0.5f, 0.1f, Y + 0.5f), Quaternion.identity);
         }
 
         // Update is called once per frame

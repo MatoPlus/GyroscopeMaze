@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class LethalObject : MonoBehaviour {
+public class TriggerObject : MonoBehaviour {
 
     public UnityEvent OnCollisionWithBall = new UnityEvent();
 

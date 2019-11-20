@@ -40,7 +40,7 @@ namespace MazeObjects
         public override void Build()
         {
             spikeBall = Object.Instantiate(spikeBallPrefab, new Vector3(Origin.x + X + 0.5f, 0.5f, Origin.z + Y + 0.5f), Quaternion.identity);
-            spikeBall.GetComponent<LethalObject>().OnCollisionWithBall.AddListener(maze.KillBall);
+            spikeBall.GetComponent<TriggerObject>().OnCollisionWithBall.AddListener(maze.KillBall);
             timer = timerMax;
         }
 
