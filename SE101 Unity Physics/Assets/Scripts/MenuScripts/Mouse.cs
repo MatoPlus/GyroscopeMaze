@@ -36,19 +36,19 @@ public class Mouse : MonoBehaviour
         {
             if (Input.GetAxis("Horizontal") > .2)
             {
-                this.transform.rotation *= Quaternion.Euler(0, 0, -0.3f);
+                this.transform.rotation *= Quaternion.Euler(0, 0, -0.4f);
             }
             if (Input.GetAxis("Horizontal") < -.2)
             {
-                this.transform.rotation *= Quaternion.Euler(0, 0, 0.3f);
+                this.transform.rotation *= Quaternion.Euler(0, 0, 0.4f);
             }
             if (Input.GetAxis("Vertical") > .2)
             {
-                this.transform.rotation *= Quaternion.Euler(0.3f, 0, 0);
+                this.transform.rotation *= Quaternion.Euler(0.4f, 0, 0);
             }
             if (Input.GetAxis("Vertical") < -.2)
             {
-                this.transform.rotation *= Quaternion.Euler(-0.3f, 0, 0);
+                this.transform.rotation *= Quaternion.Euler(-0.4f, 0, 0);
             }
         }
         else
@@ -123,7 +123,7 @@ public class Mouse : MonoBehaviour
             }
         }
         
-        mouse.transform.position = new Vector3(transform.up.x*500+Screen.width/2, transform.up.z * 500 + Screen.height/2, 0);
+        mouse.transform.position = new Vector3(transform.up.x * Director.gyroSensitivity*100 + Screen.width/2, transform.up.z * Director.gyroSensitivity * 100 + Screen.height/2, 0);
     }
 
 

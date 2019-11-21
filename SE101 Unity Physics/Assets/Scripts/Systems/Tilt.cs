@@ -46,7 +46,7 @@ public class Tilt : MonoBehaviour
         //gravPointer = GameObject.Find("GravPointer");
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // if useGyro is false use the 
         if (!Director.useGyro)
@@ -107,7 +107,7 @@ public class Tilt : MonoBehaviour
 
                         // set our toxilibs quaternion to new data
                         //transform.rotation = new Quaternion(q[2], q[0], -q[1], q[3]);
-                        this.transform.rotation = new Quaternion(q[2], q[0], -q[1], q[3]);
+                        transform.rotation = new Quaternion(q[2], q[0], -q[1], q[3]);
 
 
                     }
