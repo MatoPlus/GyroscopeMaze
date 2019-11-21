@@ -30,7 +30,7 @@ public class Director : MonoBehaviour
 
     private void Start()
     {
-        Difficulty = 50;
+        Difficulty = 30;
         TimeLimit = 90;
     }
     
@@ -44,10 +44,16 @@ public class Director : MonoBehaviour
         } while (SceneManager.sceneCount == 0);
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
         menuHandler = new MenuHandler(this);
+        menuHandler.CreateOpeningScreen();
         if (useGyro)
         {
             SetupController();
         }
+    }
+
+    public void BeginGame()
+    {
+        StartCoroutine("BeginGameCoroutine");
     }
 
     IEnumerator StartGameCoroutine()
@@ -99,7 +105,7 @@ public class Director : MonoBehaviour
     {
         MazeObject = Instantiate(MazePrefab);
         Maze maze = MazeObject.GetComponent<Maze>();
-        maze.Initialize(10, 10);
+        maze.Initialize(10, 10, this);
     }
 
     void CreateTimer()
@@ -236,7 +242,6 @@ public class Director : MonoBehaviour
         }
     }
 
-
     public static List<string> GetFilteredPorts()
     {
         List<string> ports = new List<string>(SerialPort.GetPortNames());
@@ -298,5 +303,25 @@ public class Director : MonoBehaviour
                 menuHandler.GyroButtonText.text = "N";
             }
         }
+    }
+
+    IEnumerator WinScreenCoroutine()
+    {
+        SceneManager.LoadScene(3);
+        do
+        {
+            yield return new WaitForSeconds(0.1f);
+
+        } while (SceneManager.sceneCount == 0);
+        //menuHandler.RemoveMenu();
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
+        menuHandler = new MenuHandler(this);
+        menuHandler.MakeWinScreen();
+
+    }
+
+    public void Win()
+    {
+        StartCoroutine("WinScreenCoroutine");
     }
 }

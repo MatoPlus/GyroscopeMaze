@@ -24,13 +24,15 @@ public class Maze : MonoBehaviour {
     private int EndX { get; set; }
     private int EndY { get; set; }
 
+    private Director director;
     private GameObject Platform;
     private GameObject Ceiling;
     private GameObject PlatformPrefab;
 
     // Use this for initialization
-    public void Initialize(int width, int height)
+    public void Initialize(int width, int height, Director director)
     {
+        this.director = director;
         UniqueObjects = new bool[width, height];
         features = new Dictionary<FeatureName, Feature>();
         Width = width;
@@ -103,6 +105,7 @@ public class Maze : MonoBehaviour {
 
     public void MazeComplete()
     {
-        print("end reached");
+        //print("end reached");
+        director.Win();
     }
 }

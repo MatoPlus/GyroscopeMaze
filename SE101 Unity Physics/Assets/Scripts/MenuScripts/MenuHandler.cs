@@ -30,6 +30,7 @@ public class MenuHandler
     public GameObject DiffAmount;
     public GameObject SensAmount;
     public Text GyroButtonText;
+    private GameObject WinScreenTitle;
 
     public MenuHandler(Director director)
     {
@@ -42,6 +43,10 @@ public class MenuHandler
         CursorPrefab = (GameObject)Resources.Load("Prefabs/Menu/Cursor");
         MenuPivotPrefab = (GameObject)Resources.Load("Prefabs/Menu/MenuPivot");
         InstantiateMenu();
+    }
+
+    public void CreateOpeningScreen()
+    {
         BuildMainMenu();
         BuildSettingsMenu();
         GoToMainMenu();
@@ -83,6 +88,18 @@ public class MenuHandler
         StageButton QuitButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Quit", buttonActions, Canvas);
         buttons.Add(QuitButton);
         QuitButton.attached.transform.SetParent(MainMenu.transform);
+    }
+
+    public void MakeWinScreen()
+    {
+        WinScreenTitle = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height - 70f, 0), Quaternion.identity);
+        WinScreenTitle.transform.SetParent(MainMenu.transform);
+        WinScreenTitle.GetComponent<Text>().text = "You win!";
+        List<Action> buttonActions = new List<Action>();
+        buttonActions.Add(director.BeginGame);
+        StageButton NextButton = new StageButton(Screen.width / 2f, Screen.height / 2f + 20, StageButtonPrefab, "Next", buttonActions, Canvas);
+        buttons.Add(NextButton);
+        NextButton.attached.transform.SetParent(MainMenu.transform);
     }
 
     public void BuildSettingsMenu()
