@@ -23,7 +23,6 @@ public class StageButton : Button
 
     public override void Press()
     {
-        active = false;
         actions.Invoke();
     }
 }

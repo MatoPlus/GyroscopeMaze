@@ -22,7 +22,7 @@ public class Mouse : MonoBehaviour
 
     void Start()
     {
-        useGyro = true;
+        useGyro = false;
         if (useGyro)
         {
             SetupController();

@@ -99,14 +99,20 @@ public class MenuHandler
 
     private void GoToSettings()
     {
-        Debug.Log("going to settings");
+        foreach(Button i in buttons)
+        {
+            i.active = false;
+        }
         MainMenu.SetActive(false);
         SettingsMenu.SetActive(true);
     }
 
     private void GoToMainMenu()
     {
-        Debug.Log("going to menu");
+        foreach (Button i in buttons)
+        {
+            i.active = false;
+        }
         MainMenu.SetActive(true);
         SettingsMenu.SetActive(false);
     }
