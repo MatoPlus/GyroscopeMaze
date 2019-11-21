@@ -11,7 +11,7 @@ public class MenuHandler
     private GameObject SettingsTitle;
     private GameObject Canvas;
     private GameObject Cursor;
-    private GameObject Pivot;
+    private GameObject MenuPivot;
     private GameObject MainMenu;
     private GameObject SettingsMenu;
 
@@ -21,7 +21,7 @@ public class MenuHandler
 
     private GameObject CanvasPrefab;
     private GameObject CursorPrefab;
-    private GameObject PivotPrefab;
+    private GameObject MenuPivotPrefab;
     private GameObject DiffTitle;
     private GameObject TimerTitle;
     public GameObject TimerAmount;
@@ -36,7 +36,7 @@ public class MenuHandler
         TitlePrefab = (GameObject)Resources.Load("Prefabs/Menu/Title");
         CanvasPrefab = (GameObject)Resources.Load("Prefabs/Menu/Canvas");
         CursorPrefab = (GameObject)Resources.Load("Prefabs/Menu/Cursor");
-        PivotPrefab = (GameObject)Resources.Load("Prefabs/Menu/MenuPivot");
+        MenuPivotPrefab = (GameObject)Resources.Load("Prefabs/Menu/MenuPivot");
         InstantiateMenu();
         BuildMainMenu();
         BuildSettingsMenu();
@@ -52,8 +52,8 @@ public class MenuHandler
         SettingsMenu.transform.SetParent(Canvas.transform);
         Cursor = UnityEngine.Object.Instantiate(CursorPrefab, new Vector3(Screen.width / 2f, Screen.height - 70f, 0), Quaternion.identity);
         Cursor.transform.SetParent(Canvas.transform);
-        Pivot = UnityEngine.Object.Instantiate(PivotPrefab);
-        Pivot.GetComponent<Mouse>().mouse = Cursor;
+        MenuPivot = UnityEngine.Object.Instantiate(MenuPivotPrefab);
+        MenuPivot.GetComponent<Mouse>().mouse = Cursor;
     }
 
     private void BuildMainMenu()
@@ -146,9 +146,6 @@ public class MenuHandler
         TimerAmount.transform.SetParent(SettingsMenu.transform);
         TimerAmount.GetComponent<Text>().text = director.TimeLimit.ToString();
 
-        /*StageButton QuitButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Quit", buttonActions, Canvas);
-        buttons.Add(QuitButton);
-        QuitButton.attached.transform.SetParent(SettingsMenu.transform);*/
     }
 
     private void GoToSettings()
@@ -171,10 +168,18 @@ public class MenuHandler
         SettingsMenu.SetActive(false);
     }
 
-    private void RemoveMenu()
+    public void RemoveMenu()
     {
-        //Pivot.Destroy();
+        MainMenu.SetActive(false);
+        SettingsMenu.SetActive(false);
+        UnityEngine.Object.Destroy(MenuPivot);
     }
+
+    private void StartGame()
+    {
+
+    }
+
     public void PressAll()
     {
         foreach (Button i in buttons)

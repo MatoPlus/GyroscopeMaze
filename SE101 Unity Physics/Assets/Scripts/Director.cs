@@ -2,13 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Director : MonoBehaviour {
     private GameObject MazePrefab;
     private GameObject MazeObject;
     private GameObject TimerPrefab;
+    private GameObject PivotPrefab;
+    private GameObject MenuPivotPrefab;
     private GameObject TimerObject;
+    public GameObject Pivot;
+    public GameObject MenuPivot;
     private MenuHandler menuHandler;
     private Timer Timer { get; set; }
     public int TimeLimit;
@@ -26,12 +31,16 @@ public class Director : MonoBehaviour {
 
     public void StartGame()
     {
+        menuHandler.RemoveMenu();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         CreateMaze();
         CreateTimer();
+        Pivot = Instantiate(PivotPrefab);
     }
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         LoadPrefabs();
     }
 
@@ -75,6 +84,8 @@ public class Director : MonoBehaviour {
     {
         MazePrefab = (GameObject)Resources.Load("Prefabs/Maze/Maze");
         TimerPrefab = (GameObject)Resources.Load("Prefabs/Timer");
+        PivotPrefab = (GameObject)Resources.Load("Prefabs/Pivot");
+        MenuPivotPrefab = (GameObject)Resources.Load("Prefabs/MenuPivot");
     }
 
     public void IncreaseDifficulty()
@@ -103,7 +114,7 @@ public class Director : MonoBehaviour {
 
     public void Empty()
     {
-
+        Debug.Log("Make this do something");
     }
 
     public static void SetPressed(bool press)
