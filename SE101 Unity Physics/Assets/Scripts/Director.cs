@@ -197,6 +197,12 @@ public class Director : MonoBehaviour
                 continue;
             }
         }
+        if(sp == null || !sp.IsOpen)
+        {
+            Debug.Log("Failed to connect to a port, switching to arrow keys...");
+            useGyro = false;
+            //Director.ToggleGyro();
+        }
     }
 
     public static void SetupController(string port)
@@ -211,8 +217,8 @@ public class Director : MonoBehaviour
             sp.Open();
 
             if (sp.BytesToRead != 0) {
-                print("Selected invalid port, automatically detecting a new port...");
-                SetupController();
+                print("Selected invalid port, switching to arrow keys...");
+                useGyro = false;
             }
 
             // Sucessfully reads input from sp, meaning the port is valid.
@@ -247,8 +253,8 @@ public class Director : MonoBehaviour
     }
 
     public static void Recalibrate()
-    {
-        if (sp.IsOpen)
+    { 
+        if (useGyro && sp.IsOpen)
         {
             sp.Close();
             sp.Open();
@@ -260,8 +266,30 @@ public class Director : MonoBehaviour
         isPressed = press;
     }
 
-    public static void ToggleGyro()
+    public void ToggleGyro()
     {
         useGyro = !useGyro;
+        if (useGyro)
+        {
+            if (sp != null)
+            {
+                SetupController(sp.PortName);
+            }
+            else
+            {
+                SetupController();
+            }
+            if (menuHandler != null)
+            {
+                menuHandler.GyroButtonText.text = "Y";
+            }
+        }
+        else
+        {
+            if (menuHandler != null)
+            {
+                menuHandler.GyroButtonText.text = "N";
+            }
+        }
     }
 }
