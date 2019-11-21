@@ -10,8 +10,8 @@ public class Mouse : MonoBehaviour
     // Public Variables (for changing in insepctor)
     public bool useGyro = true;
     public float magnitude;
-    private float buttonDelayMax = 1;
-    private float buttonDelay = 1;
+    private float buttonDelayMax = 5;
+    private float buttonDelay = 0;
     public GameObject mouse;
 
 
@@ -32,7 +32,7 @@ public class Mouse : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // if useGyro is false use the 
         if (!useGyro)
@@ -62,19 +62,20 @@ public class Mouse : MonoBehaviour
                 SetupController();
             }
 
+            // Button press delay
+            buttonDelay -= Time.deltaTime;
+
             // Read from serial port that the controller is connected to
             while (sp.BytesToRead > 0)
             {
                 int ch = sp.ReadByte();
-
-                // Button press delay
-                buttonDelay += Time.deltaTime;
+               
                 // # indicates that arduino has received button press
                 if (serialCount == 0 && ch == '#')
                 {
-                    if (buttonDelay >= buttonDelayMax)
+                    if (buttonDelay <= 0)
                     {
-                        buttonDelay = 0;
+                        buttonDelay = buttonDelayMax;
                         Director.SetPressed(true);
                     }
                     else
@@ -85,6 +86,7 @@ public class Mouse : MonoBehaviour
                 // @ indicates that arduino has speifically has no button press
                 else if (serialCount == 0 && ch == '@')
                 {
+                    buttonDelay = 0;
                     Director.SetPressed(false);
                 }
 
@@ -124,7 +126,7 @@ public class Mouse : MonoBehaviour
             }
         }
         
-        mouse.transform.position = new Vector3(transform.up.x*600+Screen.width/2, transform.up.z * 600 + Screen.height/2, 0);
+        mouse.transform.position = new Vector3(transform.up.x*500+Screen.width/2, transform.up.z * 500 + Screen.height/2, 0);
         //print(mouse.transform.position.x + " : " + mouse.transform.position.y);
 
         //gravPointer.transform.position = transform.up*magnitude;
