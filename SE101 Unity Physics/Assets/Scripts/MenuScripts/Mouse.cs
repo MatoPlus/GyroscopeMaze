@@ -15,7 +15,6 @@ public class Mouse : MonoBehaviour
 
 
     // Private Variables
-    SerialPort sp;
     char[] packet = new char[14];  // InvenSense packets
     int serialCount = 0;                 // current packet byte position
     int synced = 0;
@@ -24,10 +23,9 @@ public class Mouse : MonoBehaviour
     void Start()
     {
         // Set up Gyroscope if required
-        Director.useGyro = false;
         if (Director.useGyro)
         {
-            SetupController();
+            Director.SetupController();
         }
     }
 
@@ -56,18 +54,18 @@ public class Mouse : MonoBehaviour
         else
         {
             // Set up the controller if not instantiated
-            if (sp == null)
+            if (Director.sp == null)
             {
-                SetupController();
+                Director.SetupController();
             }
 
             // Button press delay
             buttonDelay -= Time.deltaTime;
 
             // Read from serial port that the controller is connected to
-            while (sp.BytesToRead > 0)
+            while (Director.sp.BytesToRead > 0)
             {
-                int ch = sp.ReadByte();
+                int ch = Director.sp.ReadByte();
                
                 // # indicates that arduino has received button press
                 if (serialCount == 0 && ch == '#')
@@ -126,70 +124,8 @@ public class Mouse : MonoBehaviour
         }
         
         mouse.transform.position = new Vector3(transform.up.x*500+Screen.width/2, transform.up.z * 500 + Screen.height/2, 0);
-        //print(mouse.transform.position.x + " : " + mouse.transform.position.y);
-
-        //gravPointer.transform.position = transform.up*magnitude;
-        //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
     }
 
-    void SetupController()
-    {
-        // sp = new SerialPort("/dev/cu.wchusbserial14110", 9600);
-        // sp = new SerialPort("COM6", 9600);
-        //sp.Open();
 
-        //Auto detect implementation.
-        List<string> ports = new List<string>(SerialPort.GetPortNames());
-        FilterPorts(ports);
-        foreach (string p in ports)
-        {
-            try
-            {
-                print("Attempted to connect to: " + p);
-                sp = new SerialPort(p, 9600);
-                sp.Open();
-                // Sucessfully reads input from sp, meaning the port is valid.
-                if (sp.BytesToRead != 0)
-                {
-                    break;
-                }
-                //Scan inputs for "connectAlready"
-            }
-            catch (InvalidOperationException e)
-            {
-                // Port in use  
-                print(e);
-                continue;
-            }
-            catch (System.IO.IOException e)
-            {
-                // Port can't be opened
-                print(e);
-                continue;
-            }
-        }
-    }
 
-    private void FilterPorts(List<string> ports)
-    {
-        List<string> search = ports.GetRange(0, ports.Count);
-   
-        // Search and remove inappropriate window and macOS ports
-        foreach (string port in search)
-        {
-            if (port == "COM3" || port == "COM4" || port.Contains("tty"))
-            {
-                ports.Remove(port);
-            }
-        }
-    }
-
-    public void Recalibrate()
-    {
-        if (sp.IsOpen)
-        {
-            sp.Close();
-        }
-        sp.Open();
-    }
 }
