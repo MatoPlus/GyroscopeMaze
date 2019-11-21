@@ -88,10 +88,23 @@ public class MenuHandler
         SettingsTitle.GetComponent<Text>().text = "Settings";
 
         List<Action> buttonActions = new List<Action>();
+
         buttonActions.Add(GoToMainMenu);
-        StageButton BackButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Back", buttonActions, Canvas);
+        StageButton BackButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 130, StageButtonPrefab, "Back", buttonActions, Canvas);
         buttons.Add(BackButton);
         BackButton.attached.transform.SetParent(SettingsMenu.transform);
+
+        buttonActions.Clear();
+        buttonActions.Add(director.Empty);
+        StageButton CalibrateButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 40, StageButtonPrefab, "Calibrate", buttonActions, Canvas);
+        buttons.Add(CalibrateButton);
+        CalibrateButton.attached.transform.SetParent(SettingsMenu.transform);
+
+        buttonActions.Clear();
+        buttonActions.Add(director.Empty);
+        StageButton PortsButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Serial Port", buttonActions, Canvas);
+        buttons.Add(PortsButton);
+        PortsButton.attached.transform.SetParent(SettingsMenu.transform);
 
         buttonActions.Clear();
         buttonActions.Add(director.IncreaseDifficulty);
