@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    private Text ScreenTimer;
     private UnityEvent timeOut;
     public UnityEvent TimeOut {
         get
@@ -34,6 +36,10 @@ public class Timer : MonoBehaviour
     private bool initialized = false;
     public float WaitTime { get; private set; }
     private float timer;
+    public float RemainingTime
+    {
+        get { return WaitTime - timer;  }
+    }
     private int lastTime;
     private bool timerActive;
     public string TimeLeft { get { return FormatTime(); } }
@@ -48,12 +54,14 @@ public class Timer : MonoBehaviour
 
     void Awake()
     {
+        ScreenTimer = gameObject.AddComponent<Text>();
         //width = Screen.width;
         //height = Screen.height;
     }
 
     void Update()
     {
+        ScreenTimer.text = TimeLeft;
         // print(TimeLeft);
         if (!initialized) return;
         if (!timerActive) return;

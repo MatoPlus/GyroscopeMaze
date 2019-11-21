@@ -31,6 +31,7 @@ public class MenuHandler
     public GameObject SensAmount;
     public Text GyroButtonText;
     private GameObject WinScreenTitle;
+    private GameObject ScoreDisplay;
 
     public MenuHandler(Director director)
     {
@@ -90,14 +91,20 @@ public class MenuHandler
         QuitButton.attached.transform.SetParent(MainMenu.transform);
     }
 
-    public void MakeWinScreen()
+    public void MakeWinScreen(float remainingTime, float initialTime)
     {
         WinScreenTitle = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height - 70f, 0), Quaternion.identity);
         WinScreenTitle.transform.SetParent(MainMenu.transform);
         WinScreenTitle.GetComponent<Text>().text = "You win!";
+
+        int score = (int) Math.Floor(1000 * remainingTime * Director.Difficulty / initialTime);
+        ScoreDisplay = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height - 110f, 0), Quaternion.identity);
+        ScoreDisplay.transform.SetParent(MainMenu.transform);
+        ScoreDisplay.GetComponent<Text>().text = "Score: " + score.ToString();
+
         List<Action> buttonActions = new List<Action>();
         buttonActions.Add(director.BeginGame);
-        StageButton NextButton = new StageButton(Screen.width / 2f, Screen.height / 2f + 20, StageButtonPrefab, "Next", buttonActions, Canvas);
+        StageButton NextButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 40, StageButtonPrefab, "Next", buttonActions, Canvas);
         buttons.Add(NextButton);
         NextButton.attached.transform.SetParent(MainMenu.transform);
     }

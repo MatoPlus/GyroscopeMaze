@@ -112,7 +112,7 @@ public class Director : MonoBehaviour
     {
         TimerObject = Instantiate(TimerPrefab);
         Timer = TimerObject.GetComponent<Timer>();
-        Timer.Initialize(4);
+        Timer.Initialize(TimeLimit);
         Timer.Resume();
         Timer.TimeOut.AddListener(TimerDone);
         Timer.TimeUpdated.AddListener(TimerUpdate);
@@ -316,7 +316,7 @@ public class Director : MonoBehaviour
         //menuHandler.RemoveMenu();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
         menuHandler = new MenuHandler(this);
-        menuHandler.MakeWinScreen();
+        menuHandler.MakeWinScreen(Timer.RemainingTime, TimeLimit);
 
     }
 
