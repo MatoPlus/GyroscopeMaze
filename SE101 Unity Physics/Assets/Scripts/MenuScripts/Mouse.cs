@@ -10,6 +10,8 @@ public class Mouse : MonoBehaviour
     // Public Variables (for changing in insepctor)
     public bool useGyro = true;
     public float magnitude;
+    private float buttonDelayMax = 1;
+    private float buttonDelay = 1;
     public GameObject mouse;
 
 
@@ -22,7 +24,8 @@ public class Mouse : MonoBehaviour
 
     void Start()
     {
-        useGyro = false;
+        // Set up Gyroscope if required
+        useGyro = true;
         if (useGyro)
         {
             SetupController();
@@ -53,21 +56,33 @@ public class Mouse : MonoBehaviour
         }
         else
         {
-
+            // Set up the controller if not instantiated
             if (sp == null)
             {
                 SetupController();
             }
 
+            // Read from serial port that the controller is connected to
             while (sp.BytesToRead > 0)
             {
                 int ch = sp.ReadByte();
 
-                // For debugging purposes, print to console when button is pressed
+                // Button press delay
+                buttonDelay += Time.deltaTime;
+                // # indicates that arduino has received button press
                 if (serialCount == 0 && ch == '#')
                 {
-                    Director.SetPressed(true);
+                    if (buttonDelay >= buttonDelayMax)
+                    {
+                        buttonDelay = 0;
+                        Director.SetPressed(true);
+                    }
+                    else
+                    {
+                        Director.SetPressed(false);
+                    }
                 }
+                // @ indicates that arduino has speifically has no button press
                 else if (serialCount == 0 && ch == '@')
                 {
                     Director.SetPressed(false);
@@ -116,7 +131,6 @@ public class Mouse : MonoBehaviour
         //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
     }
 
-
     void SetupController()
     {
         // sp = new SerialPort("/dev/cu.wchusbserial14110", 9600);
@@ -124,7 +138,8 @@ public class Mouse : MonoBehaviour
         //sp.Open();
 
         //Auto detect implementation.
-        string[] ports = SerialPort.GetPortNames();
+        List<string> ports = new List<string>(SerialPort.GetPortNames());
+        FilterPorts(ports);
         foreach (string p in ports)
         {
             try
@@ -152,5 +167,28 @@ public class Mouse : MonoBehaviour
                 continue;
             }
         }
+    }
+
+    private void FilterPorts(List<string> ports)
+    {
+        List<string> search = ports.GetRange(0, ports.Count);
+   
+        // Search and remove inappropriate window and macOS ports
+        foreach (string port in search)
+        {
+            if (port == "COM3" || port == "COM4" || port.Contains("tty"))
+            {
+                ports.Remove(port);
+            }
+        }
+    }
+
+    public void Recalibrate()
+    {
+        if (sp.IsOpen)
+        {
+            sp.Close();
+        }
+        sp.Open();
     }
 }
