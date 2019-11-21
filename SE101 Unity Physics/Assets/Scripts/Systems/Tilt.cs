@@ -53,19 +53,19 @@ public class Tilt : MonoBehaviour
         {
             if (Input.GetAxis("Horizontal") > .2)
             {
-                this.transform.rotation *= Quaternion.Euler(0, 0, 0.5f);
+                this.transform.rotation *= Quaternion.Euler(0, 0, 0.1f* Director.gyroSensitivity);
             }
             if (Input.GetAxis("Horizontal") < -.2)
             {
-                this.transform.rotation *= Quaternion.Euler(0, 0, -0.5f);
+                this.transform.rotation *= Quaternion.Euler(0, 0, -0.1f* Director.gyroSensitivity);
             }
             if (Input.GetAxis("Vertical") > .2)
             {
-                this.transform.rotation *= Quaternion.Euler(0.5f, 0, 0);
+                this.transform.rotation *= Quaternion.Euler(0.1f* Director.gyroSensitivity, 0, 0);
             }
             if (Input.GetAxis("Vertical") < -.2)
             {
-                this.transform.rotation *= Quaternion.Euler(-0.5f, 0, 0);
+                this.transform.rotation *= Quaternion.Euler(-0.1f* Director.gyroSensitivity, 0, 0);
             }
         }
         else
