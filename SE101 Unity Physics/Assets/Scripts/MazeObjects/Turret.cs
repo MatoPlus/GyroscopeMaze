@@ -10,7 +10,7 @@ namespace MazeObjects
 
         private bool active;
         GameObject turret, bullet1, bullet2, bullet3, bullet4;
-        int bullets_killed = 0;
+        bool bullet1Dead = false, bullet2Dead = false, bullet3Dead = false, bullet4Dead = false;
         GameObject turretPrefab;
         GameObject bulletPrefab;
         private float timerMax;
@@ -39,35 +39,34 @@ namespace MazeObjects
         public void KillBullet1()
         {
             Object.Destroy(bullet1);
-            bullets_killed++;
+            bullet1Dead = true;
             KillIfBulletsDead();
         }
 
         public void KillBullet2()
         {
             Object.Destroy(bullet2);
-            bullets_killed++;
+            bullet2Dead = true;
             KillIfBulletsDead();
         }
 
         public void KillBullet3()
         {
             Object.Destroy(bullet3);
-            bullets_killed++;
+            bullet3Dead = true;
             KillIfBulletsDead();
         }
 
         public void KillBullet4()
         {
             Object.Destroy(bullet4);
-            bullets_killed++;
+            bullet4Dead = true;
             KillIfBulletsDead();
         }
 
         private void KillIfBulletsDead()
         {
-            if (bullets_killed > 4) throw new System.Exception();
-            if (bullets_killed == 4) KillObject();
+            if (bullet1Dead && bullet2Dead && bullet3Dead && bullet4Dead) KillObject();
         }
 
         // Builds object in unity
