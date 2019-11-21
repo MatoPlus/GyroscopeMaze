@@ -58,7 +58,6 @@ public class Director : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
 
         } while (SceneManager.sceneCount == 0);
-        Debug.Log("this worked");
         //menuHandler.RemoveMenu();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
         CreateMaze();
