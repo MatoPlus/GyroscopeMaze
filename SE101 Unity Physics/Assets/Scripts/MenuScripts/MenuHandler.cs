@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuHandler
+public class MenuHandler : MonoBehaviour
 {
     public List<Button> buttons;
     private Director director;
@@ -12,6 +12,7 @@ public class MenuHandler
     private GameObject StageButtonPrefab;
     private GameObject TitlePrefab;
     GameObject Canvas;
+
     public MenuHandler(Director director)
     {
         this.director = director;

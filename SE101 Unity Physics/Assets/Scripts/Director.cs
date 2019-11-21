@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +10,9 @@ public class Director : MonoBehaviour {
     private GameObject TimerObject;
     private MenuHandler menuHandler;
     private Timer Timer { get; set; }
-
+    
     public static int Difficulty { get; private set; }
+    public static bool isPressed = false;
 
     // Use this for initialization
     void Start()
@@ -32,7 +34,7 @@ public class Director : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") || isPressed)
         {
             menuHandler.PressAll();
         }
@@ -75,5 +77,10 @@ public class Director : MonoBehaviour {
     public void Empty()
     {
 
+    }
+
+    public static void SetPressed(bool press)
+    {
+        isPressed = press;
     }
 }
