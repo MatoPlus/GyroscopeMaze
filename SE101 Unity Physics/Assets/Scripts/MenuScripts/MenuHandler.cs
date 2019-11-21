@@ -16,19 +16,23 @@ public class MenuHandler
     private GameObject SettingsMenu;
 
     private GameObject StageButtonPrefab;
+    private GameObject PlusButtonPrefab;
     private GameObject TitlePrefab;
 
     private GameObject CanvasPrefab;
     private GameObject CursorPrefab;
     private GameObject PivotPrefab;
-    
-
+    private GameObject DiffTitle;
+    private GameObject TimerTitle;
+    public GameObject TimerAmount;
+    public GameObject DiffAmount;
 
     public MenuHandler(Director director)
     {
         this.director = director;
         buttons = new List<Button>();
         StageButtonPrefab = (GameObject)Resources.Load("Prefabs/Menu/StageButton");
+        PlusButtonPrefab = (GameObject)Resources.Load("Prefabs/Menu/PlusButton");
         TitlePrefab = (GameObject)Resources.Load("Prefabs/Menu/Title");
         CanvasPrefab = (GameObject)Resources.Load("Prefabs/Menu/Canvas");
         CursorPrefab = (GameObject)Resources.Load("Prefabs/Menu/Cursor");
@@ -70,6 +74,8 @@ public class MenuHandler
         buttons.Add(SettingsButton);
         SettingsButton.attached.transform.SetParent(MainMenu.transform);
 
+        buttonActions.Clear();
+        buttonActions.Add(director.Empty);
         StageButton QuitButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Quit", buttonActions, Canvas);
         buttons.Add(QuitButton);
         QuitButton.attached.transform.SetParent(MainMenu.transform);
@@ -80,21 +86,56 @@ public class MenuHandler
         SettingsTitle = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height - 70f, 0), Quaternion.identity);
         SettingsTitle.transform.SetParent(SettingsMenu.transform);
         SettingsTitle.GetComponent<Text>().text = "Settings";
+
         List<Action> buttonActions = new List<Action>();
         buttonActions.Add(GoToMainMenu);
-        StageButton BackButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 40, StageButtonPrefab, "Back", buttonActions, Canvas);
+        StageButton BackButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Back", buttonActions, Canvas);
         buttons.Add(BackButton);
         BackButton.attached.transform.SetParent(SettingsMenu.transform);
 
-        /*buttonActions.Clear();
-        buttonActions.Add(director.Empty);
-        StageButton SettingsButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 30, StageButtonPrefab, "Settings", buttonActions, Canvas);
-        buttons.Add(SettingsButton);
-        SettingsButton.attached.transform.SetParent(MainMenu.transform);
+        buttonActions.Clear();
+        buttonActions.Add(director.IncreaseDifficulty);
+        StageButton DiffPlus = new StageButton(Screen.width / 2f + 100, Screen.height / 2f + 5, PlusButtonPrefab, "+", buttonActions, Canvas);
+        buttons.Add(DiffPlus);
+        DiffPlus.attached.transform.SetParent(SettingsMenu.transform);
 
-        StageButton QuitButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Quit", buttonActions, Canvas);
+        buttonActions.Clear();
+        buttonActions.Add(director.DecreaseDifficulty);
+        StageButton DiffMinus = new StageButton(Screen.width / 2f - 100, Screen.height / 2f + 5, PlusButtonPrefab, "-", buttonActions, Canvas);
+        buttons.Add(DiffMinus);
+        DiffMinus.attached.transform.SetParent(SettingsMenu.transform);
+
+        DiffTitle = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f - 200, Screen.height / 2f + 5, 0), Quaternion.identity);
+        DiffTitle.transform.SetParent(SettingsMenu.transform);
+        DiffTitle.GetComponent<Text>().text = "Difficulty";
+
+        DiffAmount = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height / 2f + 5, 0), Quaternion.identity);
+        DiffAmount.transform.SetParent(SettingsMenu.transform);
+        DiffAmount.GetComponent<Text>().text = Director.Difficulty.ToString();
+
+        buttonActions.Clear();
+        buttonActions.Add(director.IncreaseTimer);
+        StageButton TimerPlus = new StageButton(Screen.width / 2f + 100, Screen.height / 2f + 50, PlusButtonPrefab, "+", buttonActions, Canvas);
+        buttons.Add(TimerPlus);
+        TimerPlus.attached.transform.SetParent(SettingsMenu.transform);
+
+        buttonActions.Clear();
+        buttonActions.Add(director.DecreaseTimer);
+        StageButton TimerMinus = new StageButton(Screen.width / 2f - 100, Screen.height / 2f + 50, PlusButtonPrefab, "-", buttonActions, Canvas);
+        buttons.Add(TimerMinus);
+        TimerMinus.attached.transform.SetParent(SettingsMenu.transform);
+
+        TimerTitle = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f - 200, Screen.height / 2f + 50, 0), Quaternion.identity);
+        TimerTitle.transform.SetParent(SettingsMenu.transform);
+        TimerTitle.GetComponent<Text>().text = "Timer";
+
+        TimerAmount = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height / 2f + 50, 0), Quaternion.identity);
+        TimerAmount.transform.SetParent(SettingsMenu.transform);
+        TimerAmount.GetComponent<Text>().text = director.TimeLimit.ToString();
+
+        /*StageButton QuitButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Quit", buttonActions, Canvas);
         buttons.Add(QuitButton);
-        QuitButton.attached.transform.SetParent(MainMenu.transform);*/
+        QuitButton.attached.transform.SetParent(SettingsMenu.transform);*/
     }
 
     private void GoToSettings()
