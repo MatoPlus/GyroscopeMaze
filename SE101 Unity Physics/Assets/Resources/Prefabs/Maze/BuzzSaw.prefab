@@ -56,9 +56,10 @@ GameObject:
   - component: {fileID: 111025569516222578}
   - component: {fileID: 135564393503767306}
   - component: {fileID: 114722966663236128}
+  - component: {fileID: 114910378511651514}
   m_Layer: 0
   m_Name: BuzzSaw
-  m_TagString: Untagged
+  m_TagString: UniqueObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,6 +220,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114910378511651514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1900001595276144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d64fe9c5d9084e99b9da3745d4216de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135564393503767306
 SphereCollider:
   m_ObjectHideFlags: 1
