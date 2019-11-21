@@ -4,8 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class CalibrateMenu : MonoBehaviour {
 
-    public void Calibrate()
+    public void StartGameWithGyro()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Director.useGyro = true;
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<Director>().StartCoroutine("BeginGameCoroutine");
+        
+    }
+    public void StartGameWithoutGyro()
+    {
+        Director.useGyro = false;
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<Director>().StartCoroutine("BeginGameCoroutine");
     }
 }

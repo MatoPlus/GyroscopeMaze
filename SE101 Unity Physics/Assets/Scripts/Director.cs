@@ -23,15 +23,26 @@ public class Director : MonoBehaviour
     public int TimeLimit;
 
     public static int Difficulty;
-    public static bool useGyro = true;
+    public static bool useGyro = false;
     public static int gyroSensitivity = 5;
     public static bool isPressed = false;
 
-    // Use this for initialization
-    void Start()
+
+    private void Start()
     {
         Difficulty = 50;
         TimeLimit = 90;
+    }
+    
+    IEnumerator BeginGameCoroutine()
+    {
+        SceneManager.LoadScene(1);
+        do
+        {
+            yield return null;
+
+        } while (SceneManager.sceneCount == 0);
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
         menuHandler = new MenuHandler(this);
         if (useGyro)
         {
@@ -42,7 +53,11 @@ public class Director : MonoBehaviour
     IEnumerator StartGameCoroutine()
     {
         SceneManager.LoadScene(2);
-        yield return new WaitForSeconds(0.1f);
+        do
+        {
+            yield return new WaitForSeconds(0.1f);
+
+        } while (SceneManager.sceneCount == 0);
         Debug.Log("this worked");
         //menuHandler.RemoveMenu();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
