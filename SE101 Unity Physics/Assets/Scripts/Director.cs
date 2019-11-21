@@ -237,6 +237,13 @@ public class Director : MonoBehaviour
     }
 
 
+    public static List<string> GetFilteredPorts()
+    {
+        List<string> ports = new List<string>(SerialPort.GetPortNames());
+        FilterPorts(ports);
+        return ports;
+
+    }
 
     public static void FilterPorts(List<string> ports)
     {

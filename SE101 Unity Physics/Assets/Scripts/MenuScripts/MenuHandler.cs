@@ -104,19 +104,19 @@ public class MenuHandler
         buttons.Add(CalibrateButton);
         CalibrateButton.attached.transform.SetParent(SettingsMenu.transform);
 
-        buttonActions.Clear();
+        /*buttonActions.Clear();
         buttonActions.Add(director.Empty);
         StageButton PortsButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Serial Port", buttonActions, Canvas);
         buttons.Add(PortsButton);
-        PortsButton.attached.transform.SetParent(SettingsMenu.transform);
+        PortsButton.attached.transform.SetParent(SettingsMenu.transform);*/
 
-        GyroTitle = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f - 200, Screen.height / 2f - 80, 0), Quaternion.identity);
+        GyroTitle = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f - 100, Screen.height / 2f - 80, 0), Quaternion.identity);
         GyroTitle.transform.SetParent(SettingsMenu.transform);
         GyroTitle.GetComponent<Text>().text = "Use gyro?";
 
         buttonActions.Clear();
         buttonActions.Add(director.ToggleGyro);
-        StageButton ToggleButton = new StageButton(Screen.width / 2f - 100, Screen.height / 2f - 80 , PlusButtonPrefab, "Y", buttonActions, Canvas);
+        StageButton ToggleButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, PlusButtonPrefab, "Y", buttonActions, Canvas);
         GyroButtonText = ToggleButton.attached.GetComponentInChildren<Text>();
         buttons.Add(ToggleButton);
         ToggleButton.attached.transform.SetParent(SettingsMenu.transform);
@@ -227,5 +227,13 @@ public class MenuHandler
             }
         }
     }
+
+    /*public void BuildPortsDropdown(List<string> ports)
+{
+    for (int i = 0; i < ports.Count; i++)
+    {
+
+    }
+}*/
 
 }
