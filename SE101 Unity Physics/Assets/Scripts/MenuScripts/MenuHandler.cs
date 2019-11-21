@@ -24,8 +24,10 @@ public class MenuHandler
     private GameObject MenuPivotPrefab;
     private GameObject DiffTitle;
     private GameObject TimerTitle;
+    private GameObject SensTitle;
     public GameObject TimerAmount;
     public GameObject DiffAmount;
+    public GameObject SensAmount;
 
     public MenuHandler(Director director)
     {
@@ -83,7 +85,7 @@ public class MenuHandler
 
     public void BuildSettingsMenu()
     {
-        SettingsTitle = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height - 70f, 0), Quaternion.identity);
+        SettingsTitle = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height - 30f, 0), Quaternion.identity);
         SettingsTitle.transform.SetParent(SettingsMenu.transform);
         SettingsTitle.GetComponent<Text>().text = "Settings";
 
@@ -145,7 +147,26 @@ public class MenuHandler
         TimerAmount = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height / 2f + 50, 0), Quaternion.identity);
         TimerAmount.transform.SetParent(SettingsMenu.transform);
         TimerAmount.GetComponent<Text>().text = director.TimeLimit.ToString();
+        //
+        buttonActions.Clear();
+        buttonActions.Add(director.IncreaseSensitivity);
+        StageButton SensPlus = new StageButton(Screen.width / 2f + 100, Screen.height / 2f + 95, PlusButtonPrefab, "+", buttonActions, Canvas);
+        buttons.Add(SensPlus);
+        SensPlus.attached.transform.SetParent(SettingsMenu.transform);
 
+        buttonActions.Clear();
+        buttonActions.Add(director.DecreaseSensitivity);
+        StageButton SensMinus = new StageButton(Screen.width / 2f - 100, Screen.height / 2f + 95, PlusButtonPrefab, "-", buttonActions, Canvas);
+        buttons.Add(SensMinus);
+        SensMinus.attached.transform.SetParent(SettingsMenu.transform);
+
+        SensTitle = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f - 200, Screen.height / 2f + 95, 0), Quaternion.identity);
+        SensTitle.transform.SetParent(SettingsMenu.transform);
+        SensTitle.GetComponent<Text>().text = "Sensitivity";
+
+        SensAmount = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height / 2f + 95, 0), Quaternion.identity);
+        SensAmount.transform.SetParent(SettingsMenu.transform);
+        SensAmount.GetComponent<Text>().text = Director.gyroSensitivity.ToString();
     }
 
     private void GoToSettings()

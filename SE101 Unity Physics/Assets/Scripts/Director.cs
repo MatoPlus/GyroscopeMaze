@@ -24,6 +24,7 @@ public class Director : MonoBehaviour
 
     public static int Difficulty;
     public static bool useGyro = true;
+    public static int gyroSensitivity = 5;
     public static bool isPressed = false;
 
     // Use this for initialization
@@ -127,6 +128,18 @@ public class Director : MonoBehaviour
     {
         TimeLimit = Math.Max(TimeLimit - 10, 90);
         menuHandler.TimerAmount.GetComponent<Text>().text = TimeLimit.ToString();
+    }
+
+    public void IncreaseSensitivity()
+    {
+        gyroSensitivity = Math.Min(gyroSensitivity + 1, 10);
+        menuHandler.SensAmount.GetComponent<Text>().text = gyroSensitivity.ToString();
+    }
+
+    public void DecreaseSensitivity()
+    {
+        gyroSensitivity = Math.Max(gyroSensitivity - 1, 3);
+        menuHandler.SensAmount.GetComponent<Text>().text = gyroSensitivity.ToString();
     }
 
     public void Empty()
