@@ -22,8 +22,7 @@ public class Mouse : MonoBehaviour
 
     void Start()
     {
-
-        useGyro = false;
+        useGyro = true;
         if (useGyro)
         {
             SetupController();
@@ -124,7 +123,8 @@ public class Mouse : MonoBehaviour
         //sp.Open();
 
         //Auto detect implementation.
-        string[] ports = SerialPort.GetPortNames();
+        List<string> ports = new List<string>(SerialPort.GetPortNames());
+        FilterPorts(ports);
         foreach (string p in ports)
         {
             try
@@ -156,9 +156,12 @@ public class Mouse : MonoBehaviour
 
     private void FilterPorts(List<string> ports)
     {
-        foreach (string port in ports)
+        List<string> search = ports.GetRange(0, ports.Count);
+   
+        // Search and remove inappropriate window and macOS ports
+        foreach (string port in search)
         {
-            if (port == "COM3" || port == "COM4")
+            if (port == "COM3" || port == "COM4" || port.Contains("tty"))
             {
                 ports.Remove(port);
             }
@@ -167,7 +170,7 @@ public class Mouse : MonoBehaviour
 
     public void Recalibrate()
     {
-        if(sp.IsOpen)
+        if (sp.IsOpen)
         {
             sp.Close();
         }
