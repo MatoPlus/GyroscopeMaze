@@ -242,6 +242,9 @@ void loop() {
     {
       Serial.write("#PUSH\r\n");
     }
+    else {
+      Serial.write("@NOT_PUSH\r\n");
+    }
     // blink LED to indicate activity
     blinkState = !blinkState;
     digitalWrite(LED_PIN, blinkState);
