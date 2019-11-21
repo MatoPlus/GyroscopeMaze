@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 135564393503767306}
   - component: {fileID: 114722966663236128}
   - component: {fileID: 114910378511651514}
+  - component: {fileID: 54326108524757294}
   m_Layer: 0
   m_Name: BuzzSaw
   m_TagString: UniqueObject
@@ -97,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1900001595276144}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24, y: 13, z: 6}
+  m_LocalPosition: {x: 0.21720308, y: 0.20419687, z: 0.29962805}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4193556804253188}
@@ -189,6 +190,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1209235146870732}
   m_Mesh: {fileID: 4300002, guid: 4a1142b17f64bbc40871f76529421f77, type: 3}
+--- !u!54 &54326108524757294
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1900001595276144}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!111 &111025569516222578
 Animation:
   m_ObjectHideFlags: 1
@@ -220,6 +236,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  OnCollisionWithTag:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114910378511651514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,5 +262,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
