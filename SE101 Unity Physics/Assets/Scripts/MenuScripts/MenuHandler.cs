@@ -25,9 +25,11 @@ public class MenuHandler
     private GameObject DiffTitle;
     private GameObject TimerTitle;
     private GameObject SensTitle;
+    private GameObject GyroTitle;
     public GameObject TimerAmount;
     public GameObject DiffAmount;
     public GameObject SensAmount;
+    public Text GyroButtonText;
 
     public MenuHandler(Director director)
     {
@@ -97,16 +99,35 @@ public class MenuHandler
         BackButton.attached.transform.SetParent(SettingsMenu.transform);
 
         buttonActions.Clear();
-        buttonActions.Add(director.Empty);
+        buttonActions.Add(Director.Recalibrate);
         StageButton CalibrateButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 40, StageButtonPrefab, "Calibrate", buttonActions, Canvas);
         buttons.Add(CalibrateButton);
         CalibrateButton.attached.transform.SetParent(SettingsMenu.transform);
 
-        buttonActions.Clear();
+        /*buttonActions.Clear();
         buttonActions.Add(director.Empty);
         StageButton PortsButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Serial Port", buttonActions, Canvas);
         buttons.Add(PortsButton);
-        PortsButton.attached.transform.SetParent(SettingsMenu.transform);
+        PortsButton.attached.transform.SetParent(SettingsMenu.transform);*/
+
+        GyroTitle = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f - 100, Screen.height / 2f - 80, 0), Quaternion.identity);
+        GyroTitle.transform.SetParent(SettingsMenu.transform);
+        GyroTitle.GetComponent<Text>().text = "Use gyro?";
+
+        buttonActions.Clear();
+        buttonActions.Add(director.ToggleGyro);
+        StageButton ToggleButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, PlusButtonPrefab, "Y", buttonActions, Canvas);
+        GyroButtonText = ToggleButton.attached.GetComponentInChildren<Text>();
+        buttons.Add(ToggleButton);
+        ToggleButton.attached.transform.SetParent(SettingsMenu.transform);
+        if (Director.useGyro)
+        {
+            GyroButtonText.text = "Y";
+        }
+        else
+        {
+            GyroButtonText.text = "N";
+        }
 
         buttonActions.Clear();
         buttonActions.Add(director.IncreaseDifficulty);
@@ -196,11 +217,6 @@ public class MenuHandler
         UnityEngine.Object.Destroy(MenuPivot);
     }
 
-    private void StartGame()
-    {
-
-    }
-
     public void PressAll()
     {
         foreach (Button i in buttons)
@@ -211,5 +227,13 @@ public class MenuHandler
             }
         }
     }
+
+    /*public void BuildPortsDropdown(List<string> ports)
+{
+    for (int i = 0; i < ports.Count; i++)
+    {
+
+    }
+}*/
 
 }

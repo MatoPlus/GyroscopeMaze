@@ -23,15 +23,26 @@ public class Director : MonoBehaviour
     public int TimeLimit;
 
     public static int Difficulty;
-    public static bool useGyro = true;
+    public static bool useGyro = false;
     public static int gyroSensitivity = 5;
     public static bool isPressed = false;
 
-    // Use this for initialization
-    void Start()
+
+    private void Start()
     {
         Difficulty = 50;
         TimeLimit = 90;
+    }
+    
+    IEnumerator BeginGameCoroutine()
+    {
+        SceneManager.LoadScene(1);
+        do
+        {
+            yield return null;
+
+        } while (SceneManager.sceneCount == 0);
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
         menuHandler = new MenuHandler(this);
         if (useGyro)
         {
@@ -42,8 +53,11 @@ public class Director : MonoBehaviour
     IEnumerator StartGameCoroutine()
     {
         SceneManager.LoadScene(2);
-        yield return new WaitForSeconds(0.1f);
-        Debug.Log("this worked");
+        do
+        {
+            yield return new WaitForSeconds(0.1f);
+
+        } while (SceneManager.sceneCount == 0);
         //menuHandler.RemoveMenu();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
         CreateMaze();
@@ -183,6 +197,12 @@ public class Director : MonoBehaviour
                 continue;
             }
         }
+        if(sp == null || !sp.IsOpen)
+        {
+            Debug.Log("Failed to connect to a port, switching to arrow keys...");
+            useGyro = false;
+            //Director.ToggleGyro();
+        }
     }
 
     public static void SetupController(string port)
@@ -197,8 +217,8 @@ public class Director : MonoBehaviour
             sp.Open();
 
             if (sp.BytesToRead != 0) {
-                print("Selected invalid port, automatically detecting a new port...");
-                SetupController();
+                print("Selected invalid port, switching to arrow keys...");
+                useGyro = false;
             }
 
             // Sucessfully reads input from sp, meaning the port is valid.
@@ -217,6 +237,13 @@ public class Director : MonoBehaviour
     }
 
 
+    public static List<string> GetFilteredPorts()
+    {
+        List<string> ports = new List<string>(SerialPort.GetPortNames());
+        FilterPorts(ports);
+        return ports;
+
+    }
 
     public static void FilterPorts(List<string> ports)
     {
@@ -233,8 +260,8 @@ public class Director : MonoBehaviour
     }
 
     public static void Recalibrate()
-    {
-        if (sp.IsOpen)
+    { 
+        if (useGyro && sp.IsOpen)
         {
             sp.Close();
             sp.Open();
@@ -246,8 +273,30 @@ public class Director : MonoBehaviour
         isPressed = press;
     }
 
-    public static void ToggleGyro()
+    public void ToggleGyro()
     {
         useGyro = !useGyro;
+        if (useGyro)
+        {
+            if (sp != null)
+            {
+                SetupController(sp.PortName);
+            }
+            else
+            {
+                SetupController();
+            }
+            if (menuHandler != null)
+            {
+                menuHandler.GyroButtonText.text = "Y";
+            }
+        }
+        else
+        {
+            if (menuHandler != null)
+            {
+                menuHandler.GyroButtonText.text = "N";
+            }
+        }
     }
 }
