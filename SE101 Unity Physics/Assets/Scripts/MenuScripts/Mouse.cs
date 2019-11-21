@@ -8,15 +8,13 @@ using System.Threading;
 public class Mouse : MonoBehaviour
 {
     // Public Variables (for changing in insepctor)
-    public bool useGyro = true;
     public float magnitude;
+    private float buttonDelayMax = 5;
+    private float buttonDelay = 0;
     public GameObject mouse;
-    public int XCoord { get; private set; }
-    public int YCoord { get; private set; }
 
 
     // Private Variables
-    SerialPort sp;
     char[] packet = new char[14];  // InvenSense packets
     int serialCount = 0;                 // current packet byte position
     int synced = 0;
@@ -24,18 +22,17 @@ public class Mouse : MonoBehaviour
 
     void Start()
     {
-        useGyro = false;
-        if (useGyro)
+        // Set up Gyroscope if required
+        if (Director.useGyro && !Director.sp.IsOpen)
         {
-            SetupController();
+            Director.SetupController();
         }
-        mouse = GameObject.Find("Mouse");
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // if useGyro is false use the 
-        if (!useGyro)
+        if (!Director.useGyro)
         {
             if (Input.GetAxis("Horizontal") > .2)
             {
@@ -56,21 +53,40 @@ public class Mouse : MonoBehaviour
         }
         else
         {
-
-            if (sp == null)
+            // Set up the controller if not instantiated
+            if (Director.sp == null)
             {
-                SetupController();
+                Director.SetupController();
             }
 
-            while (sp.BytesToRead > 0)
-            {
-                int ch = sp.ReadByte();
+            // Button press delay
+            buttonDelay -= Time.deltaTime;
 
-                // For debugging purposes, print to console when button is pressed
+            // Read from serial port that the controller is connected to
+            while (Director.sp.BytesToRead > 0)
+            {
+                int ch = Director.sp.ReadByte();
+               
+                // # indicates that arduino has received button press
                 if (serialCount == 0 && ch == '#')
                 {
-                    print("Button Pressed!");
+                    if (buttonDelay <= 0)
+                    {
+                        buttonDelay = buttonDelayMax;
+                        Director.SetPressed(true);
+                    }
+                    else
+                    {
+                        Director.SetPressed(false);
+                    }
                 }
+                // @ indicates that arduino has speifically has no button press
+                else if (serialCount == 0 && ch == '@')
+                {
+                    buttonDelay = 0;
+                    Director.SetPressed(false);
+                }
+
 
                 if (synced == 0 && ch != '$') return;   // initial synchronization - also used to resync/realign if needed
                 synced = 1;
@@ -107,50 +123,9 @@ public class Mouse : MonoBehaviour
             }
         }
         
-        mouse.transform.position = new Vector3(transform.up.x*600+Screen.width/2, transform.up.z * 600 + Screen.height/2, 0);
-        //print(mouse.transform.position.x + " : " + mouse.transform.position.y);
-        XCoord = (int)mouse.transform.position.x;
-        YCoord = (int)mouse.transform.position.y;
-
-        //gravPointer.transform.position = transform.up*magnitude;
-        //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
+        mouse.transform.position = new Vector3(transform.up.x*500+Screen.width/2, transform.up.z * 500 + Screen.height/2, 0);
     }
 
 
-    void SetupController()
-    {
-        // sp = new SerialPort("/dev/cu.wchusbserial14110", 9600);
-        // sp = new SerialPort("COM6", 9600);
-        //sp.Open();
 
-        //Auto detect implementation.
-        string[] ports = SerialPort.GetPortNames();
-        foreach (string p in ports)
-        {
-            try
-            {
-                print("Attempted to connect to: " + p);
-                sp = new SerialPort(p, 9600);
-                sp.Open();
-                // Sucessfully reads input from sp, meaning the port is valid.
-                if (sp.BytesToRead != 0)
-                {
-                    break;
-                }
-                //Scan inputs for "connectAlready"
-            }
-            catch (InvalidOperationException e)
-            {
-                // Port in use  
-                print(e);
-                continue;
-            }
-            catch (System.IO.IOException e)
-            {
-                // Port can't be opened
-                print(e);
-                continue;
-            }
-        }
-    }
 }

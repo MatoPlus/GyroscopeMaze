@@ -9,9 +9,7 @@ using System.Threading;
 public class Tilt : MonoBehaviour
 {
     // Public Variables (for changing in insepctor)
-    public bool useGyro = false;
     private static float magnitude = -9.81f;
-    public GameObject ball;
     private static GameObject gravityObject;
     public static Vector3 Gravity
     {
@@ -28,7 +26,6 @@ public class Tilt : MonoBehaviour
     //public GameObject gravPointer;
 
     // Private Variables
-    SerialPort sp;
     char[] packet = new char[14];  // InvenSense packet
     int serialCount = 0;                 // current packet byte position
     int synced = 0;
@@ -37,7 +34,7 @@ public class Tilt : MonoBehaviour
     void Start()
     {
         // /dev/cu.wchusbserial14xx0   OR    COMx
-        if (useGyro)
+        if (Director.useGyro && !Director.sp.IsOpen)
         {
             SetupController();
         }
@@ -49,10 +46,10 @@ public class Tilt : MonoBehaviour
         //gravPointer = GameObject.Find("GravPointer");
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // if useGyro is false use the 
-        if (!useGyro)
+        if (!Director.useGyro)
         {
             if (Input.GetAxis("Horizontal") > .2)
             {
@@ -74,14 +71,14 @@ public class Tilt : MonoBehaviour
         else
         {
 
-            if (sp == null)
+            if (Director.sp == null)
             {
                 SetupController();
             }
 
-            while (sp.BytesToRead > 0)
+            while (Director.sp.BytesToRead > 0)
             {
-                int ch = sp.ReadByte();
+                int ch = Director.sp.ReadByte();
 
                 if (synced == 0 && ch != '$') return;   // initial synchronization - also used to resync/realign if needed
                 synced = 1;
@@ -111,12 +108,12 @@ public class Tilt : MonoBehaviour
                         // set our toxilibs quaternion to new data
                         //transform.rotation = new Quaternion(q[2], q[0], -q[1], q[3]);
                         this.transform.rotation = new Quaternion(q[2], q[0], -q[1], q[3]);
-                        
+
 
                     }
                 }
             }
-        }        
+        }
         //GameObject.Find("Ball(Clone)").GetComponent<Rigidbody>().AddForce(transform.up * magnitude, ForceMode.Acceleration);
         //gravPointer.transform.position = transform.up*magnitude;
         //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
@@ -133,30 +130,30 @@ public class Tilt : MonoBehaviour
         //Auto detect implementation.
         string[] ports = SerialPort.GetPortNames();
         foreach (string p in ports)
-        {   
-           try
-           {
-               print("Attempted to connect to: " + p);
-               sp = new SerialPort(p, 9600);
-               sp.Open();
+        {
+            try
+            {
+                print("Attempted to connect to: " + p);
+                Director.sp = new SerialPort(p, 9600);
+                Director.sp.Open();
                 // Sucessfully reads input from sp, meaning the port is valid.
-                if (sp.BytesToRead != 0)
+                if (Director.sp.BytesToRead != 0)
                 {
                     break;
                 }
-           }
-           catch (InvalidOperationException e)
-           {
-               // Port in use  
-               print(e);
-               continue;
-           }
-           catch (System.IO.IOException e)
-           {
-               // Port can't be opened
-               print(e);
-               continue;
-           }
+            }
+            catch (InvalidOperationException e)
+            {
+                // Port in use  
+                print(e);
+                continue;
+            }
+            catch (System.IO.IOException e)
+            {
+                // Port can't be opened
+                print(e);
+                continue;
+            }
         }
     }
 }

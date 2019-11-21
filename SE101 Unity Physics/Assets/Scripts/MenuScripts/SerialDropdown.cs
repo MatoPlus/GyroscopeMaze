@@ -5,13 +5,17 @@ using UnityEngine.UI;
 
 public class SerialDropdown : MonoBehaviour {
 
+    // Filter out
+    // /dev/tty
+    // COM3
+    // COM4
+
     public Dropdown dropdown;
 
     void Start () {
         PopulateList();	
 	}
 	
-	// Update is called once per frame
 	void PopulateList() {
         List<string> ports = new List<string>(SerialPort.GetPortNames());
         dropdown.AddOptions(ports);
