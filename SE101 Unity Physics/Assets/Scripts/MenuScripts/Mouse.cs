@@ -10,6 +10,8 @@ public class Mouse : MonoBehaviour
     // Public Variables (for changing in insepctor)
     public bool useGyro = true;
     public float magnitude;
+    private float buttonDelayMax = 1;
+    private float buttonDelay = 1;
     public GameObject mouse;
 
 
@@ -22,6 +24,7 @@ public class Mouse : MonoBehaviour
 
     void Start()
     {
+        // Set up Gyroscope if required
         useGyro = true;
         if (useGyro)
         {
@@ -53,21 +56,33 @@ public class Mouse : MonoBehaviour
         }
         else
         {
-
+            // Set up the controller if not instantiated
             if (sp == null)
             {
                 SetupController();
             }
 
+            // Read from serial port that the controller is connected to
             while (sp.BytesToRead > 0)
             {
                 int ch = sp.ReadByte();
 
-                // For debugging purposes, print to console when button is pressed
+                // Button press delay
+                buttonDelay += Time.deltaTime;
+                // # indicates that arduino has received button press
                 if (serialCount == 0 && ch == '#')
                 {
-                    Director.SetPressed(true);
+                    if (buttonDelay >= buttonDelayMax)
+                    {
+                        buttonDelay = 0;
+                        Director.SetPressed(true);
+                    }
+                    else
+                    {
+                        Director.SetPressed(false);
+                    }
                 }
+                // @ indicates that arduino has speifically has no button press
                 else if (serialCount == 0 && ch == '@')
                 {
                     Director.SetPressed(false);

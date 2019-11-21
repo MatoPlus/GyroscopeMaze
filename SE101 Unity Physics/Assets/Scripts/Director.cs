@@ -49,6 +49,7 @@ public class Director : MonoBehaviour {
         if (Input.GetKeyDown("space") || isPressed)
         {
             menuHandler.PressAll();
+            isPressed = false;
         }
     }
 
