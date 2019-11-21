@@ -11,7 +11,6 @@ public class Tilt : MonoBehaviour
     // Public Variables (for changing in insepctor)
     public bool useGyro = false;
     private static float magnitude = -9.81f;
-    public GameObject ball;
     private static GameObject gravityObject;
     public static Vector3 Gravity
     {
