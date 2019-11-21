@@ -20,6 +20,7 @@ public class Director : MonoBehaviour {
     public int TimeLimit;
 
     public static int Difficulty;
+    public static bool useGyro = true;
     public static bool isPressed = false;
 
     // Use this for initialization

@@ -8,7 +8,6 @@ using System.Threading;
 public class Mouse : MonoBehaviour
 {
     // Public Variables (for changing in insepctor)
-    public bool useGyro = true;
     public float magnitude;
     private float buttonDelayMax = 5;
     private float buttonDelay = 0;
@@ -25,8 +24,8 @@ public class Mouse : MonoBehaviour
     void Start()
     {
         // Set up Gyroscope if required
-        useGyro = true;
-        if (useGyro)
+        Director.useGyro = false;
+        if (Director.useGyro)
         {
             SetupController();
         }
@@ -35,7 +34,7 @@ public class Mouse : MonoBehaviour
     void Update()
     {
         // if useGyro is false use the 
-        if (!useGyro)
+        if (!Director.useGyro)
         {
             if (Input.GetAxis("Horizontal") > .2)
             {
