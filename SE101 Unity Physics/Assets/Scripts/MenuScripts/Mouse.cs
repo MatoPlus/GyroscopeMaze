@@ -23,7 +23,7 @@ public class Mouse : MonoBehaviour
     void Start()
     {
         // Set up Gyroscope if required
-        if (Director.useGyro)
+        if (Director.useGyro && !Director.sp.IsOpen)
         {
             Director.SetupController();
         }

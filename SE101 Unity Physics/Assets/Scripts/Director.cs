@@ -7,7 +7,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Director : MonoBehaviour {
+public class Director : MonoBehaviour
+{
     private GameObject MazePrefab;
     private GameObject MazeObject;
     private GameObject TimerPrefab;
@@ -31,6 +32,10 @@ public class Director : MonoBehaviour {
         Difficulty = 50;
         TimeLimit = 90;
         menuHandler = new MenuHandler(this);
+        if (useGyro)
+        {
+            SetupController();
+        }
     }
 
     IEnumerator StartGameCoroutine()
@@ -167,6 +172,39 @@ public class Director : MonoBehaviour {
         }
     }
 
+    public static void SetupController(string port)
+    {
+        // sp = new SerialPort("/dev/cu.wchusbserial14110", 9600);
+        // sp = new SerialPort("COM6", 9600);
+        //sp.Open();
+        try
+        {
+            print("Attempted to connect to: " + port);
+            sp = new SerialPort(port, 9600);
+            sp.Open();
+
+            if (sp.BytesToRead != 0) {
+                print("Selected invalid port, automatically detecting a new port...");
+                SetupController();
+            }
+
+            // Sucessfully reads input from sp, meaning the port is valid.
+            //Scan inputs for "connectAlready"
+        }
+        catch (InvalidOperationException e)
+        {
+            // Port in use  
+            print(e);
+        }
+        catch (System.IO.IOException e)
+        {
+            // Port can't be opened
+            print(e);
+        }
+    }
+
+
+
     public static void FilterPorts(List<string> ports)
     {
         List<string> search = ports.GetRange(0, ports.Count);
@@ -186,8 +224,8 @@ public class Director : MonoBehaviour {
         if (sp.IsOpen)
         {
             sp.Close();
+            sp.Open();
         }
-        sp.Open();
     }
 
     public static void SetPressed(bool press)
