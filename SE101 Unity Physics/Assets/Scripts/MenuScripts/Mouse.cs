@@ -22,7 +22,8 @@ public class Mouse : MonoBehaviour
 
     void Start()
     {
-        useGyro = true;
+
+        useGyro = false;
         if (useGyro)
         {
             SetupController();
@@ -116,7 +117,6 @@ public class Mouse : MonoBehaviour
         //mCamera.transform.position = 10*(new Vector3(-grav.x, -grav.y, -grav.z));
     }
 
-
     void SetupController()
     {
         // sp = new SerialPort("/dev/cu.wchusbserial14110", 9600);
@@ -152,5 +152,25 @@ public class Mouse : MonoBehaviour
                 continue;
             }
         }
+    }
+
+    private void FilterPorts(List<string> ports)
+    {
+        foreach (string port in ports)
+        {
+            if (port == "COM3" || port == "COM4")
+            {
+                ports.Remove(port);
+            }
+        }
+    }
+
+    public void Recalibrate()
+    {
+        if(sp.IsOpen)
+        {
+            sp.Close();
+        }
+        sp.Open();
     }
 }
