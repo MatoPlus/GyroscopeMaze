@@ -7,7 +7,7 @@ public class Maze : MonoBehaviour {
 
     enum FeatureName
     {
-        Walls, Spikeballs, KeyPoints
+        Walls, Spikeballs, KeyPoints, BuzzSaws
     }
 
     private Dictionary<FeatureName, Feature> features;
@@ -86,6 +86,7 @@ public class Maze : MonoBehaviour {
         features[FeatureName.Walls] = new Walls(Map, this, Origin);
         features[FeatureName.Spikeballs] = new SpikeBalls(this, Origin, UniqueObjects);
         features[FeatureName.KeyPoints] = new KeyPoints(this, Origin, StartX, StartY, EndX, EndY, UniqueObjects);
+        features[FeatureName.BuzzSaws] = new BuzzSaws(this, Origin, UniqueObjects);
         //features.Add(new Obsticles);
     }
 
