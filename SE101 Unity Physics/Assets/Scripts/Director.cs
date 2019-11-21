@@ -17,7 +17,7 @@ public class Director : MonoBehaviour {
     void Start()
     {
         //menuHandler = new MenuHandler();
-        Difficulty = 50;
+        Difficulty = 25;
         if (playing)
         {
             StartGame();
