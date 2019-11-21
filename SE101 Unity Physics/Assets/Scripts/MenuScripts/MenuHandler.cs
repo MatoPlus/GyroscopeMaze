@@ -17,10 +17,12 @@ public class MenuHandler
 
     private GameObject StageButtonPrefab;
     private GameObject TitlePrefab;
+
     private GameObject CanvasPrefab;
     private GameObject CursorPrefab;
     private GameObject PivotPrefab;
     
+
 
     public MenuHandler(Director director)
     {

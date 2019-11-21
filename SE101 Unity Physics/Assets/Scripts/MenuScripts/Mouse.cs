@@ -22,7 +22,7 @@ public class Mouse : MonoBehaviour
 
     void Start()
     {
-        useGyro = false;
+        useGyro = true;
         if (useGyro)
         {
             SetupController();
@@ -66,8 +66,13 @@ public class Mouse : MonoBehaviour
                 // For debugging purposes, print to console when button is pressed
                 if (serialCount == 0 && ch == '#')
                 {
-                    print("Button Pressed!");
+                    Director.SetPressed(true);
                 }
+                else if (serialCount == 0 && ch == '@')
+                {
+                    Director.SetPressed(false);
+                }
+
 
                 if (synced == 0 && ch != '$') return;   // initial synchronization - also used to resync/realign if needed
                 synced = 1;
