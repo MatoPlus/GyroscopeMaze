@@ -7,11 +7,13 @@ namespace MazeObjects
     class BuzzSaws : Feature
     {
         public GameObject MazeObject { get; private set; }
-        private GameObject BuzzSawPrefab { get; set; }
+        public GameObject BuzzSawPrefab { get; private set; }
+        public GameObject WarningPadPrefab { get; private set; }
         private List<BuzzSaw> buzzSaws;
         private float counterMax;
         private float counter;
         private float buzzSawTimer;
+        private float spawnChance;
 
         public BuzzSaws(Maze maze, Vector3 Origin, bool[,] uniqueObjects) : base(maze, Origin, uniqueObjects)
         {
@@ -19,25 +21,19 @@ namespace MazeObjects
             this.maze = maze;
             MazeObject = maze.gameObject;
             BuzzSawPrefab = (GameObject)Resources.Load("Prefabs/Maze/BuzzSaw");
-            this.Initialize();
+            WarningPadPrefab = (GameObject)Resources.Load("Prefabs/Maze/WarningPad");
+            Initialize();
         }
 
         // Use this for initialization
         public void Initialize()
         {
             //Time between spawns
-            counterMax = 1 - (Director.Difficulty) / 100;
+            counterMax = 2.5f - (Director.Difficulty) / 100f;
             counter = 0;
             //Time for a ball to despawn
-            buzzSawTimer = 2 + Director.Difficulty / 100;
-        }
-
-        public override void Build()
-        {
-            /*foreach (FeatureObject buzzSaw in buzzSaws)
-            {
-                buzzSaw.Build();
-            }*/
+            buzzSawTimer = 5 + Director.Difficulty / 100f;
+            spawnChance = Director.Difficulty / 100f;
         }
 
         public override void Update()
@@ -46,9 +42,10 @@ namespace MazeObjects
             if (counter >= counterMax)
             {
                 //Chance of spawning
-                if (Random.value < 0.25)
+                if (Random.value <= spawnChance)
                 {
-                    BuzzSaw buzzSaw = new BuzzSaw(Random.Range(0, (int)(this.maze.Width)), Random.Range(0, (int)this.maze.Height), BuzzSawPrefab, buzzSawTimer, Origin);
+                    Vector2 coords = getValidLocation(1);
+                    BuzzSaw buzzSaw = new BuzzSaw((int)coords.x, (int)coords.y, BuzzSawPrefab, WarningPadPrefab, buzzSawTimer, maze);
                     buzzSaws.Add(buzzSaw);
                 }
                 counter = 0;
@@ -62,10 +59,11 @@ namespace MazeObjects
                 }
                 buzzSaws[i].Update();
             }
-            /*foreach (FeatureObject buzzSaw in buzzSaws)
-            {
-                buzzSaw.Update();
-            }*/
+        }
+
+        public override void Build()
+        {
+
         }
     }
 }

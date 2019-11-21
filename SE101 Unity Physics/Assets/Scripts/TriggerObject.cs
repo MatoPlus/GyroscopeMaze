@@ -16,7 +16,6 @@ public class TriggerObject : MonoBehaviour {
     {
         if (c.tag == "Player")
         {
-            print("collided");
             OnCollisionWithBall.Invoke();
         }
     }
