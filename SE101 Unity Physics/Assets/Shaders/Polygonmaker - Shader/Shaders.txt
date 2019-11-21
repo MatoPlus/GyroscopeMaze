@@ -1,0 +1,12 @@
+Unity Standard: Default from Unity: Used on some Polygonmaker Renders
+
+Polygonmaker_Toon:
+-Simple Shader to achieve "Unlit look"
+-Shaderforge Shader
+-Blinn-Phong Lighting
+
+StandardMetallic_DoubleSided
+-Unity Standard Metallic set to render "Double Sided"
+
+StandardSpecular_DoubleSided
+-Unity Standard Specular set to render "Double Sided"
