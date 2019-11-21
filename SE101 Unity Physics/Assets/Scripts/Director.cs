@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -29,13 +30,20 @@ public class Director : MonoBehaviour {
         menuHandler = new MenuHandler(this);
     }
 
-    public void StartGame()
+    IEnumerator StartGameCoroutine()
     {
-        menuHandler.RemoveMenu();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(2);
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("this worked");
+        //menuHandler.RemoveMenu();
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
         CreateMaze();
         CreateTimer();
         Pivot = Instantiate(PivotPrefab);
+    }
+    public void StartGame()
+    {
+        StartCoroutine("StartGameCoroutine");
     }
 
     void Awake()
