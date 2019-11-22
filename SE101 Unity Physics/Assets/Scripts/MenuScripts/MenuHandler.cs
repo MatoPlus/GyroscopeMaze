@@ -74,6 +74,7 @@ public class MenuHandler
         List<Action> buttonActions = new List<Action>();
         buttonActions.Add(director.StartGame);
         StageButton PlayButton = new StageButton(Screen.width / 2f, Screen.height / 2f + 20, StageButtonPrefab, "Play", buttonActions, Canvas);
+        PlayButton.actions.AddListener(PlayButton.Deactivate);
         buttons.Add(PlayButton);
         PlayButton.attached.transform.SetParent(MainMenu.transform);
 

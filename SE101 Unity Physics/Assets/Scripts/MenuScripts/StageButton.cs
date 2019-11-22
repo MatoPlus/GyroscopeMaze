@@ -25,4 +25,9 @@ public class StageButton : Button
     {
         actions.Invoke();
     }
+
+    public void Deactivate()
+    {
+        active = false;
+    }
 }
