@@ -106,13 +106,15 @@ public class Director : MonoBehaviour
 
     void TimerDone()
     {
-        // Timer.ResetTime();
         Timer.Pause();
+        // END GAME HERE, THIS IS CALLED WHEN TIMER IS UP
+        QuitCurrentSession();
     }
 
-    void TimerUpdate()
+    void QuitCurrentSession()
     {
-        // print(Timer.TimeLeft);
+        print("Should Quit Here, time ended");
+
     }
 
     void CreateMaze()
@@ -129,7 +131,6 @@ public class Director : MonoBehaviour
         Timer.Initialize(TimeLimit);
         Timer.Resume();
         Timer.TimeOut.AddListener(TimerDone);
-        Timer.TimeUpdated.AddListener(TimerUpdate);
     }
 
     void LoadPrefabs()

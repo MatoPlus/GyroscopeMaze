@@ -9,7 +9,8 @@ public class Timer : MonoBehaviour
 {
     private Text ScreenTimer;
     private UnityEvent timeOut;
-    public UnityEvent TimeOut {
+    public UnityEvent TimeOut
+    {
         get
         {
             if (timeOut == null)
@@ -38,25 +39,29 @@ public class Timer : MonoBehaviour
     private float timer;
     public float RemainingTime
     {
-        get { return WaitTime - timer;  }
+        get { return WaitTime - timer; }
     }
     private int lastTime;
     private bool timerActive;
     public string TimeLeft { get { return FormatTime(); } }
+    private int width, height;
 
     private string FormatTime()
     {
-        int remaining = (int) (WaitTime - timer);
+        int remaining = (int)(WaitTime - timer);
         int minutes = remaining / 60;
         int seconds = remaining % 60;
-        return minutes.ToString() + ":" + seconds.ToString();
+        string minStr = (minutes < 10) ? "0" + minutes.ToString() : minutes.ToString();
+        string secStr = (seconds < 10) ? "0" + seconds.ToString() : seconds.ToString();
+
+        return minStr + ":" + secStr;
     }
 
     void Awake()
     {
         ScreenTimer = gameObject.AddComponent<Text>();
-        //width = Screen.width;
-        //height = Screen.height;
+        width = Screen.width;
+        height = Screen.height;
     }
 
     void Update()
@@ -106,43 +111,22 @@ public class Timer : MonoBehaviour
     {
         print("paused");
         timerActive = false;
-        // TimeUpdated.Invoke();
     }
 
     public void Resume()
     {
         timerActive = true;
-        // TimeUpdated.Invoke();
     }
 
 
-    /*
+
     void OnGUI()
     {
-        GUIStyle sliderDetails = new GUIStyle(GUI.skin.GetStyle("horizontalSlider"));
-        GUIStyle sliderThumbDetails = new GUIStyle(GUI.skin.GetStyle("horizontalSliderThumb"));
         GUIStyle labelDetails = new GUIStyle(GUI.skin.GetStyle("label"));
 
-        // Set the size of the fonts and the width/height of the slider.
-        labelDetails.fontSize = 6 * (width / 200);
-        sliderDetails.fixedHeight = height / 32;
-        sliderDetails.fontSize = 12 * (width / 200);
-        sliderThumbDetails.fixedHeight = height / 32;
-        sliderThumbDetails.fixedWidth = width / 32;
-
-        // Show the slider. Make the scale to be ten times bigger than the needed size.
-        value = GUI.HorizontalSlider(new Rect(width / 8, height / 4, width - (4 * width / 8), height - (2 * height / 4)),
-            value, 5.0f, 20.0f, sliderDetails, sliderThumbDetails);
-
-        // Show the value from the slider. Make sure that 0.5, 0.6... 1.9, 2.0 are shown.
-        float v = ((float)Mathf.RoundToInt(value)) / 10.0f;
-        GUI.Label(new Rect(width / 8, height / 3.25f, width - (2 * width / 8), height - (2 * height / 4)),
-            "timeScale: " + v.ToString("f1"), labelDetails);
-        scrollBar = v;
-
         // Display the recorded time in a certain size.
-        labelDetails.fontSize = 14 * (width / 200);
-        GUI.Label(new Rect(width / 8, height / 2, width - (2 * width / 8), height - (2 * height / 4)),
-            "Timer value is: " + visualTime.ToString("f4") + " seconds.", labelDetails);
-    }*/
+        labelDetails.fontSize = 6 * (width / 200);
+        GUI.Label(new Rect(width - width/8, 10, width - (2 * width / 8), height - (2 * height / 4)),
+            TimeLeft, labelDetails);
+    }
 }
