@@ -21,18 +21,12 @@ public class Director : MonoBehaviour
     public static SerialPort sp;
     private Timer Timer { get; set; }
     public int TimeLimit;
+    private bool winning = false;
 
     public static int Difficulty;
     public static bool useGyro = false;
     public static int gyroSensitivity = 5;
     public static bool isPressed = false;
-
-
-    private void Start()
-    {
-        Difficulty = 30;
-        TimeLimit = 90;
-    }
     
     IEnumerator BeginGameCoroutine()
     {
@@ -43,7 +37,7 @@ public class Director : MonoBehaviour
 
         } while (SceneManager.sceneCount == 0);
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
-        menuHandler = new MenuHandler(this);
+        menuHandler.InstantiateMenu();
         menuHandler.CreateOpeningScreen();
         if (useGyro)
         {
@@ -56,6 +50,23 @@ public class Director : MonoBehaviour
         StartCoroutine("BeginGameCoroutine");
     }
 
+    IEnumerator ToMainMenuCoroutine()
+    {
+        SceneManager.LoadScene(1);
+        do
+        {
+            yield return null;
+
+        } while (SceneManager.sceneCount == 0);
+        SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
+        menuHandler.InstantiateMenu();
+        menuHandler.CreateOpeningScreen();
+    }
+
+    public void ToMainMenu()
+    {
+        StartCoroutine("ToMainMenuCoroutine");
+    }
     IEnumerator StartGameCoroutine()
     {
         SceneManager.LoadScene(2);
@@ -79,6 +90,9 @@ public class Director : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         LoadPrefabs();
+        menuHandler = new MenuHandler(this);
+        Difficulty = 30;
+        TimeLimit = 90;
     }
 
     void Update()
@@ -146,7 +160,7 @@ public class Director : MonoBehaviour
 
     public void DecreaseTimer()
     {
-        TimeLimit = Math.Max(TimeLimit - 10, 90);
+        TimeLimit = Math.Max(TimeLimit - 10, 30);
         menuHandler.TimerAmount.GetComponent<Text>().text = TimeLimit.ToString();
     }
 
@@ -315,13 +329,18 @@ public class Director : MonoBehaviour
         } while (SceneManager.sceneCount == 0);
         //menuHandler.RemoveMenu();
         SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
-        menuHandler = new MenuHandler(this);
+        menuHandler.InstantiateMenu();
         menuHandler.MakeWinScreen(Timer.RemainingTime, TimeLimit);
+        winning = false;
 
     }
 
     public void Win()
     {
-        StartCoroutine("WinScreenCoroutine");
+        if (!winning)
+        {
+            StartCoroutine("WinScreenCoroutine");
+            winning = true;
+        }
     }
 }

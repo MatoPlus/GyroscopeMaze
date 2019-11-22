@@ -43,7 +43,6 @@ public class MenuHandler
         CanvasPrefab = (GameObject)Resources.Load("Prefabs/Menu/Canvas");
         CursorPrefab = (GameObject)Resources.Load("Prefabs/Menu/Cursor");
         MenuPivotPrefab = (GameObject)Resources.Load("Prefabs/Menu/MenuPivot");
-        InstantiateMenu();
     }
 
     public void CreateOpeningScreen()
@@ -55,6 +54,7 @@ public class MenuHandler
 
     public void InstantiateMenu()
     {
+        buttons.Clear();
         Canvas = UnityEngine.Object.Instantiate(CanvasPrefab,  new Vector3(Screen.width / 2f, Screen.height - 70f, 0), Quaternion.identity);
         MainMenu = new GameObject("MainMenu");
         MainMenu.transform.SetParent(Canvas.transform);
@@ -97,13 +97,13 @@ public class MenuHandler
         WinScreenTitle.transform.SetParent(MainMenu.transform);
         WinScreenTitle.GetComponent<Text>().text = "You win!";
 
-        int score = (int) Math.Floor(1000 * remainingTime * Director.Difficulty / initialTime);
+        int score = (int) Math.Floor(1000 * remainingTime * Math.Max(Director.Difficulty,1) / initialTime);
         ScoreDisplay = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height - 110f, 0), Quaternion.identity);
         ScoreDisplay.transform.SetParent(MainMenu.transform);
         ScoreDisplay.GetComponent<Text>().text = "Score: " + score.ToString();
 
         List<Action> buttonActions = new List<Action>();
-        buttonActions.Add(director.BeginGame);
+        buttonActions.Add(director.ToMainMenu);
         StageButton NextButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 40, StageButtonPrefab, "Next", buttonActions, Canvas);
         buttons.Add(NextButton);
         NextButton.attached.transform.SetParent(MainMenu.transform);
@@ -236,9 +236,7 @@ public class MenuHandler
 
     public void RemoveMenu()
     {
-        MainMenu.SetActive(false);
-        SettingsMenu.SetActive(false);
-        UnityEngine.Object.Destroy(MenuPivot);
+        
     }
 
     public void PressAll()
