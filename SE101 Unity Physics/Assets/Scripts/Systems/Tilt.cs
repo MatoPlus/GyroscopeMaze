@@ -10,7 +10,10 @@ public class Tilt : MonoBehaviour
 {
     // Public Variables (for changing in insepctor)
     private static float magnitude = -9.81f;
+    private float buttonDelayMax = 5;
+    private float buttonDelay = 0;
     private static GameObject gravityObject;
+
     public static Vector3 Gravity
     {
         get
@@ -79,6 +82,26 @@ public class Tilt : MonoBehaviour
             while (Director.sp.BytesToRead > 0)
             {
                 int ch = Director.sp.ReadByte();
+
+                // # indicates that arduino has received button press
+                if (serialCount == 0 && ch == '#')
+                {
+                    if (buttonDelay <= 0)
+                    {
+                        buttonDelay = buttonDelayMax;
+                        Director.SetPressed(true);
+                    }
+                    else
+                    {
+                        Director.SetPressed(false);
+                    }
+                }
+                // @ indicates that arduino has speifically has no button press
+                else if (serialCount == 0 && ch == '@')
+                {
+                    buttonDelay = 0;
+                    Director.SetPressed(false);
+                }
 
                 if (synced == 0 && ch != '$') return;   // initial synchronization - also used to resync/realign if needed
                 synced = 1;

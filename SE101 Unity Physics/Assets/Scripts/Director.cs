@@ -27,9 +27,11 @@ public class Director : MonoBehaviour
     public static bool useGyro = false;
     public static int gyroSensitivity = 5;
     public static bool isPressed = false;
+    private static bool isPlaying = false;
     
     IEnumerator BeginGameCoroutine()
     {
+        isPlaying = false;
         SceneManager.LoadScene(1);
         do
         {
@@ -52,6 +54,7 @@ public class Director : MonoBehaviour
 
     IEnumerator ToMainMenuCoroutine()
     {
+        isPlaying = false;
         SceneManager.LoadScene(1);
         do
         {
@@ -69,6 +72,7 @@ public class Director : MonoBehaviour
     }
     IEnumerator StartGameCoroutine()
     {
+        isPlaying = true;
         SceneManager.LoadScene(2);
         do
         {
@@ -99,7 +103,16 @@ public class Director : MonoBehaviour
     {
         if (Input.GetKeyDown("space") || isPressed)
         {
-            menuHandler.PressAll();
+            // If game session is currently going on, press button will quit the game session instead
+            if (isPlaying)
+            {
+                QuitCurrentSession();
+            }
+            // In menu, try to press all active buttons
+            else
+            {
+                menuHandler.PressAll();
+            }
             isPressed = false;
         }
     }
@@ -113,7 +126,7 @@ public class Director : MonoBehaviour
 
     void QuitCurrentSession()
     {
-        print("Should Quit Here, time ended");
+        print("Should Quit Here, session ended");
 
     }
 
@@ -184,10 +197,6 @@ public class Director : MonoBehaviour
 
     public static void SetupController()
     {
-        // sp = new SerialPort("/dev/cu.wchusbserial14110", 9600);
-        // sp = new SerialPort("COM6", 9600);
-        //sp.Open();
-
         //Auto detect implementation.
         List<string> ports = new List<string>(SerialPort.GetPortNames());
         FilterPorts(ports);
@@ -322,6 +331,7 @@ public class Director : MonoBehaviour
 
     IEnumerator WinScreenCoroutine()
     {
+        isPlaying = false;
         SceneManager.LoadScene(3);
         do
         {
