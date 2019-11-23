@@ -281,7 +281,7 @@ public class Director : MonoBehaviour
         // Search and remove inappropriate window and macOS ports
         foreach (string port in search)
         {
-            if (port == "COM3" || port == "COM4" || !port.Contains("usbserial"))
+            if (port == "COM3" || port == "COM4" || (!port.Contains("usbserial") && port.Contains("/dev/tty")))
             {
                 ports.Remove(port);
             }
