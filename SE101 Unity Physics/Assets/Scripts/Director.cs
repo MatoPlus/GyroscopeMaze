@@ -309,6 +309,7 @@ public class Director : MonoBehaviour
         {
             if (sp != null)
             {
+                sp.Close();
                 SetupController(sp.PortName);
             }
             else
