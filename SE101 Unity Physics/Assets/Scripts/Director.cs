@@ -13,10 +13,8 @@ public class Director : MonoBehaviour
     private GameObject MazeObject;
     private GameObject TimerPrefab;
     private GameObject PivotPrefab;
-    private GameObject MenuPivotPrefab;
     private GameObject TimerObject;
     public GameObject Pivot;
-    public GameObject MenuPivot;
     private MenuHandler menuHandler;
     public static SerialPort sp;
     private Timer Timer { get; set; }
@@ -145,7 +143,6 @@ public class Director : MonoBehaviour
         MazePrefab = (GameObject)Resources.Load("Prefabs/Maze/Maze");
         TimerPrefab = (GameObject)Resources.Load("Prefabs/Timer");
         PivotPrefab = (GameObject)Resources.Load("Prefabs/Pivot");
-        MenuPivotPrefab = (GameObject)Resources.Load("Prefabs/MenuPivot");
     }
 
     public void IncreaseDifficulty()
@@ -322,6 +319,7 @@ public class Director : MonoBehaviour
             }
             if (menuHandler != null)
             {
+                menuHandler.MenuPivot.transform.rotation = Quaternion.identity;
                 menuHandler.GyroButtonText.text = "Y";
             }
         }
@@ -329,6 +327,7 @@ public class Director : MonoBehaviour
         {
             if (menuHandler != null)
             {
+                menuHandler.MenuPivot.transform.rotation = Quaternion.identity;
                 menuHandler.GyroButtonText.text = "N";
             }
         }

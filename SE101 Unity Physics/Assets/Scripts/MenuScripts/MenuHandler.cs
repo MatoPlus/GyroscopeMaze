@@ -11,7 +11,7 @@ public class MenuHandler
     private GameObject SettingsTitle;
     private GameObject Canvas;
     private GameObject Cursor;
-    private GameObject MenuPivot;
+    public GameObject MenuPivot;
     private GameObject MainMenu;
     private GameObject SettingsMenu;
 
