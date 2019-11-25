@@ -86,7 +86,7 @@ public class MenuHandler
         SettingsButton.attached.transform.SetParent(MainMenu.transform);
 
         buttonActions.Clear();
-        buttonActions.Add(QuitGame);
+        buttonActions.Add(director.QuitGame);
         StageButton QuitButton = new StageButton(Screen.width / 2f, Screen.height / 2f - 80, StageButtonPrefab, "Quit", buttonActions, Canvas);
         buttons.Add(QuitButton);
         QuitButton.attached.transform.SetParent(MainMenu.transform);
@@ -233,11 +233,6 @@ public class MenuHandler
         }
         MainMenu.SetActive(true);
         SettingsMenu.SetActive(false);
-    }
-
-    private void QuitGame()
-    {
-        Application.Quit();
     }
 
     public void RemoveMenu()
