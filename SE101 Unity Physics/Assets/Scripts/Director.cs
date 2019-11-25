@@ -13,10 +13,8 @@ public class Director : MonoBehaviour
     private GameObject MazeObject;
     private GameObject TimerPrefab;
     private GameObject PivotPrefab;
-    private GameObject MenuPivotPrefab;
     private GameObject TimerObject;
     public GameObject Pivot;
-    public GameObject MenuPivot;
     private MenuHandler menuHandler;
     public static SerialPort sp;
     private Timer Timer { get; set; }
@@ -27,6 +25,8 @@ public class Director : MonoBehaviour
     public static bool useGyro = false;
     public static int gyroSensitivity = 5;
     public static bool isPressed = false;
+    public static float buttonDelayMax = 2;
+    public static float buttonDelay = 0;
     private static bool isPlaying = false;
     
     IEnumerator BeginGameCoroutine()
@@ -106,7 +106,7 @@ public class Director : MonoBehaviour
             // If game session is currently going on, press button will quit the game session instead
             if (isPlaying)
             {
-                QuitCurrentSession();
+                ToMainMenu();
             }
             // In menu, try to press all active buttons
             else
@@ -121,13 +121,7 @@ public class Director : MonoBehaviour
     {
         Timer.Pause();
         // END GAME HERE, THIS IS CALLED WHEN TIMER IS UP
-        QuitCurrentSession();
-    }
-
-    void QuitCurrentSession()
-    {
-        print("Should Quit Here, session ended");
-
+        //"QuitCurrentSession();"
     }
 
     void CreateMaze()
@@ -151,7 +145,6 @@ public class Director : MonoBehaviour
         MazePrefab = (GameObject)Resources.Load("Prefabs/Maze/Maze");
         TimerPrefab = (GameObject)Resources.Load("Prefabs/Timer");
         PivotPrefab = (GameObject)Resources.Load("Prefabs/Pivot");
-        MenuPivotPrefab = (GameObject)Resources.Load("Prefabs/MenuPivot");
     }
 
     public void IncreaseDifficulty()
@@ -190,6 +183,14 @@ public class Director : MonoBehaviour
         menuHandler.SensAmount.GetComponent<Text>().text = gyroSensitivity.ToString();
     }
 
+    public void QuitGame()
+    {
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                 Application.Quit();
+        #endif
+    }
     public void Empty()
     {
         Debug.Log("Make this do something");
@@ -318,6 +319,7 @@ public class Director : MonoBehaviour
             }
             if (menuHandler != null)
             {
+                menuHandler.MenuPivot.transform.rotation = Quaternion.identity;
                 menuHandler.GyroButtonText.text = "Y";
             }
         }
@@ -325,6 +327,7 @@ public class Director : MonoBehaviour
         {
             if (menuHandler != null)
             {
+                menuHandler.MenuPivot.transform.rotation = Quaternion.identity;
                 menuHandler.GyroButtonText.text = "N";
             }
         }

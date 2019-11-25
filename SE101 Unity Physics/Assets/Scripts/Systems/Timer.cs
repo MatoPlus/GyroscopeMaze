@@ -109,7 +109,6 @@ public class Timer : MonoBehaviour
 
     public void Pause()
     {
-        print("paused");
         timerActive = false;
     }
 
