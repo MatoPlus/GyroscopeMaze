@@ -9,8 +9,6 @@ public class Mouse : MonoBehaviour
 {
     // Public Variables (for changing in insepctor)
     public float magnitude;
-    private float buttonDelayMax = 5;
-    private float buttonDelay = 0;
     public GameObject mouse;
 
 
@@ -60,7 +58,7 @@ public class Mouse : MonoBehaviour
             }
 
             // Button press delay
-            buttonDelay -= Time.deltaTime;
+            Director.buttonDelay -= Time.deltaTime;
 
             // Read from serial port that the controller is connected to
             while (Director.sp.BytesToRead > 0)
@@ -70,9 +68,9 @@ public class Mouse : MonoBehaviour
                 // # indicates that arduino has received button press
                 if (serialCount == 0 && ch == '#')
                 {
-                    if (buttonDelay <= 0)
+                    if (Director.buttonDelay <= 0)
                     {
-                        buttonDelay = buttonDelayMax;
+                        Director.buttonDelay = Director.buttonDelayMax;
                         Director.SetPressed(true);
                     }
                     else
@@ -83,7 +81,7 @@ public class Mouse : MonoBehaviour
                 // @ indicates that arduino has speifically has no button press
                 else if (serialCount == 0 && ch == '@')
                 {
-                    buttonDelay = 0;
+                    Director.buttonDelay = 0;
                     Director.SetPressed(false);
                 }
 

@@ -25,6 +25,8 @@ public class Director : MonoBehaviour
     public static bool useGyro = false;
     public static int gyroSensitivity = 5;
     public static bool isPressed = false;
+    public static float buttonDelayMax = 2;
+    public static float buttonDelay = 0;
     private static bool isPlaying = false;
     
     IEnumerator BeginGameCoroutine()
