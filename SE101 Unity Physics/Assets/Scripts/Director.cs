@@ -106,7 +106,7 @@ public class Director : MonoBehaviour
             // If game session is currently going on, press button will quit the game session instead
             if (isPlaying)
             {
-                QuitCurrentSession();
+                ToMainMenu();
             }
             // In menu, try to press all active buttons
             else
@@ -121,13 +121,7 @@ public class Director : MonoBehaviour
     {
         Timer.Pause();
         // END GAME HERE, THIS IS CALLED WHEN TIMER IS UP
-        QuitCurrentSession();
-    }
-
-    void QuitCurrentSession()
-    {
-        print("Should Quit Here, session ended");
-
+        //"QuitCurrentSession();"
     }
 
     void CreateMaze()
