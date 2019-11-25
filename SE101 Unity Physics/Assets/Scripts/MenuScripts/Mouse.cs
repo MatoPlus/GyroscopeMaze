@@ -34,22 +34,22 @@ public class Mouse : MonoBehaviour
         {
             if (Input.GetAxis("Horizontal") > .2)
             {
-                mouse.transform.position = new Vector3(Math.Min(Screen.width, mouse.transform.position.x + Director.gyroSensitivity*1.5f), mouse.transform.position.y, mouse.transform.position.z);
+                mouse.transform.position = new Vector3(Math.Min(Screen.width, mouse.transform.position.x + Director.gyroSensitivity*1000f/Screen.width), mouse.transform.position.y, mouse.transform.position.z);
                 //this.transform.rotation *= Quaternion.Euler(0, 0, -0.1f* Director.gyroSensitivity);
             }
             if (Input.GetAxis("Horizontal") < -.2)
             {
-                mouse.transform.position = new Vector3(Math.Max(0, mouse.transform.position.x - Director.gyroSensitivity * 1.5f), mouse.transform.position.y, mouse.transform.position.z);
+                mouse.transform.position = new Vector3(Math.Max(0, mouse.transform.position.x - Director.gyroSensitivity * 1000f / Screen.width), mouse.transform.position.y, mouse.transform.position.z);
                 //this.transform.rotation *= Quaternion.Euler(0, 0, 0.1f* Director.gyroSensitivity);
             }
             if (Input.GetAxis("Vertical") > .2)
             {
-                mouse.transform.position = new Vector3(mouse.transform.position.x, Math.Min(Screen.height, mouse.transform.position.y + Director.gyroSensitivity * 1.5f), mouse.transform.position.z);
+                mouse.transform.position = new Vector3(mouse.transform.position.x, Math.Min(Screen.height, mouse.transform.position.y + Director.gyroSensitivity * 1000f / Screen.width), mouse.transform.position.z);
                 //this.transform.rotation *= Quaternion.Euler(0.1f* Director.gyroSensitivity, 0, 0);
             }
             if (Input.GetAxis("Vertical") < -.2)
             {
-                mouse.transform.position = new Vector3(mouse.transform.position.x, Math.Max(0, mouse.transform.position.y - Director.gyroSensitivity * 1.5f), mouse.transform.position.z);
+                mouse.transform.position = new Vector3(mouse.transform.position.x, Math.Max(0, mouse.transform.position.y - Director.gyroSensitivity * 1000f / Screen.width), mouse.transform.position.z);
                 //this.transform.rotation *= Quaternion.Euler(-0.1f* Director.gyroSensitivity, 0, 0);
             }
         }
