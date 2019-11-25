@@ -70,7 +70,7 @@ public class MenuHandler
     {
         Title = UnityEngine.Object.Instantiate(TitlePrefab, new Vector3(Screen.width / 2f, Screen.height - 70f, 0), Quaternion.identity);
         Title.transform.SetParent(MainMenu.transform);
-        Title.GetComponent<Text>().text = "Gyroscope Maze";
+        Title.GetComponent<Text>().text = "Gyroll";
         List<Action> buttonActions = new List<Action>();
         buttonActions.Add(director.StartGame);
         StageButton PlayButton = new StageButton(Screen.width / 2f, Screen.height / 2f + 20, StageButtonPrefab, "Play", buttonActions, Canvas);
