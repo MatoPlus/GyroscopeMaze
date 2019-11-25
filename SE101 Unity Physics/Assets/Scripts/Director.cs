@@ -84,6 +84,7 @@ public class Director : MonoBehaviour
         CreateMaze();
         CreateTimer();
         Pivot = Instantiate(PivotPrefab);
+        //Camera.main.transform.Translate(new Vector3(0,Difficulty/10),0);
     }
     public void StartGame()
     {
@@ -129,6 +130,7 @@ public class Director : MonoBehaviour
         MazeObject = Instantiate(MazePrefab);
         Maze maze = MazeObject.GetComponent<Maze>();
         maze.Initialize(10, 10, this);
+        //maze.Initialize(7+Difficulty/10, 7 + Difficulty / 10, this);
     }
 
     void CreateTimer()
