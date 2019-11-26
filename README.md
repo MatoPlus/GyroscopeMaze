@@ -1,5 +1,6 @@
 # GyroscopeMaze
 A maze game made in unity with a custom made gyroscope controller.
+![Demo](demo/demo.gif "Playing with the gyroscope maze")
 
 # Components
 - Elegoo Ardiuno nano clone
