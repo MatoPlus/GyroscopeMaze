@@ -761,7 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8392157, g: 0.03529412, b: 0.654902, a: 0.39215687}
+  m_Color: {r: 0.85490197, g: 0.011764692, b: 0.19613566, a: 0.75686276}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -855,7 +855,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pivot: {fileID: 0}
-  MenuPivot: {fileID: 0}
   TimeLimit: 0
 --- !u!4 &1176816208
 Transform:
