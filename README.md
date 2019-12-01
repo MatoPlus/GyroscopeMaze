@@ -35,32 +35,32 @@ We built our game using the Unity Game Engine. Within Unity, a majority of the f
 # Group members’ contribution
 
 Kevin Li:
-Started the Unity project and created the basic elements of the game (Ball, platform, walls) 
-Created a base for the user-interface on Unity  
-Worked on graphics and game-object design 
-Used the built-in Unity engine to create the game scenes
-Miscellaneous tasks working with Unity C# scripts (e.g Implementing the quit button)
+Started the Unity project and created the basic elements of the game. (Ball, platform, walls) 
+Created a base for the user-interface on Unity.  
+Worked on graphics and game-object design. 
+Used the built-in Unity engine to create the game scenes.
+Miscellaneous tasks working with Unity C# scripts (e.g Implementing the quit button).
 
 Robert Craig:
 Implemented several obstacles in the maze.
 Partially designed the code refactor that allowed us to implement the various obstacles. 
-Helped create the script that is running on the arduino 
-Helped create the initial version of the script that parses the arduino input in Unity
+Helped create the script that is running on the arduino. 
+Helped create the initial version of the script that parses the arduino input in Unity.
 Helped implement the automatic maze generation algorithm, which uses the output of the Depth First Search algorithm to create walls in a 3d space.
 
 Ibraheem Aboulnaga:
-Implemented core game systems (level building, collisions, etc.)
-Designed the in-game physics system, forking off of the built-in engine
-Worked on integration between gyroscope/algorithm and the core game/menus
-Implemented systems for the menu and level handling
-Worked on implementing in-game obstacles
+Implemented core game systems (level building, collisions, etc.).
+Designed the in-game physics system, forking off of the built-in engine.
+Worked on integration between gyroscope/algorithm and the core game/menus.
+Implemented systems for the menu and level handling.
+Worked on implementing in-game obstacles.
 
 Ri Xin Yang:
 Reworked gyroscope controller (hardware and software) by adding a physical button, reworked wiring design for a more transparent flow
-Worked on the integration of the gyroscope and the game with the arduino script
-Helped design major refactor of that allowed the team to work easier in agile and  OOP development environment
-Maintained git repositories to ensure a smooth workflow throughout the development process
-Worked on parts of the backends for the controller, such as auto port connections, cross platform port filtering and button input processing
+Worked on the integration of the gyroscope and the game with the arduino script.
+Helped design major refactor of that allowed the team to work easier in agile and  OOP development environment.
+Maintained git repositories to ensure a smooth workflow throughout the development process.
+Worked on parts of the backends for the controller, such as auto port connections, cross platform port filtering and button input processing.
 
 # Final Product Evaluation
 
