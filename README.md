@@ -46,7 +46,7 @@ Implemented several obstacles in the maze.
 Partially designed the code refactor that allowed us to implement the various obstacles. 
 Helped create the script that is running on the arduino. 
 Helped create the initial version of the script that parses the arduino input in Unity.
-Helped implement the automatic maze generation algorithm, which uses the output of the Depth First Search algorithm to create walls in a 3d space.
+Helped implement the automatic maze generation algorithm, which uses the output of the Depth First Search algorithm to create walls in a 3D space.
 
 Ibraheem Aboulnaga:
 Implemented core game systems (level building, collisions, etc.).
@@ -56,9 +56,9 @@ Implemented systems for the menu and level handling.
 Worked on implementing in-game obstacles.
 
 Ri Xin Yang:
-Reworked gyroscope controller (hardware and software) by adding a physical button, reworked wiring design for a more transparent flow
+Reworked gyroscope controller (hardware and software) by adding a physical button, reworked wiring design for a more transparent flow.
 Worked on the integration of the gyroscope and the game with the arduino script.
-Helped design major refactor of that allowed the team to work easier in agile and  OOP development environment.
+Helped design major refactor of the code that allowed the team to work more easily in agile and OOP development environment.
 Maintained git repositories to ensure a smooth workflow throughout the development process.
 Worked on parts of the backends for the controller, such as auto port connections, cross platform port filtering and button input processing.
 
@@ -69,7 +69,7 @@ Overall, our final product was quite successful relative to our original design 
 # Design Trade-offs
 One main trade-off we made was that we decided that a fully featured controller and case was an unnecessary amount of work. Instead we were able to focus more on the features of the game such as the complete game UI and several obstacles. Another trade-off we decided on was making our platform floor completely opaque rather than translucent. We decided that although this would inhibit the user from seeing the maze with the gyroscope tilted upside-down, we wanted to discourage this behaviour anyway as it would cause the gyroscope inputs to behave funnily. Additionally, an opaque floor made the overall lighting more pleasant. 
 
-A very important change was our complete refactor of the physics in the project. Originally, we had the game’s maze object move along with the gyroscope, as a direct mapping of the gyroscope’s location. However, the Unity engine had difficulties with accurately calculating physics while using this method, causing game-breaking issues like the ball clipping through the maze entirely. We spent a very significant amount of time trying to get around this poor interaction, trying everything from changing the way we did collision detection, all the way to writing our own proprietary scripts to calculate collisions for specific game objects. All the solutions produced substandard results, however, and eventually, we completely refactored our physics around a unique idea: instead of rotating the platform, moving the gyroscope instead rotates both the direction of gravity and the position of the camera relative to the platform, while the background remains fixed. This gives the illusion that the platform is rotating, when in fact, everything else is. This improved the physics significantly, but had the unfortunate side effect of making some of our other features unachievable - for example, we can no longer have the ball fall out of the maze.
+A very important change was our complete refactor of the physics in the project. Originally, we had the game’s maze object move along with the gyroscope, as a direct mapping of the gyroscope’s location. However, the Unity engine had difficulties with accurately calculating physics while using this method, causing game-breaking issues like the ball clipping through the maze entirely. We spent a significant amount of time trying to get around this poor interaction, trying everything from changing the way we did collision detection, all the way to writing our own proprietary scripts to calculate collisions for specific game objects. All the solutions produced substandard results, however, and eventually, we completely refactored our physics around a unique idea: instead of rotating the platform, moving the gyroscope rotates both the direction of gravity and the position of the camera relative to the platform, while the background remains fixed. This gives the illusion that the platform is rotating, when in fact, everything else is. This improved the physics significantly, but had the unfortunate side effect of making some of our other features unachievable - for example, we can no longer have the ball fall out of the maze.
 
 In another notable change, our original plan for the game had the mazes generating dynamically; instead of being sent to a score screen after completing one maze, the player would be able to complete many mazes in a row, each with increasing difficulty. However, this proved to be very difficult to implement smoothly and would block off what we wanted to do with our physics refactor. So instead, in our final product, after completing each maze, the player is presented with their score and is returned to the main menu, and the player can set the difficulty however they want.
 
